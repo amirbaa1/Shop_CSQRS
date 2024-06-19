@@ -8,41 +8,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bb20cf23-4ae5-4fef-937b-71d8fe42fa34" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Create/CreateCategoryCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Delete/DeleteCategoryCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Delete/DeleteCategoryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Product.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Product.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/ApplicationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Application/ApplicationService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/CreateCategoryCommand.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/CreateCategoryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Create/CreateCategoryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Queries/GetCategory/CategoryResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Queries/GetCategory/GetCategoryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Queries/GetCategory/GetCategoryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Queries/GetCategory/GetCategoryQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Queries/GetCategory/GetCategoryQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/CreateProduct/CreatProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/CreateProduct/CreatProductHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Delete/DeleteProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Delete/DeleteProductHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductList/GetProductListHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductList/GetProductListHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductList/GetProductListQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductList/GetProductListQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductList/ProductResponse.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Mapping/CategoryMapProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Application/Mapping/CategoryMapProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Mapping/ProductMapProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Application/Mapping/ProductMapProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Domain/Model/Category.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Domain/Model/Category.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Domain/Model/Dto/ProductCategoryDto.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Domain/Repositories/ICategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Domain/Repositories/ICategoryRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Product.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Product.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/CategoryRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/CategoryRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/ProductRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/ProductRepository.cs" afterDir="false" />
-    </list>
+    <list default="true" id="bb20cf23-4ae5-4fef-937b-71d8fe42fa34" name="Changes" comment="add gitignore" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="DpaMonitoringSettings">
-    <option name="autoShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -51,9 +21,6 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Users/amirba/Documents/Asp-net/mic2/Shop_CSQRS/src/Product/Product.Application/ApplicationService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -64,28 +31,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.Product.Api: http.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Product.Api: https.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache&quot;,
-      &quot;/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache&quot;,
-      &quot;/Users/amirba/Library/Application Support/Symbols/src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
+      "/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
+      "/Users/amirba/Library/Application Support/Symbols/src"
     ]
   }
-}</component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Product.Api: https">
+}]]></component>
+  <component name="RunManager" selected=".NET Launch Settings Profile.Product.Api: http">
     <configuration name="Product.Api: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Product/Product.Api/Product.Api.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
@@ -128,8 +93,6 @@
       <workItem from="1718696487353" duration="7847000" />
       <workItem from="1718709217542" duration="8443000" />
       <workItem from="1718720393723" duration="308000" />
-      <workItem from="1718781975607" duration="5775000" />
-      <workItem from="1718796761994" duration="3512000" />
     </task>
     <task id="LOCAL-00001" summary="add gitignore rider">
       <option name="closed" value="true" />
@@ -155,15 +118,7 @@
       <option name="project" value="LOCAL" />
       <updated>1718720699101</updated>
     </task>
-    <task id="LOCAL-00004" summary="add config postgresql">
-      <option name="closed" value="true" />
-      <created>1718721026745</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1718721026745</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -187,52 +142,6 @@
     <MESSAGE value="add gitignore rider" />
     <MESSAGE value="add product category" />
     <MESSAGE value="add gitignore" />
-    <MESSAGE value="add config postgresql" />
-    <option name="LAST_COMMIT_MESSAGE" value="add config postgresql" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Create/CreateCategoryHandler.cs</url>
-          <line>17</line>
-          <properties documentPath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/CreateCategoryHandler.cs" containingFunctionPresentation="Method 'Handle'">
-            <startOffsets>
-              <option value="577" />
-            </startOffsets>
-            <endOffsets>
-              <option value="578" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Product/Product.Api/Program.cs</url>
-          <line>14</line>
-          <properties documentPath="$PROJECT_DIR$/Product/Product.Api/Program.cs" containingFunctionPresentation="">
-            <startOffsets>
-              <option value="387" />
-            </startOffsets>
-            <endOffsets>
-              <option value="421" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Product/Product.Api/Program.cs</url>
-          <line>15</line>
-          <properties documentPath="$PROJECT_DIR$/Product/Product.Api/Program.cs" containingFunctionPresentation="">
-            <startOffsets>
-              <option value="422" />
-            </startOffsets>
-            <endOffsets>
-              <option value="480" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <option name="LAST_COMMIT_MESSAGE" value="add gitignore" />
   </component>
 </project>
