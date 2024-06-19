@@ -1,10 +1,9 @@
 using MediatR;
-using Product.Application.Features.Product.Commands.CreateProduct;
 using Product.Application.Mapping;
 using Product.Domain.Model.Dto;
 using Product.Domain.Repositories;
 
-namespace Product.Application.Features.Category.Commands;
+namespace Product.Application.Features.Category.Commands.Create;
 
 public class CreateCategoryHandler : IRequestHandler<CreateCategoryCommand,string>
 {

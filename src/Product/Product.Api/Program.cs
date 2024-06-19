@@ -1,3 +1,5 @@
+using System.Reflection;
+using MediatR;
 using Product.Application;
 using Product.Infrastructure;
 
@@ -14,6 +16,9 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 // builder.Services.AddAutoMapper(typeof(Program));
 
+builder.Services.AddMediatR(cfg => {
+    cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly);
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

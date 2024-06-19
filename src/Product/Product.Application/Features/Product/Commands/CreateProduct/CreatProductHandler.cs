@@ -17,7 +17,6 @@ public class CreatProductHandler : IRequestHandler<CreateProductCommand, string>
     public async Task<string> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var newProduct = ProductMapper.Mapper.Map<ProductDto>(request); 
-        // ProductDto have Category and CreateProductCommand have not Category model;
         
         var addToProduct = await _productRepository.AddProduct(newProduct);
 

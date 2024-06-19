@@ -26,14 +26,15 @@ public class ProductRepository : IProductRepository
             return "Not found category";
         }
 
-        var productCreate = new ProductDto
+        var productCreate = new Domain.Model.Product
         {
             Name = addNewProductDto.Name,
             Description = addNewProductDto.Description,
             Image = addNewProductDto.Image,
             Price = addNewProductDto.Price,
             CategoryId = addNewProductDto.CategoryId,
-            Category = category
+            Category = category,
+            CreationDateTime = DateTime.UtcNow,
         };
         if (productCreate == null)
         {
@@ -77,8 +78,8 @@ public class ProductRepository : IProductRepository
                 Price = productGetId.Price,
                 Id = productGetId.Id,
                 Image = productGetId.Image,
-                Category = productGetId.Category,
-                CategoryId = productGetId.CategoryId
+                // Category = productGetId.Category,
+                CategoryId = productGetId.CategoryId,
             };
             return productGet;
         }
@@ -115,7 +116,7 @@ public class ProductRepository : IProductRepository
             getProduct.Price = updateProduct.Price;
         }
 
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
         return $"Update Product : {getProduct}";
     }
 

@@ -1,5 +1,7 @@
 using System.Reflection;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Product.Application.Features.Category.Commands;
 
 namespace Product.Application;
 
@@ -11,7 +13,7 @@ public static class ApplicationService
 
         service.AddMediatR(cfg =>
             cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-
+        
         return service;
     }
 }

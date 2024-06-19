@@ -1,5 +1,4 @@
 using MediatR;
-using Product.Application.Mapping;
 using Product.Domain.Repositories;
 
 namespace Product.Application.Features.Product.Commands.Delete;

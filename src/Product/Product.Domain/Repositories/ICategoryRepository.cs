@@ -6,4 +6,5 @@ public interface ICategoryRepository
 {
    Task<List<CategoryDto>> GetCategories();
     Task<string> AddNewCategory(CategoryDto category);
+    Task<bool> DeleteCategory(Guid id);
 }

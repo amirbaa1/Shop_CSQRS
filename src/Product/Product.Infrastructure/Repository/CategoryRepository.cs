@@ -36,11 +36,25 @@ public class CategoryRepository : ICategoryRepository
         var categoryCreate = new Category
         {
             Description = category.Description,
-            Name = category.Name
+            Name = category.Name,
+            CreationDateTime = DateTime.UtcNow,
         };
 
         _dbContext.Categories.Add(categoryCreate);
-       await _dbContext.SaveChangesAsync();
-       return "add to database";
+        await _dbContext.SaveChangesAsync();
+        return "add to database";
+    }
+
+    public async Task<bool> DeleteCategory(Guid id)
+    {
+        var getCate = await _dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+        if (getCate == null)
+        {
+            return false;
+        }
+
+        _dbContext.Categories.Remove(getCate);
+        await _dbContext.SaveChangesAsync();
+        return true;
     }
 }
