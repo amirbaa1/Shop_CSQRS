@@ -1,7 +1,5 @@
 using System.Reflection;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Product.Application.Features.Category.Commands;
 
 namespace Product.Application;
 
