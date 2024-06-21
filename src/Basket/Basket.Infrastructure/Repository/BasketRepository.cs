@@ -39,7 +39,6 @@ namespace Basket.Infrastructure.Repository
 
 
             _context.basketItems.Add(basketItem);
-           
 
 
 
@@ -70,7 +69,7 @@ namespace Basket.Infrastructure.Repository
                 UserId = userId,
                 Items = basketUser.Items.Select(i => new BasketItemDto
                 {
-                    Id = Guid.NewGuid(),
+                    Id = i.Id,
                     Quantity = i.Quantity,
                     ProductId = i.ProductId,
                     ProductName = i.Product.ProductName,
@@ -87,13 +86,13 @@ namespace Basket.Infrastructure.Repository
         {
             try
             {
-                var item = await _context.basketItems.FirstOrDefaultAsync(x => x.BasketId == basketId);
+                var item = _context.basketItems.FirstOrDefault(x => x.BasketId == basketId);
 
                 if (item == null)
                 {
-                    return await Task.FromResult("Not Found Item Id");
+                    return "Not Found Item Id";
                 }
-                var productItem = await _context.products.SingleOrDefaultAsync(x => x.ProductId == item.ProductId);
+                var productItem = _context.products.SingleOrDefault(x => x.ProductId == item.ProductId);
 
                 if (item == null)
                     throw new Exception("BasketItem Not Found...!");
@@ -102,7 +101,7 @@ namespace Basket.Infrastructure.Repository
                 _context.products.Remove(productItem);
                 await _context.SaveChangesAsync();
 
-                return await Task.FromResult("Item removed successfully.");
+                return "Item removed successfully.";
             }
             catch (Exception ex)
             {
@@ -111,11 +110,18 @@ namespace Basket.Infrastructure.Repository
         }
 
 
-        public void UpdateQuantities(Guid basketitemId, int quantity)
+        public async Task<string> UpdateQuantities(Guid basketitemId, int quantity)
         {
-            var item = _context.basketItems.SingleOrDefault(p => p.Id == basketitemId);
+            var item =await _context.basketItems.SingleOrDefaultAsync(p => p.Id == basketitemId);
+            if (item == null)
+            {
+                return "Not Found Item.";
+            }
+
             item.SetQuantity(quantity);
-            _context.SaveChanges();
+            
+            await _context.SaveChangesAsync();
+            return "Update Item.";
         }
     }
 

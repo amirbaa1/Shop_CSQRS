@@ -49,7 +49,6 @@ namespace Basket.Infrastructure.Repository
         }
 
 
-
         public BasketModelDto GetBasket(string UserId)
         {
             var basket = _context.baskets
@@ -79,6 +78,8 @@ namespace Basket.Infrastructure.Repository
                 }).ToList(),
             };
         }
+
+
         private ProductDto GetProduct(Guid productId)
         {
             var existProduct = _context.products.SingleOrDefault(p => p.ProductId == productId);

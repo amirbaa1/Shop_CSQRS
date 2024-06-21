@@ -9,7 +9,7 @@ namespace Basket.Domain.Repository
         Task<BasketModelDto> GetOrCreateBasketForUser(string userId);
         Task<bool> AddBasket(AddItemToBasketDto basketitem);
         Task<string> RemoveItemFromBasket(Guid basketId);
-        void UpdateQuantities(Guid basketitemId, int quantity);
+        Task<string> UpdateQuantities(Guid basketitemId, int quantity);
         //ResultDto CheckOutBasket(CheckOutBasketDto checkOut, IDiscountService discountService);
     }
 }
