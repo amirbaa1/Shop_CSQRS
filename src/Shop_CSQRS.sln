@@ -15,13 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Product.Infrastructure", "P
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{8A4A4C97-1EA1-4624-B861-97556363CD0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.Api", "Basket\Basket.Api\Basket.Api.csproj", "{550FCD89-A6E3-417B-BA54-D5901D115483}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Api", "Basket\Basket.Api\Basket.Api.csproj", "{550FCD89-A6E3-417B-BA54-D5901D115483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.Application", "Basket\Basket.Application\Basket.Application.csproj", "{1575FE35-3A8C-4937-9328-4FDEBAB86886}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Application", "Basket\Basket.Application\Basket.Application.csproj", "{1575FE35-3A8C-4937-9328-4FDEBAB86886}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.Domain", "Basket\Basket.Domain\Basket.Domain.csproj", "{837AAFE1-9666-4105-8F74-C92091FE5BCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Domain", "Basket\Basket.Domain\Basket.Domain.csproj", "{837AAFE1-9666-4105-8F74-C92091FE5BCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.Infrastructure", "Basket\Basket.Infrastructure\Basket.Infrastructure.csproj", "{E9E66185-1532-43F0-9E95-E41219043896}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Infrastructure", "Basket\Basket.Infrastructure\Basket.Infrastructure.csproj", "{E9E66185-1532-43F0-9E95-E41219043896}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{289CDBB2-5316-4B1F-8669-97BE5FDA2172}"
 EndProject
@@ -32,6 +32,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Infrastructure", "Order\Order.Infrastructure\Order.Infrastructure.csproj", "{7432D7D8-D483-4397-9E13-1842179A3DC7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Domain", "Order\Order.Domain\Order.Domain.csproj", "{4C60724D-6584-4C71-8080-27A29B0093A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "EventBus.Messages\EventBus.Messages.csproj", "{1D8D6B2B-3277-45C1-8F5B-0868E6E925A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{4C60724D-6584-4C71-8080-27A29B0093A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C60724D-6584-4C71-8080-27A29B0093A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C60724D-6584-4C71-8080-27A29B0093A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D8D6B2B-3277-45C1-8F5B-0868E6E925A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D8D6B2B-3277-45C1-8F5B-0868E6E925A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D8D6B2B-3277-45C1-8F5B-0868E6E925A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D8D6B2B-3277-45C1-8F5B-0868E6E925A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
