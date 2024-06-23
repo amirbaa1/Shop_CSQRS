@@ -2,7 +2,7 @@
 
 namespace Basket.Domain.Model
 {
-    public class BasketItem
+    public class BasketItem 
     {
         public Guid Id { get; set; }
         public int Quantity { get; set; }

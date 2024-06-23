@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Basket.Application.Features.Basket.Commands.CheckOut;
 using Basket.Domain.Model;
 using Basket.Domain.Model.Dto;
+using EventBus.Messages.Event;
 
 
 namespace Basket.Application.Mapper
@@ -8,10 +10,10 @@ namespace Basket.Application.Mapper
     public class BasketMap : Profile
     {
         public BasketMap()
-        { 
-            CreateMap<BasketModel,BasketModelDto>().ReverseMap();
+        {
+            CreateMap<BasketModel, BasketModelDto>().ReverseMap();
             CreateMap<BasketItem, BasketItemDto>().ReverseMap();
-            CreateMap<BasketModel,BasketItem>().ReverseMap();
+            CreateMap<BasketModel, BasketItem>().ReverseMap();
             CreateMap<BasketModelDto, BasketItemDto>().ReverseMap();
             CreateMap<BasketItem, BasketModelDto>().ReverseMap();
             CreateMap<AddItemToBasketDto, BasketItem>().ReverseMap();
@@ -20,9 +22,9 @@ namespace Basket.Application.Mapper
             CreateMap<ProductDto, BasketModelDto>().ReverseMap();
             CreateMap<AddItemToBasketDto, ProductDto>().ReverseMap();
 
+            CreateMap<CheckOutCommand, BasketQueueEvent>().ReverseMap();
+
             //CreateMap<CheckOutBasketDto, BasketCheckoutMessage>().ReverseMap();
-
-
         }
     }
 }

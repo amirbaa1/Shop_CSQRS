@@ -3,6 +3,8 @@ using Basket.Domain.Model;
 using Basket.Domain.Model.Dto;
 using Basket.Domain.Repository;
 using Basket.Infrastructure.Data;
+using EventBus.Messages.Event;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -16,18 +18,23 @@ namespace Basket.Infrastructure.Repository
         private readonly IMapper _mapper;
         private readonly IBasketService _service;
         private readonly ILogger<BasketRepository> _logger;
-        public BasketRepository(BasketdbContext context, IMapper mapper, IBasketService service, ILogger<BasketRepository> logger)
+        private readonly IPublishEndpoint _publishEndpoint;
+
+        public BasketRepository(BasketdbContext context, IMapper mapper, IBasketService service,
+            ILogger<BasketRepository> logger, IPublishEndpoint publishEndpoint)
         {
             _context = context;
             _mapper = mapper;
             _service = service;
             _logger = logger;
+            _publishEndpoint = publishEndpoint;
         }
 
 
         public async Task<bool> AddBasket(AddItemToBasketDto basketitem)
         {
-            var basket = await _context.baskets.FirstOrDefaultAsync(x => x.Id == basketitem.basketId); // search basketId user
+            var basket =
+                await _context.baskets.FirstOrDefaultAsync(x => x.Id == basketitem.basketId); // search basketId user
 
 
             if (basket == null)
@@ -39,7 +46,6 @@ namespace Basket.Infrastructure.Repository
 
 
             _context.basketItems.Add(basketItem);
-
 
 
             var productItem = _mapper.Map<ProductDto>(basketitem);
@@ -92,6 +98,7 @@ namespace Basket.Infrastructure.Repository
                 {
                     return "Not Found Item Id";
                 }
+
                 var productItem = _context.products.SingleOrDefault(x => x.ProductId == item.ProductId);
 
                 if (item == null)
@@ -112,17 +119,64 @@ namespace Basket.Infrastructure.Repository
 
         public async Task<string> UpdateQuantities(Guid basketitemId, int quantity)
         {
-            var item =await _context.basketItems.SingleOrDefaultAsync(p => p.Id == basketitemId);
+            var item = await _context.basketItems.SingleOrDefaultAsync(p => p.Id == basketitemId);
             if (item == null)
             {
                 return "Not Found Item.";
             }
 
             item.SetQuantity(quantity);
-            
+
             await _context.SaveChangesAsync();
             return "Update Item.";
         }
-    }
 
+        public async Task<ResultDto> CheckOutBasket(CheckOutDto checkOut)
+        {
+            // دریافت سبد خرید
+            var getBasket = await _context.baskets
+                .Include(p => p.Items)
+                .ThenInclude(p => p.Product)
+                .SingleOrDefaultAsync(p => p.Id == checkOut.BasketId);
+
+            if (getBasket == null)
+            {
+                return new ResultDto
+                {
+                    IsSuccess = false,
+                    Message = $"{nameof(getBasket)} Not Found!",
+                };
+            }
+
+            var message = _mapper.Map<BasketQueueEvent>(checkOut);
+
+            int priceTotal = 0;
+            foreach (var item in getBasket.Items)
+            {
+                var basketItem = new BasketItemQueueEvent
+                {
+                    BasketItemId = item.BasketId,
+                    Name = item.Product.ProductName,
+                    ProductId = item.Product.ProductId,
+                    Price = item.Product.UnitPrice,
+                    Quantity = item.Quantity,
+                    Total = item.Product.UnitPrice * item.Quantity
+                };
+                priceTotal += item.Product.UnitPrice * item.Quantity;
+                message.TotalPrice = priceTotal;
+
+                message.BasketItems.Add(basketItem);
+            }
+
+            await _publishEndpoint.Publish(message, context => 
+            {
+                context.Durable = true; // پیام را persistent کنید
+            });
+            return new ResultDto
+            {
+                IsSuccess = true,
+                Message = "Basket checkout successful and message published."
+            };
+        }
+    }
 }

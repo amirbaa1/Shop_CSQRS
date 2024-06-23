@@ -14,6 +14,18 @@ namespace Basket.Application
             service.AddMediatR(cfg =>
                 cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
+            // service.AddMassTransit(x =>
+            // {
+            //     x.UsingRabbitMq((ctx, cfg) =>
+            //     {
+            //         cfg.Host("localhost", "/", c =>
+            //         {
+            //             c.Username("guest");
+            //             c.Password("guest");
+            //         });
+            //         cfg.ConfigureEndpoints(ctx);
+            //     }); 
+            // }); 
 
             return service;
         }

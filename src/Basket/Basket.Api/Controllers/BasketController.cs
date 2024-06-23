@@ -1,7 +1,11 @@
-﻿using Basket.Application.Features.Basket.Commands.Create;
+﻿using Basket.Application.Features.Basket.Commands.CheckOut;
+using Basket.Application.Features.Basket.Commands.Create;
 using Basket.Application.Features.Basket.Commands.Delete;
 using Basket.Application.Features.Basket.Commands.Update;
 using Basket.Application.Features.Basket.Queries.BasketGet;
+using Basket.Domain.Model.Dto;
+using EventBus.Messages.Event;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +17,13 @@ namespace Basket.Api.Controllers
     {
         private readonly IMediator _mediator;
         private readonly ILogger<BasketController> _logger;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public BasketController(IMediator mediator, ILogger<BasketController> logger)
+        public BasketController(IMediator mediator, ILogger<BasketController> logger, IPublishEndpoint publishEndpoint)
         {
             _mediator = mediator;
             _logger = logger;
+            _publishEndpoint = publishEndpoint;
         }
 
         [HttpGet("{UserId}")]
@@ -51,6 +57,13 @@ namespace Basket.Api.Controllers
             var DeleteBasketItem = await _mediator.Send(new DeleteBasketCommand(basketId));
 
             return Ok(DeleteBasketItem);
+        }
+
+        [HttpPost("Send")]
+        public async Task<IActionResult> SendToOrder([FromBody] CheckOutCommand command)
+        {
+            var send = await _mediator.Send(command);
+            return Ok(send);
         }
     }
 }
