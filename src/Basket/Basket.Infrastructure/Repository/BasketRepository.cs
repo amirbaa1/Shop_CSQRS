@@ -170,7 +170,7 @@ namespace Basket.Infrastructure.Repository
 
             await _publishEndpoint.Publish(message, context => 
             {
-                context.Durable = true; // پیام را persistent کنید
+                context.Durable = true; 
             });
             return new ResultDto
             {
