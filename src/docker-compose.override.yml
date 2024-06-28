@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+   rabbitmq:
+      container_name: rabbitmq
+      restart: always
+      environment:
+        - "TZ: Asia/Tehran"
+      ports:
+        - "5672:5672"
+        - "15672:15672"

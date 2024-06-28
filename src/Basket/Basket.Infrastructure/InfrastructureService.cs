@@ -2,6 +2,7 @@
 using Basket.Infrastructure.Data;
 using Basket.Infrastructure.Repository;
 using EventBus.Messages.Common;
+using EventBus.Messages.Event;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -39,7 +40,7 @@ namespace Basket.Infrastructure
                 });
             });
             services.AddMassTransitHostedService();
-            
+
             return services;
         }
     }

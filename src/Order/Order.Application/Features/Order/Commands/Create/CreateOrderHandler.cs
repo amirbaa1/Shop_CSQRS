@@ -7,7 +7,7 @@ using Order.Domain.Repository;
 
 namespace Order.Application.Features.Order.Commands.Create;
 
-public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Guid>
+public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, bool>
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IMapper _mapper;
@@ -20,12 +20,12 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, Guid>
         _logger = logger;
     }
 
-    public Task<Guid> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+    public Task<bool> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         var orderMap =  _mapper.Map<OrderModelDto>(request);
         
         _logger.LogInformation($"ordermap : --->{JsonConvert.SerializeObject(orderMap)}");
         var createOrder =  _orderRepository.CreateOrder(orderMap);
-        return Task.FromResult(createOrder.Id);
+        return Task.FromResult(createOrder);
     }
 }

@@ -4,6 +4,6 @@ using Order.Domain.Model.Dto;
 
 namespace Order.Application.Features.Order.Commands.Create;
 
-public class CreateOrderCommand :AddOrderDto, IRequest<Guid>
+public class CreateOrderCommand :AddOrderDto, IRequest<bool>
 {
 }

@@ -29,23 +29,26 @@ public class OrderRepository : IOrderRepository
                 {
                     Id = x.Id,
                     OrderPaid = x.OrderPaid,
-                    // ItemCount = x.OrderLines.Count(),
+                    UserId = x.UserId,
                     TotalPrice = x.TotalPrice,
                     OrderPlaced = x.OrderPlaced,
                     PhoneNumber = x.PhoneNumber,
                     Address = x.Address,
+                    ZipCode = x.ZipCode,
                     EmailAddress = x.EmailAddress,
                     FirstName = x.FirstName,
                     LastName = x.LastName,
                     OrderLines = x.OrderLines.Select(x => new OrderLineDto
                     {
                         Id = x.Id,
+                        Quantity = x.Quantity,
                         Product = new ProductDto
                         {
                             ProductId = x.ProductId,
                             ProductName = x.Product.ProductName,
                             ProductPrice = x.Product.ProductPrice
                         },
+                        Total = x.Total,
                     }).ToList()
                 }).ToListAsync();
 
@@ -55,10 +58,14 @@ public class OrderRepository : IOrderRepository
     public async Task<OrderModelDto> GetOrderById(Guid id)
     {
         var orderGet = await _orderdbContext.Orders.FirstOrDefaultAsync(x => x.Id == id);
+
+        _logger.LogInformation($"Order user : {JsonConvert.SerializeObject(orderGet)}");
+
         var orderLine = new OrderModelDto
         {
             Id = orderGet.Id,
             Address = orderGet.Address,
+            UserId = orderGet.UserId,
             ZipCode = orderGet.ZipCode,
             EmailAddress = orderGet.EmailAddress,
             FirstName = orderGet.FirstName,
@@ -70,69 +77,102 @@ public class OrderRepository : IOrderRepository
             {
                 Id = x.Id,
                 Quantity = x.Quantity,
-                ProductId = x.ProductId,
                 Product = new ProductDto
                 {
                     ProductId = x.Product.ProductId,
                     ProductName = x.Product.ProductName,
                     ProductPrice = x.Product.ProductPrice
                 },
+
                 Total = x.Total
             }).ToList(),
             TotalPrice = orderGet.TotalPrice
         };
+
+        _logger.LogInformation($"orderLine Get : {JsonConvert.SerializeObject(orderLine)}");
         return orderLine;
     }
 
-    // public Task<List<OrderModelDto>> GetAll()
-    // {
-    //     throw new NotImplementedException();
-    // }
 
-    public OrderModelDto CreateOrder(OrderModelDto orderModelDto)
+    public bool CreateOrder(OrderModelDto orderModelDto)
     {
-        _logger.LogInformation($"Order MOdel --->{JsonConvert.SerializeObject(orderModelDto)}");
-        var productID = new Product
+        try
         {
-            ProductId = Guid.NewGuid(),
-        };
-        var order = new OrderModel
-        {
-            UserId = orderModelDto.UserId,
-            EmailAddress = orderModelDto.EmailAddress,
-            FirstName = orderModelDto.FirstName,
-            LastName = orderModelDto.LastName,
-            Address = orderModelDto.Address,
-            ZipCode = orderModelDto.ZipCode,
-            PhoneNumber = orderModelDto.PhoneNumber,
-            OrderPaid = orderModelDto.OrderPaid,
-            OrderPlaced = DateTime.UtcNow,
-            TotalPrice = orderModelDto.TotalPrice,
-            CreateBy = "admin",
-            CreateTime = DateTime.UtcNow,
-            LastModifiedDate = null,
-            LastModifiedBy = "IDK",
-            OrderLines = orderModelDto.OrderLines.Select(ol => new OrderLine
+
+            foreach (var item in orderModelDto.OrderLines)
+            {
+                var getProduct = _orderdbContext.Products.FirstOrDefault(x => x.ProductId == item.ProductId);
+
+                if (getProduct != null)
                 {
-                    Id = Guid.NewGuid(),
-                    ProductId = ol.ProductId,
-                    Quantity = ol.Quantity,
-                    Product = new Product
+                    var product = getProduct;
+
+                    var orderLineUser = new OrderLine
                     {
-                        // ProductId = ol.Product.ProductId,
-                        ProductId = Guid.NewGuid(),
-                        ProductName = ol.Product.ProductName,
-                        ProductPrice = ol.Product.ProductPrice
-                    },
+                        Id = item.Id,
+                        Quantity = item.Quantity,
+                        ProductId = item.ProductId,
+                        Total = item.Total,
+                    };
+                    _orderdbContext.OrderLines.Add(orderLineUser);
                 }
-            ).ToList()
-        };
 
-        _logger.LogInformation($"---> order{JsonConvert.SerializeObject(order)}");
-        _orderdbContext.Orders.Add(order);
+                else
+                {
+                    var orderLineUser = new OrderLine
+                    {
+                        Id = item.Id,
 
-        _orderdbContext.SaveChanges();
+                        Quantity = item.Quantity,
+                        ProductId= item.ProductId,
+                        Product = new Product
+                        {
+                            ProductId = item.Product.ProductId,
+                            ProductName = item.Product.ProductName,
+                            ProductPrice = item.Product.ProductPrice
+                        },
+                        Total = item.Total,
+                    };
 
-        return orderModelDto;
+                    _orderdbContext.OrderLines.Add(orderLineUser);
+                }
+            }
+
+            var orderUser = new OrderModel
+            {
+                UserId = orderModelDto.UserId,
+                EmailAddress = orderModelDto.EmailAddress,
+                FirstName = orderModelDto.FirstName,
+                LastName = orderModelDto.LastName,
+                Address = orderModelDto.Address,
+                ZipCode = orderModelDto.ZipCode,
+                PhoneNumber = orderModelDto.PhoneNumber,
+                OrderPaid = orderModelDto.OrderPaid,
+                OrderPlaced = DateTime.UtcNow,
+                TotalPrice = orderModelDto.TotalPrice,
+                CreateBy = "admin",
+                CreateTime = DateTime.UtcNow,
+                LastModifiedDate = null,
+                LastModifiedBy = "IDK",
+            };
+
+            _orderdbContext.Orders.Add(orderUser);
+
+
+
+            //save 
+            //_logger.LogInformation($"--->2 order{JsonConvert.SerializeObject(order)}");
+            //_orderdbContext.Orders.Add(order);
+            //
+
+            _orderdbContext.SaveChanges();
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            _logger.LogError($"Error Model :{e.Message}");
+            return false;
+        }
     }
 }

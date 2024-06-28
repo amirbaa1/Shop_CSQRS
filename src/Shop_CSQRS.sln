@@ -25,15 +25,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.Infrastructure", "Ba
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{289CDBB2-5316-4B1F-8669-97BE5FDA2172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Api", "Order\Order.Api\Order.Api.csproj", "{B91C9B95-B695-4306-8C7E-28EB42AAE705}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Api", "Order\Order.Api\Order.Api.csproj", "{B91C9B95-B695-4306-8C7E-28EB42AAE705}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Application", "Order\Order.Application\Order.Application.csproj", "{E58B1AD3-A0BA-43DD-B33F-5D1731137324}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Application", "Order\Order.Application\Order.Application.csproj", "{E58B1AD3-A0BA-43DD-B33F-5D1731137324}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Infrastructure", "Order\Order.Infrastructure\Order.Infrastructure.csproj", "{7432D7D8-D483-4397-9E13-1842179A3DC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Infrastructure", "Order\Order.Infrastructure\Order.Infrastructure.csproj", "{7432D7D8-D483-4397-9E13-1842179A3DC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Domain", "Order\Order.Domain\Order.Domain.csproj", "{4C60724D-6584-4C71-8080-27A29B0093A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Domain", "Order\Order.Domain\Order.Domain.csproj", "{4C60724D-6584-4C71-8080-27A29B0093A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "EventBus.Messages\EventBus.Messages.csproj", "{1D8D6B2B-3277-45C1-8F5B-0868E6E925A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus.Messages", "EventBus.Messages\EventBus.Messages.csproj", "{1D8D6B2B-3277-45C1-8F5B-0868E6E925A7}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6D8B87CD-5EEC-4A12-8414-27A318FE9BC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{1D8D6B2B-3277-45C1-8F5B-0868E6E925A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D8D6B2B-3277-45C1-8F5B-0868E6E925A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D8D6B2B-3277-45C1-8F5B-0868E6E925A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D8B87CD-5EEC-4A12-8414-27A318FE9BC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D8B87CD-5EEC-4A12-8414-27A318FE9BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D8B87CD-5EEC-4A12-8414-27A318FE9BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D8B87CD-5EEC-4A12-8414-27A318FE9BC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

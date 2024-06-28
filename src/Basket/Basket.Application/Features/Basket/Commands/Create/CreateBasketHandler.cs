@@ -30,6 +30,11 @@ namespace Basket.Application.Features.Basket.Commands.Create
                 throw new Exception("Basket creation failed");
             }
 
+            if (request.ProductId == Guid.Empty || request.ProductId == new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"))
+            {
+                request.ProductId = Guid.NewGuid();
+            }
+
 
             var itemBaket = new AddItemToBasketDto
             {
@@ -39,7 +44,6 @@ namespace Basket.Application.Features.Basket.Commands.Create
                 ProductName = request.ProductName,
                 UnitPrice = request.UnitPrice,
                 ImageUrl = request.ImageUrl,
-
             };
 
             _logger.LogInformation($"itemBaket ---> {JsonConvert.SerializeObject(itemBaket)}");
@@ -57,8 +61,6 @@ namespace Basket.Application.Features.Basket.Commands.Create
 
 
             return basketMap; // outPrint 
-
-
         }
     }
 }
