@@ -10,6 +10,6 @@ namespace Basket.Domain.Repository
         Task<bool> AddBasket(AddItemToBasketDto basketitem);
         Task<string> RemoveItemFromBasket(Guid basketId);
         Task<string> UpdateQuantities(Guid basketitemId, int quantity);
-        //ResultDto CheckOutBasket(CheckOutBasketDto checkOut, IDiscountService discountService);
+        Task<ResultDto> CheckOutBasket(CheckOutDto checkOut);
     }
 }
