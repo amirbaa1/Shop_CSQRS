@@ -6,4 +6,5 @@ namespace Order.Application.Features.Order.Commands.Create;
 
 public class CreateOrderCommand :AddOrderDto, IRequest<bool>
 {
+    
 }

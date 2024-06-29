@@ -1,5 +1,6 @@
 ﻿using Basket.Domain.Model.Dto;
 using MediatR;
+using Newtonsoft.Json;
 
 
 namespace Basket.Application.Features.Basket.Commands.Create

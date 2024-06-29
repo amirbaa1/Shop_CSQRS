@@ -34,7 +34,7 @@ namespace Basket.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostBasket(CreateBasketCommand command, string userId)
+        public async Task<IActionResult> PostBasket([FromBody] CreateBasketCommand command, [FromQuery] string userId)
         {
             command.UserId = userId;
 
