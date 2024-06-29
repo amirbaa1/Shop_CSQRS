@@ -24,22 +24,22 @@ namespace Basket.Infrastructure
             services.AddScoped<IBasketService, BasketService>();
 
             //services.AddScoped<BasketService>();
-            services.AddMassTransit(x =>
-            {
-                x.UsingRabbitMq((ctx, cfg) =>
-                {
-                    cfg.Host("localhost", "/", c =>
-                    {
-                        c.Username("guest");
-                        c.Password("guest");
-                    });
-                    cfg.ReceiveEndpoint(EventBusConstants.BasketQueue, ep =>
-                    {
-                        ep.Durable = true;
-                    });
-                });
-            });
-            services.AddMassTransitHostedService();
+            // services.AddMassTransit(x =>
+            // {
+            //     x.UsingRabbitMq((ctx, cfg) =>
+            //     {
+            //         cfg.Host("localhost", "/", c =>
+            //         {
+            //             c.Username("guest");
+            //             c.Password("guest");
+            //         });
+            //         cfg.ReceiveEndpoint(EventBusConstants.BasketQueue, ep =>
+            //         {
+            //             ep.Durable = true;
+            //         });
+            //     });
+            // });
+            // services.AddMassTransitHostedService();
 
             return services;
         }

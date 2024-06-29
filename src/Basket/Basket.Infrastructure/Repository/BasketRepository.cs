@@ -7,7 +7,6 @@ using EventBus.Messages.Event;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 
 namespace Basket.Infrastructure.Repository
@@ -49,8 +48,9 @@ namespace Basket.Infrastructure.Repository
 
             var productItem = _mapper.Map<ProductDto>(basketitem);
 
-            var createProduct = _service.CreateProduct(productItem);
-            _context.SaveChanges();
+            _service.CreateProduct(productItem);
+
+            await _context.SaveChangesAsync();
 
             return true;
         }
@@ -134,66 +134,52 @@ namespace Basket.Infrastructure.Repository
         {
             try
             {
-                using (var transaction = _context.Database.BeginTransaction())
-                {
-
-                    // دریافت سبد خرید
-                    var getBasket = await _context.baskets
+                // دریافت سبد خرید
+                var getBasket = await _context.baskets
                     .Include(p => p.Items)
                     .ThenInclude(p => p.Product)
                     .SingleOrDefaultAsync(p => p.Id == checkOut.BasketId);
 
-                    if (getBasket == null)
-                    {
-                        return new ResultDto
-                        {
-                            IsSuccess = false,
-                            Message = $"{nameof(getBasket)} Not Found!",
-                        };
-                    }
-
-                    var message = _mapper.Map<BasketQueueEvent>(checkOut);
-
-                    int priceTotal = 0;
-                    foreach (var item in getBasket.Items)
-                    {
-                        var basketItem = new BasketItemQueueEvent
-                        {
-                            BasketItemId = item.Id, // id basketItemId
-                            Name = item.Product.ProductName,
-                            ProductId = item.Product.ProductId,
-                            Price = item.Product.UnitPrice,
-                            Quantity = item.Quantity,
-                            Total = item.Product.UnitPrice * item.Quantity
-                        };
-                        priceTotal += item.Product.UnitPrice * item.Quantity;
-                        message.TotalPrice = priceTotal;
-
-                        message.BasketItems.Add(basketItem);
-                    }
-
-                    await _context.SaveChangesAsync();
-
-                    var publish = _publishEndpoint.Publish(message);
-
-                    transaction.Commit();
-
-                    if (publish == null)
-                    {
-                        return new ResultDto
-                        {
-                            IsSuccess = false,
-                            Message = $"error: {publish.Exception.ToString()}"
-
-                        };
-                    }
-
+                if (getBasket == null)
+                {
                     return new ResultDto
                     {
-                        IsSuccess = true,
-                        Message = $"Basket checkout successful and message published."
+                        IsSuccess = false,
+                        Message = $"{nameof(getBasket)} Not Found!",
                     };
                 }
+
+                var message = _mapper.Map<BasketQueueEvent>(checkOut);
+
+                int priceTotal = 0;
+                foreach (var item in getBasket.Items)
+                {
+                    var basketItem = new BasketItemQueueEvent
+                    {
+                        BasketItemId = item.Id, // id basketItemId
+                        Name = item.Product.ProductName,
+                        ProductId = item.Product.ProductId,
+                        Price = item.Product.UnitPrice,
+                        Quantity = item.Quantity,
+                        Total = item.Product.UnitPrice * item.Quantity
+                    };
+                    priceTotal += item.Product.UnitPrice * item.Quantity;
+                    message.TotalPrice = priceTotal;
+
+                    message.BasketItems.Add(basketItem);
+                }
+
+                await _context.SaveChangesAsync();
+
+                await _publishEndpoint.Publish(message);
+
+                await RemoveItemFromBasket(basketId: getBasket.Id);
+
+                return new ResultDto
+                {
+                    IsSuccess = true,
+                    Message = $"Basket checkout successful and message published."
+                };
             }
             catch (Exception ex)
             {

@@ -38,19 +38,21 @@ public class OrderRepository : IOrderRepository
                     EmailAddress = x.EmailAddress,
                     FirstName = x.FirstName,
                     LastName = x.LastName,
-                    OrderLines = x.OrderLines.Select(x => new OrderLineDto
+                    OrderLines = x.OrderLines.Select(xl => new OrderLineDto
                     {
-                        Id = x.Id,
-                        Quantity = x.Quantity,
+                        Id = xl.Id,
+                        Quantity = xl.Quantity,
+                        ProductId = xl.Product.ProductId,
                         Product = new ProductDto
                         {
-                            ProductId = x.ProductId,
-                            ProductName = x.Product.ProductName,
-                            ProductPrice = x.Product.ProductPrice
+                            ProductId = xl.ProductId,
+                            ProductName = xl.Product.ProductName,
+                            ProductPrice = xl.Product.ProductPrice
                         },
-                        Total = x.Total,
+                        Total = xl.Total,
                     }).ToList()
                 }).ToListAsync();
+
 
         return order;
     }
@@ -59,7 +61,7 @@ public class OrderRepository : IOrderRepository
     {
         var orderGet = await _orderdbContext.Orders.FirstOrDefaultAsync(x => x.Id == id);
 
-        _logger.LogInformation($"Order user : {JsonConvert.SerializeObject(orderGet)}");
+        // _logger.LogInformation($"Order user : {JsonConvert.SerializeObject(orderGet)}");
 
         var orderLine = new OrderModelDto
         {
@@ -83,7 +85,6 @@ public class OrderRepository : IOrderRepository
                     ProductName = x.Product.ProductName,
                     ProductPrice = x.Product.ProductPrice
                 },
-
                 Total = x.Total
             }).ToList(),
             TotalPrice = orderGet.TotalPrice
@@ -98,46 +99,6 @@ public class OrderRepository : IOrderRepository
     {
         try
         {
-
-            foreach (var item in orderModelDto.OrderLines)
-            {
-                var getProduct = _orderdbContext.Products.FirstOrDefault(x => x.ProductId == item.ProductId);
-
-                if (getProduct != null)
-                {
-                    var product = getProduct;
-
-                    var orderLineUser = new OrderLine
-                    {
-                        Id = item.Id,
-                        Quantity = item.Quantity,
-                        ProductId = item.ProductId,
-                        Total = item.Total,
-                    };
-                    _orderdbContext.OrderLines.Add(orderLineUser);
-                }
-
-                else
-                {
-                    var orderLineUser = new OrderLine
-                    {
-                        Id = item.Id,
-
-                        Quantity = item.Quantity,
-                        ProductId= item.ProductId,
-                        Product = new Product
-                        {
-                            ProductId = item.Product.ProductId,
-                            ProductName = item.Product.ProductName,
-                            ProductPrice = item.Product.ProductPrice
-                        },
-                        Total = item.Total,
-                    };
-
-                    _orderdbContext.OrderLines.Add(orderLineUser);
-                }
-            }
-
             var orderUser = new OrderModel
             {
                 UserId = orderModelDto.UserId,
@@ -157,13 +118,49 @@ public class OrderRepository : IOrderRepository
             };
 
             _orderdbContext.Orders.Add(orderUser);
+            _orderdbContext.SaveChanges();
 
+            foreach (var item in orderModelDto.OrderLines)
+            {
+                // _logger.LogInformation($"ProductID ---> : {JsonConvert.SerializeObject(item.ProductId)}");
+                var getProduct = _orderdbContext.Products.FirstOrDefault(x => x.ProductId == item.ProductId);
 
+                if (getProduct != null)
+                {
+                    var product = getProduct;
 
-            //save 
-            //_logger.LogInformation($"--->2 order{JsonConvert.SerializeObject(order)}");
-            //_orderdbContext.Orders.Add(order);
-            //
+                    var orderLineUser = new OrderLine
+                    {
+                        Id = item.Id,
+                        OrderModelId = orderUser.Id,
+                        Quantity = item.Quantity,
+                        ProductId = item.ProductId,
+                        Total = item.Total,
+                    };
+                    // _logger.LogInformation($"orderline --->{JsonConvert.SerializeObject(orderLineUser)}");
+                    _orderdbContext.OrderLines.Add(orderLineUser);
+                }
+
+                else
+                {
+                    var orderLineUser = new OrderLine
+                    {
+                        Id = item.Id,
+                        Quantity = item.Quantity,
+                        OrderModelId = orderUser.Id,
+                        ProductId = item.Product.ProductId,
+                        Product = new Product
+                        {
+                            ProductId = item.Product.ProductId,
+                            ProductName = item.Product.ProductName,
+                            ProductPrice = item.Product.ProductPrice
+                        },
+                        Total = item.Total,
+                    };
+                    // _logger.LogInformation($"orderline --->{JsonConvert.SerializeObject(orderLineUser)}");
+                    _orderdbContext.OrderLines.Add(orderLineUser);
+                }
+            }
 
             _orderdbContext.SaveChanges();
 
