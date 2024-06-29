@@ -7,7 +7,7 @@ namespace Basket.Application.Features.Basket.Commands.CheckOut;
 public class CheckOutHandler : IRequestHandler<CheckOutCommand, ResultDto>
 {
     private readonly IBasketRepository _basketRepository;
-
+    
     public CheckOutHandler(IBasketRepository basketRepository)
     {
         _basketRepository = basketRepository;
@@ -16,7 +16,7 @@ public class CheckOutHandler : IRequestHandler<CheckOutCommand, ResultDto>
     public async Task<ResultDto> Handle(CheckOutCommand request, CancellationToken cancellationToken)
     {
         var checkOut = await _basketRepository.CheckOutBasket(request);
-
+        
         return checkOut;
     }
 }

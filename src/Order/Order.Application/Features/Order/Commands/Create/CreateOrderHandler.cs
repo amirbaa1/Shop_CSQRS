@@ -23,8 +23,7 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, bool>
     public Task<bool> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         var orderMap =  _mapper.Map<OrderModelDto>(request);
-        
-        _logger.LogInformation($"ordermap : --->{JsonConvert.SerializeObject(orderMap)}");
+
         var createOrder =  _orderRepository.CreateOrder(orderMap);
         return Task.FromResult(createOrder);
     }
