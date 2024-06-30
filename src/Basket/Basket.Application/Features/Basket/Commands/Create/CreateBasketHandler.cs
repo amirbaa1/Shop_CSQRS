@@ -36,9 +36,9 @@ namespace Basket.Application.Features.Basket.Commands.Create
             }
 
 
-            var itemBaket = new AddItemToBasketDto
+            var itemBasket = new AddItemToBasketDto
             {
-                basketId = request.BasketId,
+                BasketId = request.BasketId,
                 Quantity = request.Quantity,
                 ProductId = request.ProductId,
                 ProductName = request.ProductName,
@@ -46,9 +46,9 @@ namespace Basket.Application.Features.Basket.Commands.Create
                 ImageUrl = request.ImageUrl,
             };
 
-            _logger.LogInformation($"itemBaket ---> {JsonConvert.SerializeObject(itemBaket)}");
+            _logger.LogInformation($"itemBaket ---> {JsonConvert.SerializeObject(itemBasket)}");
 
-            var addBasket = await _repository.AddBasket(itemBaket);
+            var addBasket = await _repository.AddBasket(itemBasket);
 
             if (!addBasket)
             {

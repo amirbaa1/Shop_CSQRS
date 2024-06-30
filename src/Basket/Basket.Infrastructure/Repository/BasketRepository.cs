@@ -32,7 +32,7 @@ namespace Basket.Infrastructure.Repository
         public async Task<bool> AddBasket(AddItemToBasketDto basketitem)
         {
             var basket =
-                await _context.baskets.FirstOrDefaultAsync(x => x.Id == basketitem.basketId); // search basketId user
+                await _context.baskets.FirstOrDefaultAsync(x => x.Id == basketitem.BasketId); // search basketId user
 
 
             if (basket == null)

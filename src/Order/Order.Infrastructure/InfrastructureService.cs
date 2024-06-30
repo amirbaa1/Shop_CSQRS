@@ -18,7 +18,8 @@ public static class InfrastructureService
             p.UseNpgsql(configuration["ConnectionStrings:OrderConnectionString"]));
 
         service.AddScoped<IOrderRepository, OrderRepository>();
-
+        service.AddScoped<IProductRepository, ProductRepository>();
+        
         service.AddMassTransit(x =>
         {
             x.AddConsumer<BasketQueueEventConsumer>();
@@ -31,10 +32,11 @@ public static class InfrastructureService
                     c.Password("guest");
                 });
 
-                cfg.ReceiveEndpoint("Basket-queue_skipped", e =>
-                {
-                    e.ConfigureConsumer<BasketQueueEventConsumer>(context);
-                });
+                cfg.ReceiveEndpoint(EventBusConstants.BasketQueue,
+                    e =>
+                    {
+                        e.ConfigureConsumer<BasketQueueEventConsumer>(context);
+                    });
             });
         });
 

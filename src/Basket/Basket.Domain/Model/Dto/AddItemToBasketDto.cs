@@ -8,7 +8,7 @@ namespace Basket.Domain.Model.Dto
 {
     public class AddItemToBasketDto
     {
-        public Guid basketId { get; set; }
+        public Guid BasketId { get; set; }
         public Guid ProductId { get; set; }
         public string ProductName { get; set; }
         public int UnitPrice { get; set; }
