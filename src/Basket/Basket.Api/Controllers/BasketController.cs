@@ -34,9 +34,18 @@ namespace Basket.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostBasket([FromBody] CreateBasketCommand command, [FromQuery] string userId)
+        public async Task<IActionResult> PostBasket([FromBody] AddItemToBasketDto addItemToBasket,
+            [FromQuery] string userId)
         {
-            command.UserId = userId;
+            var command = new CreateBasketCommand(userId)
+            {
+                BasketId = addItemToBasket.BasketId,
+                ProductId = addItemToBasket.ProductId,
+                ProductName = addItemToBasket.ProductName,
+                UnitPrice = addItemToBasket.UnitPrice,
+                Quantity = addItemToBasket.Quantity,
+                ImageUrl = addItemToBasket.ImageUrl
+            };
 
             var basketDto = await _mediator.Send(command);
 

@@ -12,13 +12,15 @@ public class OrderRepository : IOrderRepository
 {
     private readonly OrderdbContext _orderdbContext;
     private readonly ILogger<OrderRepository> _logger;
-
-    public OrderRepository(OrderdbContext orderdbContext, ILogger<OrderRepository> logger)
+    private readonly IProductRepository _productRepository;
+    
+    public OrderRepository(OrderdbContext orderdbContext, ILogger<OrderRepository> logger,
+        IProductRepository productRepository)
     {
         _orderdbContext = orderdbContext;
         _logger = logger;
+        _productRepository = productRepository;
     }
-
     public async Task<List<OrderModelDto>> GetOrdersByUserId(string userid)
     {
         var order = await _orderdbContext.Orders
@@ -122,44 +124,49 @@ public class OrderRepository : IOrderRepository
 
             foreach (var item in orderModelDto.OrderLines)
             {
-                // _logger.LogInformation($"ProductID ---> : {JsonConvert.SerializeObject(item.ProductId)}");
-                var getProduct = _orderdbContext.Products.FirstOrDefault(x => x.ProductId == item.ProductId);
+                // var getProduct = _orderdbContext.Products.FirstOrDefault(x => x.ProductId == item.ProductId);
 
-                if (getProduct != null)
+                // if (getProduct != null)
+                // {
+                var productCheck = _productRepository.GetProduct(new ProductDto
                 {
-                    var product = getProduct;
+                    ProductId = item.Product.ProductId,
+                    ProductName = item.Product.ProductName,
+                    ProductPrice = item.Product.ProductPrice
+                });
 
-                    var orderLineUser = new OrderLine
-                    {
-                        Id = item.Id,
-                        OrderModelId = orderUser.Id,
-                        Quantity = item.Quantity,
-                        ProductId = item.ProductId,
-                        Total = item.Total,
-                    };
-                    // _logger.LogInformation($"orderline --->{JsonConvert.SerializeObject(orderLineUser)}");
-                    _orderdbContext.OrderLines.Add(orderLineUser);
-                }
-
-                else
+                var orderLineUser = new OrderLine
                 {
-                    var orderLineUser = new OrderLine
-                    {
-                        Id = item.Id,
-                        Quantity = item.Quantity,
-                        OrderModelId = orderUser.Id,
-                        ProductId = item.Product.ProductId,
-                        Product = new Product
-                        {
-                            ProductId = item.Product.ProductId,
-                            ProductName = item.Product.ProductName,
-                            ProductPrice = item.Product.ProductPrice
-                        },
-                        Total = item.Total,
-                    };
-                    // _logger.LogInformation($"orderline --->{JsonConvert.SerializeObject(orderLineUser)}");
-                    _orderdbContext.OrderLines.Add(orderLineUser);
-                }
+                    Id = item.Id,
+                    OrderModelId = orderUser.Id,
+                    Quantity = item.Quantity,
+                    ProductId = item.ProductId,
+                    Product = productCheck,
+                    Total = item.Total,
+                };
+                // _logger.LogInformation($"orderline --->{JsonConvert.SerializeObject(orderLineUser)}");
+                _orderdbContext.OrderLines.Add(orderLineUser);
+                // }
+
+                // else
+                // {
+                //     var orderLineUser = new OrderLine
+                //     {
+                //         Id = item.Id,
+                //         Quantity = item.Quantity,
+                //         OrderModelId = orderUser.Id,
+                //         ProductId = item.Product.ProductId,
+                //         Product = new Product
+                //         {
+                //             ProductId = item.Product.ProductId,
+                //             ProductName = item.Product.ProductName,
+                //             ProductPrice = item.Product.ProductPrice
+                //         },
+                //         Total = item.Total,
+                //     };
+                //     // _logger.LogInformation($"orderline --->{JsonConvert.SerializeObject(orderLineUser)}");
+                //     _orderdbContext.OrderLines.Add(orderLineUser);
+                // }
             }
 
             _orderdbContext.SaveChanges();
