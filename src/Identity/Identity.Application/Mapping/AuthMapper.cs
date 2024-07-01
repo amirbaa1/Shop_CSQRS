@@ -11,5 +11,7 @@ public class AuthMapper : Profile
     {
         CreateMap<LoginModel, LoginCommand>().ReverseMap();
         CreateMap<RegisterModel, RegisterCommand>().ReverseMap();
+
+        // CreateMap<ProfileQuery,>()
     }
 }

@@ -2,6 +2,7 @@ using Identity.Domain.Models;
 using Identity.Domain.Models.Dto;
 using Identity.Domain.Repository;
 using Identity.Infrastructure.Data;
+using IdentityServer4.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -104,15 +105,159 @@ public class AuthRepository : IAuthRepository
         };
     }
 
-    // public Task<ResponseDto> ProfileService(string Id)
-    // {
-    //     throw new NotImplementedException();
-    // }
-    //
-    // public Task<ResponseDto> UpdateProfile(string id, UpdateProfile updateProfiles)
-    // {
-    //     throw new NotImplementedException();
-    // }
+    public async Task<ResponseDto> ProfileService(string id)
+    {
+        var user = await _context.AppUsers.SingleOrDefaultAsync(x => x.Id == id);
+        if (user == null)
+        {
+            return new ResponseDto
+            {
+                IsSuccess = false,
+                Message = "NotFound!",
+                Result = null
+            };
+        }
+
+        // var userProfile = new UserDto
+        // {
+        //     ID = user.Id,
+        //     UserName = user.UserName,
+        //     FirstName = user.FirstName,
+        //     LastName = user.LastName,
+        //     Email = user.Email,
+        //     Image = user.Image,
+        //     PhoneNumber = user.PhoneNumber,
+        //     Role = user.Role,
+        //     
+        // };
+
+        var userProfile = new AppUser
+        {
+            Id = user.Id,
+            UserName = user.UserName,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email,
+            Image = user.Image,
+            PhoneNumber = user.PhoneNumber,
+            Role = user.Role,
+            EmailConfirmed = user.EmailConfirmed,
+            PhoneNumberConfirmed = user.PhoneNumberConfirmed,
+            TwoFactorEnabled = user.TwoFactorEnabled
+        };
+
+        return new ResponseDto
+        {
+            IsSuccess = true,
+            Message = "ProfileService",
+            Result = userProfile
+        };
+    }
+
+    public async Task<ResponseDto> UpdateProfile(string id, UpdateProfile updateProfiles)
+    {
+        var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+        if (user == null)
+        {
+            return new ResponseDto
+
+            {
+                IsSuccess = false,
+                Message = "NotFound!",
+                Result = null
+            };
+        }
+
+        if ((user.LastName == "string" || string.IsNullOrWhiteSpace(user.LastName)) &&
+            (user.Image == "string" || string.IsNullOrWhiteSpace(user.Image)))
+        {
+            user.FirstName = updateProfiles.FirstName;
+        }
+
+        if ((user.FirstName == "string" || string.IsNullOrWhiteSpace(user.FirstName)) &&
+            (user.Image == "string" || string.IsNullOrWhiteSpace(user.Image)))
+        {
+            user.LastName = updateProfiles.LastName;
+        }
+
+        if ((user.FirstName == "string" || string.IsNullOrWhiteSpace(user.FirstName)) &&
+            (user.LastName == "string" || string.IsNullOrWhiteSpace(user.LastName)))
+        {
+            user.Image = updateProfiles.Image;
+        }
+
+        if (user.FirstName == "string" || string.IsNullOrWhiteSpace(user.FirstName))
+        {
+            user.LastName = updateProfiles.LastName;
+            user.Image = updateProfiles.Image;
+        }
+
+        if (user.LastName == "string" || string.IsNullOrWhiteSpace(user.LastName))
+        {
+            user.FirstName = updateProfiles.FirstName;
+            user.Image = updateProfiles.Image;
+        }
+
+        if (user.Image == "string" || string.IsNullOrWhiteSpace(user.Image))
+        {
+            user.FirstName = updateProfiles.FirstName;
+            user.LastName = updateProfiles.LastName;
+        }
+
+        // void UpdateIfDefault(ref string userProperty, string updateProperty)
+        // {
+        //     if (userProperty == "string" || string.IsNullOrWhiteSpace(userProperty))
+        //     {
+        //         userProperty = updateProperty;
+        //     }
+        // }
+        //
+        // UpdateIfDefault(ref user.FirstName, updateProfiles.FirstName);
+        // UpdateIfDefault(ref user.LastName, updateProfiles.LastName);
+        // UpdateIfDefault(ref user.Image, updateProfiles.Image);
+        //
+        // var result = await _userManager.UpdateAsync(user);
+        // if (result.Succeeded)
+        // {
+        //     return new ResponseDto
+        //     {
+        //         IsSuccess = true,
+        //         Message = "Profile updated successfully!",
+        //         Result = user
+        //     };
+        // }
+        // else
+        // {
+        //     return new ResponseDto
+        //     {
+        //         IsSuccess = false,
+        //         Message = "Update failed!",
+        //         Result = result.Errors
+        //     };
+        // }
+
+
+        var result = await _userManager.UpdateAsync(user);
+        if (result.Succeeded)
+        {
+            return new ResponseDto
+            {
+                IsSuccess = true,
+                Message = "Profile updated successfully!",
+                Result = user
+            };
+        }
+        else
+        {
+            return new ResponseDto
+            {
+                IsSuccess = false,
+                Message = "Update failed!",
+                Result = result.Errors
+            };
+        }
+    }
+
     //
     // public Task<string> SendActivateEmail(string userId)
     // {

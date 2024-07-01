@@ -9,9 +9,9 @@ public interface IAuthRepository
 
     Task<LoginResponseDto> Login(LoginModel login);
 
-    // Task<ResponseDto> ProfileService(string Id);
-    //
-    // Task<ResponseDto> UpdateProfile(string id,UpdateProfile updateProfiles);
-    //
+    Task<ResponseDto> ProfileService(string id);
+
+    Task<ResponseDto> UpdateProfile(string id, UpdateProfile updateProfiles);
+
     // Task<string> SendActivateEmail(string userId);
 }
