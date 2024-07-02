@@ -1,8 +1,9 @@
-﻿using Basket.Domain.Repository;
+﻿using Basket.Application.Features.Basket.Commands.CheckOut;
+using Basket.Domain.Repository;
+using Basket.Infrastructure.Consumer;
 using Basket.Infrastructure.Data;
 using Basket.Infrastructure.Repository;
 using EventBus.Messages.Common;
-using EventBus.Messages.Event;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -22,24 +23,32 @@ namespace Basket.Infrastructure
 
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IBasketService, BasketService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
-            //services.AddScoped<BasketService>();
-            // services.AddMassTransit(x =>
-            // {
-            //     x.UsingRabbitMq((ctx, cfg) =>
-            //     {
-            //         cfg.Host("localhost", "/", c =>
-            //         {
-            //             c.Username("guest");
-            //             c.Password("guest");
-            //         });
-            //         cfg.ReceiveEndpoint(EventBusConstants.BasketQueue, ep =>
-            //         {
-            //             ep.Durable = true;
-            //         });
-            //     });
-            // });
-            // services.AddMassTransitHostedService();
+            services.AddMassTransit(x =>
+            {
+                x.AddRequestClient<CheckOutHandler>();
+                x.AddConsumer<UpdateProductConsumer>();
+
+                x.SetKebabCaseEndpointNameFormatter();
+                x.UsingRabbitMq((context, config) =>
+                {
+                    config.Host("localhost", "/", hostConfigurator =>
+                    {
+                        hostConfigurator.Username("guest");
+                        hostConfigurator.Password("guest");
+                    });
+
+                    config.ReceiveEndpoint(EventBusConstants.BasketQueue, ep =>
+                    {
+                        ep.AutoDelete = false;
+                        ep.Durable = true;
+                    });
+
+                    config.ReceiveEndpoint(EventBusConstants.UpdateProductQueue,
+                        ep => { ep.ConfigureConsumer<UpdateProductConsumer>(context); });
+                });
+            });
 
             return services;
         }

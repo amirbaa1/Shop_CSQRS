@@ -1,9 +1,8 @@
 ﻿
-using EventBus.Messages.Event;
+using EventBus.Messages.Event.Basket;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Order.Domain.Model;
 using Order.Domain.Model.Dto;
 using Order.Domain.Repository;
 

@@ -2,7 +2,7 @@
 using Basket.Application.Features.Basket.Commands.CheckOut;
 using Basket.Domain.Model;
 using Basket.Domain.Model.Dto;
-using EventBus.Messages.Event;
+using EventBus.Messages.Event.Basket;
 
 
 namespace Basket.Application.Mapper

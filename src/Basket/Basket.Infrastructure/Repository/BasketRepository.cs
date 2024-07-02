@@ -3,7 +3,7 @@ using Basket.Domain.Model;
 using Basket.Domain.Model.Dto;
 using Basket.Domain.Repository;
 using Basket.Infrastructure.Data;
-using EventBus.Messages.Event;
+using EventBus.Messages.Event.Basket;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -98,7 +98,7 @@ namespace Basket.Infrastructure.Repository
                     return "Not Found Item Id";
                 }
 
-                var productItem = _context.products.SingleOrDefault(x => x.ProductId == item.ProductId);
+                var productItem = await _context.products.SingleOrDefaultAsync(x => x.ProductId == item.ProductId);
 
                 if (item == null)
                     throw new Exception("BasketItem Not Found...!");

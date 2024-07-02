@@ -1,5 +1,8 @@
+using EventBus.Messages.Event.Product;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Product.Domain.Model.Dto;
 using Product.Domain.Repositories;
 using Product.Infrastructure.Data;
@@ -10,11 +13,14 @@ public class ProductRepository : IProductRepository
 {
     private readonly ProductDbContext _context;
     private readonly ILogger<ProductDbContext> _logger;
+    private readonly IPublishEndpoint _publishEndpoint;
 
-    public ProductRepository(ProductDbContext context, ILogger<ProductDbContext> logger)
+    public ProductRepository(ProductDbContext context, ILogger<ProductDbContext> logger,
+        IPublishEndpoint publishEndpoint)
     {
         _context = context;
         _logger = logger;
+        _publishEndpoint = publishEndpoint;
     }
 
     public async Task<string> AddProduct(ProductDto addNewProductDto)
@@ -90,7 +96,7 @@ public class ProductRepository : IProductRepository
         }
     }
 
-    public async Task<string> UpdateProductName(UpdateProductDto updateProduct)
+    public async Task<string> UpdateProduct(UpdateProductDto updateProduct)
     {
         var getProduct = await _context.Products.FindAsync(updateProduct.ProductId);
         if (getProduct == null)
@@ -117,7 +123,19 @@ public class ProductRepository : IProductRepository
         }
 
         await _context.SaveChangesAsync();
-        return $"Update Product : {getProduct}";
+
+
+        var message = new ProductQueueEvent
+        {
+            ProductId = getProduct.Id,
+            Name = getProduct.Name,
+            Price = getProduct.Price
+        };
+        _logger.LogInformation($"send :  {JsonConvert.SerializeObject(message)}");
+       
+        await _publishEndpoint.Publish(message);
+
+        return $"Update Product : {JsonConvert.SerializeObject(getProduct)}";
     }
 
     public async Task<bool> DeleteProduct(Guid productId)

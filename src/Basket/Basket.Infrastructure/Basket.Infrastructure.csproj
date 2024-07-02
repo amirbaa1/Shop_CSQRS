@@ -11,13 +11,14 @@
     <PackageReference Include="MassTransit" Version="8.2.3" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.3" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.18" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\EventBus.Messages\EventBus.Messages.csproj" />
+    <ProjectReference Include="..\Basket.Application\Basket.Application.csproj" />
     <ProjectReference Include="..\Basket.Domain\Basket.Domain.csproj" />
   </ItemGroup>
 

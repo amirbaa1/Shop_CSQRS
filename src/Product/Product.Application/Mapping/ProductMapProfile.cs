@@ -1,4 +1,5 @@
 using AutoMapper;
+using EventBus.Messages.Event.Product;
 using Product.Application.Features.Category.Commands;
 using Product.Application.Features.Product.Commands.CreateProduct;
 using Product.Application.Features.Product.Commands.Update;
@@ -15,5 +16,8 @@ public class ProductMapProfile : Profile
         CreateMap<Domain.Model.Product, CreateProductCommand>().ReverseMap();
         CreateMap<ProductDto, CreateProductCommand>().ReverseMap();
         CreateMap<UpdateProductDto, UpdateProductCommand>().ReverseMap();
+
+        CreateMap<UpdateProductCommand, ProductQueueEvent>().ReverseMap();
+        
     }
 }

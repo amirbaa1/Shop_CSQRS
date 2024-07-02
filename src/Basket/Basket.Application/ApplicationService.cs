@@ -14,37 +14,7 @@ namespace Basket.Application
 
             service.AddMediatR(cfg =>
                 cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
-
-            // service.AddMassTransit(x =>
-            // {
-            //     x.UsingRabbitMq((ctx, cfg) =>
-            //     {
-            //         cfg.Host("localhost", "/", c =>
-            //         {
-            //             c.Username("guest");
-            //             c.Password("guest");
-            //         });
-            //         cfg.ConfigureEndpoints(ctx);
-            //     }); 
-            // }); 
-
-            service.AddMassTransit(cfg =>
-            {
-                cfg.AddRequestClient<CheckOutHandler>();
-                
-                cfg.SetKebabCaseEndpointNameFormatter();
-                cfg.UsingRabbitMq((context, config) =>
-                {
-                    config.Host("localhost","/", hostConfigurator => { });
-                    
-                    config.ReceiveEndpoint(EventBusConstants.BasketQueue, ep =>
-                    {
-                        ep.AutoDelete = false;
-                        ep.Durable = true;
-                    });
-                });
-            });
-
+            
 
             return service;
         }

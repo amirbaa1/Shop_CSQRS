@@ -1,6 +1,6 @@
 ﻿
 
-namespace EventBus.Messages.Event
+namespace EventBus.Messages.Event.Basket
 {
     public class BasketQueueEvent : IntegrationBaseEvent
     {
