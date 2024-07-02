@@ -3,7 +3,7 @@ using Basket.Domain.Model;
 using Basket.Domain.Model.Dto;
 using Basket.Domain.Repository;
 using Basket.Infrastructure.Data;
-using EventBus.Messages.Event;
+using EventBus.Messages.Event.Basket;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

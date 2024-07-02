@@ -1,3 +1,5 @@
+using EventBus.Messages.Common;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +18,25 @@ public static class InfrastructureService
 
         service.AddScoped<IProductRepository, ProductRepository>();
         service.AddScoped<ICategoryRepository, CategoryRepository>();
+
+        service.AddMassTransit(x =>
+        {
+            x.UsingRabbitMq((ctx, cfg) =>
+            {
+                cfg.Host("localhost", "/", c =>
+                {
+                    c.Username("guest");
+                    c.Password("guest");
+                });
+                cfg.ReceiveEndpoint(EventBusConstants.UpdateProductQueue, ep =>
+                {
+                    ep.Durable = true;
+                    ep.AutoDelete = false;
+                    
+                });
+            });
+        });
+        
         return service;
     }
 }
