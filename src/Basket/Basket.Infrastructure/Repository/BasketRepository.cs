@@ -171,10 +171,21 @@ namespace Basket.Infrastructure.Repository
 
                 await _context.SaveChangesAsync();
 
-                await _publishEndpoint.Publish(message);
+                var pub = _publishEndpoint.Publish(message);
 
-                await RemoveItemFromBasket(basketId: getBasket.Id);
+                if (pub != null)
+                {
+                    await RemoveItemFromBasket(basketId: getBasket.Id);
+                }
+                else
+                {
+                    return new ResultDto
+                    {
+                        IsSuccess = false,
+                        Message = $"no send message."
+                    };
 
+                }
                 return new ResultDto
                 {
                     IsSuccess = true,

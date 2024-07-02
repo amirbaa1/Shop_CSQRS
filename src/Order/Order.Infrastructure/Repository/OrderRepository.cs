@@ -159,7 +159,7 @@ public class OrderRepository : IOrderRepository
                     Body = body,
                     From = "amir.2002.ba@gmail.com",
                     Subject = "Order Shopping",
-                    To = orderUser.Address
+                    To = orderUser.EmailAddress,
                 };
 
                 _emailSend.Send(emailCreate);

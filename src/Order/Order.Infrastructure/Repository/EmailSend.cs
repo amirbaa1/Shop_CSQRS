@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Mail;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Order.Domain.Model.Email;
 using Order.Domain.Repository;
 
@@ -9,13 +10,14 @@ namespace Order.Infrastructure.Repository;
 
 public class EmailSend : IEmailSend
 {
-    public EmailSend(ILogger<EmailSend> logger)
+    private readonly EmailConfig _config;
+    private readonly ILogger<EmailSend> _logger;
+
+    public EmailSend(IOptions<EmailConfig> config, ILogger<EmailSend> logger)
     {
+        _config = config.Value;
         _logger = logger;
     }
-
-    private EmailSetting _emailSetting { get; }
-    private readonly ILogger<EmailSend> _logger;
 
     public async Task<bool> Send(EmailModel email)
     {
@@ -24,9 +26,9 @@ public class EmailSend : IEmailSend
             var message = new MailMessage(email.From, email.To, email.Subject, email.Body);
 
 
-            using (var emailClient = new SmtpClient(_emailSetting.HOST, _emailSetting.PORT))
+            using (var emailClient = new SmtpClient(_config.HOST, _config.PORT))
             {
-                emailClient.Credentials = new NetworkCredential(_emailSetting.User, _emailSetting.Password);
+                emailClient.Credentials = new NetworkCredential(_config.User, _config.Password);
                 await emailClient.SendMailAsync(message);
                 _logger.LogInformation($"--->sand Email : {email.To}");
                 _logger.LogInformation($"--->sand Email : {emailClient.SendMailAsync(message)}");
