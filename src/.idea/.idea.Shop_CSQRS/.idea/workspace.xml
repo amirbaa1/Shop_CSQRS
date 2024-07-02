@@ -18,13 +18,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d7a7d61-af35-4789-a905-8596f200d918" name="Changes" comment="add notification">
-      <change afterPath="$PROJECT_DIR$/Order/Order.Domain/Repository/IEmailSend.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Order/Order.Infrastructure/Repository/EmailSend.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Infrastructure/InfrastructureService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Infrastructure/InfrastructureService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Infrastructure/Repository/OrderRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Infrastructure/Repository/OrderRepository.cs" afterDir="false" />
-    </list>
+    <list default="true" id="4d7a7d61-af35-4789-a905-8596f200d918" name="Changes" comment="update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +29,10 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/amirba/Documents/Asp-net/mic2/Shop_CSQRS/src/Order/Order.Infrastructure/Repository/EmailSend.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/amirba/Documents/Asp-net/mic2/Shop_CSQRS/src/Order/Order.Infrastructure/Repository/EmailSend.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -268,7 +266,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1719916101805</updated>
-      <workItem from="1719916105710" duration="7096000" />
+      <workItem from="1719916105710" duration="7529000" />
     </task>
     <task id="LOCAL-00001" summary="update idea">
       <option name="closed" value="true" />
@@ -302,7 +300,31 @@
       <option name="project" value="LOCAL" />
       <updated>1719926053274</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="update emailsend in order">
+      <option name="closed" value="true" />
+      <created>1719928570337</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1719928570337</updated>
+    </task>
+    <task id="LOCAL-00006" summary="update">
+      <option name="closed" value="true" />
+      <created>1719928687864</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1719928687864</updated>
+    </task>
+    <task id="LOCAL-00007" summary="update">
+      <option name="closed" value="true" />
+      <created>1719928712798</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1719928712798</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,6 +349,8 @@
     <MESSAGE value="update rabbitmq&#10;update idea" />
     <MESSAGE value="update order" />
     <MESSAGE value="add notification" />
-    <option name="LAST_COMMIT_MESSAGE" value="add notification" />
+    <MESSAGE value="update emailsend in order" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
 </project>
