@@ -19,7 +19,9 @@ public static class InfrastructureService
 
         service.AddScoped<IOrderRepository, OrderRepository>();
         service.AddScoped<IProductRepository, ProductRepository>();
-        
+        service.AddScoped<IEmailSend, EmailSend>();
+        service.AddSingleton<EmailSetting>();
+
         service.AddMassTransit(x =>
         {
             x.AddConsumer<BasketQueueEventConsumer>();
@@ -33,12 +35,10 @@ public static class InfrastructureService
                 });
 
                 cfg.ReceiveEndpoint(EventBusConstants.BasketQueue,
-                    e =>
-                    {
-                        e.ConfigureConsumer<BasketQueueEventConsumer>(context);
-                    });
+                    e => { e.ConfigureConsumer<BasketQueueEventConsumer>(context); });
             });
         });
+
 
         //service.AddMassTransitHostedService();
 

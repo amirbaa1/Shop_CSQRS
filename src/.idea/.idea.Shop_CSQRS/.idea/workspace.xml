@@ -18,11 +18,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d7a7d61-af35-4789-a905-8596f200d918" name="Changes" comment="update rabbitmq&#10;update idea">
-      <change afterPath="$PROJECT_DIR$/Notification/Notification.Domain/Model/EmailModel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Order/Order.Domain/Model/Email/EmailModel.cs" afterDir="false" />
+    <list default="true" id="4d7a7d61-af35-4789-a905-8596f200d918" name="Changes" comment="add notification">
+      <change afterPath="$PROJECT_DIR$/Order/Order.Domain/Repository/IEmailSend.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Order/Order.Infrastructure/Repository/EmailSend.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shop_CSQRS.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Shop_CSQRS.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Order/Order.Infrastructure/InfrastructureService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Infrastructure/InfrastructureService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Order/Order.Infrastructure/Repository/OrderRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Infrastructure/Repository/OrderRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,28 +46,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.Basket.Api: https.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Product.Api: https.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.Basket.Api: https.executor": "Run",
+    ".NET Launch Settings Profile.Order.Api: https.executor": "Run",
+    ".NET Launch Settings Profile.Product.Api: https.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache&quot;,
-      &quot;/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache&quot;,
-      &quot;/Users/amirba/Library/Application Support/Symbols/src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
+      "/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
+      "/Users/amirba/Library/Application Support/Symbols/src"
     ]
   }
-}</component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Product.Api: https">
+}]]></component>
+  <component name="RunManager" selected=".NET Launch Settings Profile.Order.Api: https">
     <configuration name="Basket.Api: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Basket/Basket.Api/Basket.Api.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
@@ -266,7 +268,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1719916101805</updated>
-      <workItem from="1719916105710" duration="5369000" />
+      <workItem from="1719916105710" duration="7096000" />
     </task>
     <task id="LOCAL-00001" summary="update idea">
       <option name="closed" value="true" />
@@ -284,7 +286,23 @@
       <option name="project" value="LOCAL" />
       <updated>1719919286836</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update order">
+      <option name="closed" value="true" />
+      <created>1719926036477</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1719926036478</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add notification">
+      <option name="closed" value="true" />
+      <created>1719926053274</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1719926053274</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,6 +325,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="update idea" />
     <MESSAGE value="update rabbitmq&#10;update idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="update rabbitmq&#10;update idea" />
+    <MESSAGE value="update order" />
+    <MESSAGE value="add notification" />
+    <option name="LAST_COMMIT_MESSAGE" value="add notification" />
   </component>
 </project>
