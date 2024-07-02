@@ -1,5 +1,6 @@
 ﻿using Basket.Application.Features.Basket.Commands.CheckOut;
 using Basket.Domain.Repository;
+using Basket.Infrastructure.Consumer;
 using Basket.Infrastructure.Data;
 using Basket.Infrastructure.Repository;
 using EventBus.Messages.Common;
@@ -22,13 +23,15 @@ namespace Basket.Infrastructure
 
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IBasketService, BasketService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
-            services.AddMassTransit(cfg =>
+            services.AddMassTransit(x =>
             {
-                cfg.AddRequestClient<CheckOutHandler>();
+                x.AddRequestClient<CheckOutHandler>();
+                x.AddConsumer<UpdateProductConsumer>();
 
-                cfg.SetKebabCaseEndpointNameFormatter();
-                cfg.UsingRabbitMq((context, config) =>
+                x.SetKebabCaseEndpointNameFormatter();
+                x.UsingRabbitMq((context, config) =>
                 {
                     config.Host("localhost", "/", hostConfigurator =>
                     {
@@ -42,11 +45,8 @@ namespace Basket.Infrastructure
                         ep.Durable = true;
                     });
 
-                    config.ReceiveEndpoint(EventBusConstants.UpdateProductQueue, ep =>
-                    {
-                        ep.AutoDelete = false;
-                        ep.Durable = true;
-                    });
+                    config.ReceiveEndpoint(EventBusConstants.UpdateProductQueue,
+                        ep => { ep.ConfigureConsumer<UpdateProductConsumer>(context); });
                 });
             });
 

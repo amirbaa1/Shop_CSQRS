@@ -20,7 +20,7 @@ public class UpdateProductConsumer : IConsumer<ProductQueueEvent>
 
         var product = new ProductDto
         {
-            ProductId = getMessage.Id,
+            ProductId = getMessage.ProductId,
             ProductName = getMessage.Name,
             UnitPrice = getMessage.Price
         };

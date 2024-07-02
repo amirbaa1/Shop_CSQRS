@@ -21,6 +21,8 @@ public static class InfrastructureService
 
         service.AddMassTransit(x =>
         {
+            x.SetKebabCaseEndpointNameFormatter();
+            
             x.UsingRabbitMq((ctx, cfg) =>
             {
                 cfg.Host("localhost", "/", c =>
@@ -31,8 +33,6 @@ public static class InfrastructureService
                 cfg.ReceiveEndpoint(EventBusConstants.UpdateProductQueue, ep =>
                 {
                     ep.Durable = true;
-                    ep.AutoDelete = false;
-                    
                 });
             });
         });

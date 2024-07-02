@@ -98,7 +98,7 @@ namespace Basket.Infrastructure.Repository
                     return "Not Found Item Id";
                 }
 
-                var productItem = _context.products.SingleOrDefault(x => x.ProductId == item.ProductId);
+                var productItem = await _context.products.SingleOrDefaultAsync(x => x.ProductId == item.ProductId);
 
                 if (item == null)
                     throw new Exception("BasketItem Not Found...!");
