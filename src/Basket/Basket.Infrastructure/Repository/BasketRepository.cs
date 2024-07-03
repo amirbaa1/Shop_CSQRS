@@ -171,6 +171,7 @@ namespace Basket.Infrastructure.Repository
 
                 await _context.SaveChangesAsync();
 
+                _logger.LogInformation("Publishing message: {@message}", message);
                 var pub = _publishEndpoint.Publish(message);
 
                 if (pub != null)

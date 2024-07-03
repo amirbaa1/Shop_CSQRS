@@ -131,7 +131,6 @@ public class ProductRepository : IProductRepository
             Name = getProduct.Name,
             Price = getProduct.Price
         };
-        _logger.LogInformation($"send :  {JsonConvert.SerializeObject(message)}");
        
         await _publishEndpoint.Publish(message);
 

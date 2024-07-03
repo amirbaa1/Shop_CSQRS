@@ -39,12 +39,15 @@ public static class InfrastructureService
                 });
 
                 cfg.ReceiveEndpoint(EventBusConstants.BasketQueue,
-                    e => { e.ConfigureConsumer<BasketQueueEventConsumer>(context); });
+                    e =>
+                    {
+                        e.ConfigureConsumer<BasketQueueEventConsumer>(context);
+                    });
             });
         });
 
 
-        //service.AddMassTransitHostedService();
+        service.AddMassTransitHostedService();
 
         return service;
     }

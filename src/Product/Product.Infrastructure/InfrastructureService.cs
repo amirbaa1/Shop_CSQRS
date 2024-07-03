@@ -22,21 +22,26 @@ public static class InfrastructureService
         service.AddMassTransit(x =>
         {
             x.SetKebabCaseEndpointNameFormatter();
-            
-            x.UsingRabbitMq((ctx, cfg) =>
+
+            x.UsingRabbitMq((context, cfg) =>
             {
                 cfg.Host("localhost", "/", c =>
                 {
                     c.Username("guest");
                     c.Password("guest");
                 });
-                cfg.ReceiveEndpoint(EventBusConstants.UpdateProductQueue, ep =>
+                cfg.ConfigureEndpoints(context);
+
+                //cfg.ReceiveEndpoint(EventBusConstants.UpdateProductQueue, ep => { });
+
+                cfg.UseTimeout(timeConfig =>
                 {
-                    ep.Durable = true;
+                    timeConfig.Timeout = TimeSpan.FromSeconds(60);
                 });
+
             });
         });
-        
+
         return service;
     }
 }

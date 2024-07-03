@@ -27,7 +27,6 @@ namespace Basket.Infrastructure
 
             services.AddMassTransit(x =>
             {
-                x.AddRequestClient<CheckOutHandler>();
                 x.AddConsumer<UpdateProductConsumer>();
 
                 x.SetKebabCaseEndpointNameFormatter();
@@ -39,14 +38,18 @@ namespace Basket.Infrastructure
                         hostConfigurator.Password("guest");
                     });
 
-                    config.ReceiveEndpoint(EventBusConstants.BasketQueue, ep =>
+                    //config.ReceiveEndpoint(EventBusConstants.BasketQueue, ep => { });
+                    config.ConfigureEndpoints(context);
+                    config.UseTimeout(timeConfig =>
                     {
-                        ep.AutoDelete = false;
-                        ep.Durable = true;
+                        timeConfig.Timeout = TimeSpan.FromSeconds(60);
                     });
 
                     config.ReceiveEndpoint(EventBusConstants.UpdateProductQueue,
-                        ep => { ep.ConfigureConsumer<UpdateProductConsumer>(context); });
+                        ep =>
+                        {
+                            ep.ConfigureConsumer<UpdateProductConsumer>(context);
+                        });
                 });
             });
 
