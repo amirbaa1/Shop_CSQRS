@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Order.Domain.Model;
 using Order.Domain.Model.Dto;
+using Order.Domain.Model.Email;
 using Order.Domain.Repository;
 using Order.Infrastructure.Data;
 
@@ -13,14 +14,17 @@ public class OrderRepository : IOrderRepository
     private readonly OrderdbContext _orderdbContext;
     private readonly ILogger<OrderRepository> _logger;
     private readonly IProductRepository _productRepository;
-    
+    private readonly IEmailSend _emailSend;
+
     public OrderRepository(OrderdbContext orderdbContext, ILogger<OrderRepository> logger,
-        IProductRepository productRepository)
+        IProductRepository productRepository, IEmailSend emailSend)
     {
         _orderdbContext = orderdbContext;
         _logger = logger;
         _productRepository = productRepository;
+        _emailSend = emailSend;
     }
+
     public async Task<List<OrderModelDto>> GetOrdersByUserId(string userid)
     {
         var order = await _orderdbContext.Orders
@@ -99,6 +103,7 @@ public class OrderRepository : IOrderRepository
 
     public bool CreateOrder(OrderModelDto orderModelDto)
     {
+        string body = "";
         try
         {
             var orderUser = new OrderModel
@@ -146,27 +151,18 @@ public class OrderRepository : IOrderRepository
                 };
                 // _logger.LogInformation($"orderline --->{JsonConvert.SerializeObject(orderLineUser)}");
                 _orderdbContext.OrderLines.Add(orderLineUser);
-                // }
 
-                // else
-                // {
-                //     var orderLineUser = new OrderLine
-                //     {
-                //         Id = item.Id,
-                //         Quantity = item.Quantity,
-                //         OrderModelId = orderUser.Id,
-                //         ProductId = item.Product.ProductId,
-                //         Product = new Product
-                //         {
-                //             ProductId = item.Product.ProductId,
-                //             ProductName = item.Product.ProductName,
-                //             ProductPrice = item.Product.ProductPrice
-                //         },
-                //         Total = item.Total,
-                //     };
-                //     // _logger.LogInformation($"orderline --->{JsonConvert.SerializeObject(orderLineUser)}");
-                //     _orderdbContext.OrderLines.Add(orderLineUser);
-                // }
+                body += $"Product: {productCheck}, Quantity: {item.Quantity}, Total: {item.Total}\n";
+
+                var emailCreate = new EmailModel
+                {
+                    Body = body,
+                    From = "amir.2002.ba@gmail.com",
+                    Subject = "Order Shopping",
+                    To = orderUser.EmailAddress,
+                };
+
+                _emailSend.Send(emailCreate);
             }
 
             _orderdbContext.SaveChanges();

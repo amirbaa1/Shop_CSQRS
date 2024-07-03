@@ -3,6 +3,7 @@ using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Order.Domain.Model.Email;
 using Order.Domain.Repository;
 using Order.Infrastructure.Consumer;
 using Order.Infrastructure.Data;
@@ -19,7 +20,12 @@ public static class InfrastructureService
 
         service.AddScoped<IOrderRepository, OrderRepository>();
         service.AddScoped<IProductRepository, ProductRepository>();
-        
+        service.AddScoped<IEmailSend, EmailSend>();
+
+        service.Configure<EmailConfig>(configuration.GetSection("stmp"));
+
+
+
         service.AddMassTransit(x =>
         {
             x.AddConsumer<BasketQueueEventConsumer>();
@@ -40,7 +46,8 @@ public static class InfrastructureService
             });
         });
 
-        //service.AddMassTransitHostedService();
+
+        service.AddMassTransitHostedService();
 
         return service;
     }
