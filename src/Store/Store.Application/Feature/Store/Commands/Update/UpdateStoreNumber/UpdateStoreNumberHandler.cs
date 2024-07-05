@@ -18,7 +18,7 @@ namespace Store.Application.Feature.Store.Commands.Update.UpdateStoreNumber
         public async Task<ResultDto> Handle(UpdateStoreNumberCommand request, CancellationToken cancellationToken)
         {
             var map = _mapper.Map<UpdateNumberDto>(request);
-            var update = await _storeResp.UpdateStore(map);
+            var update = await _storeResp.UpdateInventoryAfterPurchase(map);
 
             return update;
         }

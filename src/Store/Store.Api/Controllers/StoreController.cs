@@ -41,8 +41,8 @@ namespace Store.Api.Controllers
             return Ok(delete);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateStore([FromBody] UpdateStoreNumberCommand command)
+        [HttpPut("UpdateInventory")]
+        public async Task<IActionResult> UpdateInventory([FromBody] UpdateStoreNumberCommand command)
         {
             var update = await _mediator.Send(command);
             return Ok(update);

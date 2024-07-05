@@ -10,7 +10,7 @@ namespace Store.Domain.Repository
     public interface  IStoreRespository
     {
         Task<ResultDto> CreateStore(StoreDto storeDto);
-        Task<ResultDto> UpdateStore(UpdateNumberDto update);
+        Task<ResultDto> UpdateInventoryAfterPurchase(UpdateNumberDto update);
         Task<ResultDto> DeleteStore(Guid productId);
         Task<List<StoreDto>> GetStore();
     }

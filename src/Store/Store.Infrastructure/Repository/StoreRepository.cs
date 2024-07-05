@@ -100,7 +100,7 @@ namespace Store.Infrastructure.Repository
             return store;
         }
 
-        public async Task<ResultDto> UpdateStore(UpdateNumberDto update)
+        public async Task<ResultDto> UpdateInventoryAfterPurchase(UpdateNumberDto update)
         {
             var getStore = await _context.storeModels.FirstOrDefaultAsync(x => x.Id == update.Id);
 
@@ -113,7 +113,11 @@ namespace Store.Infrastructure.Repository
                     Message = "Not found store in database."
                 };
             }
-            if (update.Number == 0)
+
+            var updateNumber = getStore.Number - update.Number;
+            getStore.Number = updateNumber;
+
+            if (updateNumber == 0)
             {
                 getStore.Status = ProductStatus.OutOfStock;
             }
@@ -121,9 +125,7 @@ namespace Store.Infrastructure.Repository
             {
                 getStore.Status = ProductStatus.Available;
             }
-            
-            
-            getStore.Number = update.Number;
+
             getStore.UpdateTime = DateTime.UtcNow;
 
             _logger.LogInformation($"---> update : {getStore}");
