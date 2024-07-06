@@ -19,22 +19,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d7a7d61-af35-4789-a905-8596f200d918" name="Changes" comment="Update database">
-      <change afterPath="$PROJECT_DIR$/EventBus.Messages/Event/Product/ProductStoreEvent.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Product/Product.Domain/Model/ProductStatus.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Consumer/AddProductStoreConsumer.cs" afterDir="false" />
+    <list default="true" id="4d7a7d61-af35-4789-a905-8596f200d918" name="Changes" comment="update database store">
+      <change afterPath="$PROJECT_DIR$/EventBus.Messages/Event/Product/ProductStoreUpdateEvent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductManagementController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Consumer/UpdateProductStoreConsumer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EventBus.Messages/Common/EventBusConstants.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EventBus.Messages/Common/EventBusConstants.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/CreateProduct/CreateProductCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/CreateProduct/CreateProductCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Domain/Model/Dto/ProductDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Domain/Model/Dto/ProductDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Domain/Model/Product.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Domain/Model/Product.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Domain/Repositories/IProductRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Domain/Repositories/IProductRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/InfrastructureService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/InfrastructureService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Migrations/ProductDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Migrations/ProductDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Update/UpdateProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Update/UpdateProductHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/ProductRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/ProductRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/InfrastructureService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/InfrastructureService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Store.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Store.Infrastructure.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +58,8 @@
   "keyToString": {
     ".NET Launch Settings Profile.Basket.Api: https.executor": "Run",
     ".NET Launch Settings Profile.Order.Api: https.executor": "Run",
-    ".NET Launch Settings Profile.Product.Api: https.executor": "Run",
-    ".NET Launch Settings Profile.Store.Api: https.executor": "Run",
+    ".NET Launch Settings Profile.Product.Api: https.executor": "Debug",
+    ".NET Launch Settings Profile.Store.Api: https.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "dev",
     "node.js.detected.package.eslint": "true",
@@ -361,7 +354,7 @@
       <option name="presentableId" value="Default" />
       <updated>1719916101805</updated>
       <workItem from="1719916105710" duration="7628000" />
-      <workItem from="1720250605027" duration="12434000" />
+      <workItem from="1720250605027" duration="15444000" />
     </task>
     <task id="LOCAL-00001" summary="update idea">
       <option name="closed" value="true" />
@@ -451,7 +444,23 @@
       <option name="project" value="LOCAL" />
       <updated>1720259898167</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="add product-store&#10;rabbitmq product-store">
+      <option name="closed" value="true" />
+      <created>1720268053120</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1720268053120</updated>
+    </task>
+    <task id="LOCAL-00013" summary="update database store">
+      <option name="closed" value="true" />
+      <created>1720268076017</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1720268076017</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -481,7 +490,9 @@
     <MESSAGE value="idea" />
     <MESSAGE value="update store&#10;&#10;add update product name and  status number" />
     <MESSAGE value="Update database" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update database" />
+    <MESSAGE value="add product-store&#10;rabbitmq product-store" />
+    <MESSAGE value="update database store" />
+    <option name="LAST_COMMIT_MESSAGE" value="update database store" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -511,6 +522,45 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Product/Product.Infrastructure/Repository/ProductRepository.cs</url>
+          <line>113</line>
+          <properties documentPath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/ProductRepository.cs" containingFunctionPresentation="Method 'UpdateProduct'">
+            <startOffsets>
+              <option value="3512" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3513" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Update/UpdateProductHandler.cs</url>
+          <line>17</line>
+          <properties documentPath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Update/UpdateProductHandler.cs" containingFunctionPresentation="Method 'Handle'">
+            <startOffsets>
+              <option value="585" />
+            </startOffsets>
+            <endOffsets>
+              <option value="586" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Product/Product.Api/Controllers/ProductManagementController.cs</url>
+          <line>25</line>
+          <properties documentPath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductManagementController.cs" containingFunctionPresentation="Method 'UpdateProduct'">
+            <startOffsets>
+              <option value="857" />
+            </startOffsets>
+            <endOffsets>
+              <option value="858" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

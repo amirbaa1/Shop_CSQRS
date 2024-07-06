@@ -112,7 +112,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<string> UpdateProduct(UpdateProductDto updateProduct)
     {
-        var getProduct = await _context.Products.FindAsync(updateProduct.ProductId);
+        var getProduct = await _context.Products.FirstOrDefaultAsync(x => x.Id == updateProduct.ProductId);
         if (getProduct == null)
         {
             return "Not found product ID.";
@@ -145,8 +145,13 @@ public class ProductRepository : IProductRepository
             Name = getProduct.Name,
             Price = getProduct.Price
         };
-
+        var messageUpdateStore = new ProductStoreUpdateEvent
+        {
+            ProductId = getProduct.Id,
+            ProductName = getProduct.Name
+        };
         await _publishEndpoint.Publish(message);
+        await _publishEndpoint.Publish(messageUpdateStore);
 
         return $"Update Product : {JsonConvert.SerializeObject(getProduct)}";
     }

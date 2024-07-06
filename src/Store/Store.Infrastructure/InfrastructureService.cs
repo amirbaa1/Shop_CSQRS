@@ -25,7 +25,8 @@ namespace Store.Infrastructure
             services.AddMassTransit(x =>
             {
                 x.AddConsumer<AddProductStoreConsumer>();
-
+                x.AddConsumer<UpdateProductStoreConsumer>();
+                
                 x.SetKebabCaseEndpointNameFormatter();
                 x.UsingRabbitMq((context, config) =>
                 {
