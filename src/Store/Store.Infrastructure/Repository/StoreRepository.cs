@@ -23,7 +23,7 @@ namespace Store.Infrastructure.Repository
 
         public async Task<ResultDto> CreateStore(StoreDto storeDto)
         {
-            var getProduct = await _context.storeModels.SingleOrDefaultAsync(x => x.ProductId == storeDto.ProductId);
+            var getProduct = await _context.storeModels.FirstOrDefaultAsync(x => x.ProductId == storeDto.ProductId);
             if (getProduct == null)
             {
                 var createStore = new StoreModel
@@ -41,7 +41,7 @@ namespace Store.Infrastructure.Repository
                     {
                         StatusCode = HttpStatusCode.OK,
                         IsSuccessful = true,
-                        Message = "problem in create product."
+                        Message = "error in create product."
                     };
                 }
 

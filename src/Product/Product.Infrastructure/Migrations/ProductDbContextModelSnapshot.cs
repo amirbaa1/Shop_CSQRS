@@ -74,7 +74,13 @@ namespace Product.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("Number")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Price")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProductStatus")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
