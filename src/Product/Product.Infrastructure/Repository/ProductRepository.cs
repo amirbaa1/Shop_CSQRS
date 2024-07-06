@@ -3,6 +3,7 @@ using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Product.Domain.Model;
 using Product.Domain.Model.Dto;
 using Product.Domain.Repositories;
 using Product.Infrastructure.Data;
@@ -23,9 +24,9 @@ public class ProductRepository : IProductRepository
         _publishEndpoint = publishEndpoint;
     }
 
-    public async Task<string> AddProduct(ProductDto addNewProductDto)
+    public async Task<string> AddProduct(ProductDto addNewProduct)
     {
-        var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == addNewProductDto.CategoryId);
+        var category = await _context.Categories.FirstOrDefaultAsync(x => x.Id == addNewProduct.CategoryId);
 
         if (category == null)
         {
@@ -34,11 +35,13 @@ public class ProductRepository : IProductRepository
 
         var productCreate = new Domain.Model.Product
         {
-            Name = addNewProductDto.Name,
-            Description = addNewProductDto.Description,
-            Image = addNewProductDto.Image,
-            Price = addNewProductDto.Price,
-            CategoryId = addNewProductDto.CategoryId,
+            Name = addNewProduct.Name,
+            Description = addNewProduct.Description,
+            Image = addNewProduct.Image,
+            ProductStatus = addNewProduct.ProductStatus,
+            Number = addNewProduct.Number,
+            Price = addNewProduct.Price,
+            CategoryId = addNewProduct.CategoryId,
             Category = category,
             CreationDateTime = DateTime.UtcNow,
         };
@@ -50,6 +53,16 @@ public class ProductRepository : IProductRepository
         _context.Add(productCreate);
 
         await _context.SaveChangesAsync();
+
+        var message = new ProductStoreEvent
+        {
+            ProductId = productCreate.Id,
+            ProductName = productCreate.Name,
+            Number = productCreate.Number,
+            ProductStatusEvent = (ProductStatusEvent)(int)productCreate.ProductStatus,
+        };
+
+        await _publishEndpoint.Publish(message);
 
         return "add in database.";
     }
@@ -64,6 +77,7 @@ public class ProductRepository : IProductRepository
                 Id = p.Id,
                 Image = p.Image,
                 Name = p.Name,
+                ProductStatus = p.ProductStatus,
                 Price = p.Price,
                 CategoryId = p.CategoryId,
                 Category = p.Category
@@ -98,7 +112,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<string> UpdateProduct(UpdateProductDto updateProduct)
     {
-        var getProduct = await _context.Products.FindAsync(updateProduct.ProductId);
+        var getProduct = await _context.Products.FirstOrDefaultAsync(x => x.Id == updateProduct.ProductId);
         if (getProduct == null)
         {
             return "Not found product ID.";
@@ -131,8 +145,13 @@ public class ProductRepository : IProductRepository
             Name = getProduct.Name,
             Price = getProduct.Price
         };
-       
+        var messageUpdateStore = new ProductStoreUpdateEvent
+        {
+            ProductId = getProduct.Id,
+            ProductName = getProduct.Name
+        };
         await _publishEndpoint.Publish(message);
+        await _publishEndpoint.Publish(messageUpdateStore);
 
         return $"Update Product : {JsonConvert.SerializeObject(getProduct)}";
     }

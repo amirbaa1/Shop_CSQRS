@@ -1,5 +1,5 @@
 using MediatR;
-using Product.Application.Features.Queries.GetProductList;
+using Product.Domain.Model;
 
 namespace Product.Application.Features.Product.Commands.CreateProduct;
 
@@ -9,6 +9,8 @@ public class CreateProductCommand : IRequest<string>
     public string Name { get; set; }
     public string Description { get; set; }
     public string Image { get; set; }
+    public ProductStatus ProductStatus { get; set; }
+    public int Number { get; set; }
     public int Price { get; set; }
     public Guid CategoryId { get; set; }
 }

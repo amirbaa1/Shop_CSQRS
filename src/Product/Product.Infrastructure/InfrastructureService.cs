@@ -1,4 +1,5 @@
 using EventBus.Messages.Common;
+using EventBus.Messages.Event.Product;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,8 @@ public static class InfrastructureService
 
         service.AddMassTransit(x =>
         {
+            x.AddRequestClient<ProductStoreEvent>();
+
             x.SetKebabCaseEndpointNameFormatter();
 
             x.UsingRabbitMq((context, cfg) =>
@@ -34,11 +37,7 @@ public static class InfrastructureService
 
                 //cfg.ReceiveEndpoint(EventBusConstants.UpdateProductQueue, ep => { });
 
-                cfg.UseTimeout(timeConfig =>
-                {
-                    timeConfig.Timeout = TimeSpan.FromSeconds(60);
-                });
-
+                cfg.UseTimeout(timeConfig => { timeConfig.Timeout = TimeSpan.FromSeconds(60); });
             });
         });
 
