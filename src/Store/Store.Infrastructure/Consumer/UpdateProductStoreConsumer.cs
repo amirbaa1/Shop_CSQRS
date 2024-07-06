@@ -1,6 +1,8 @@
 using EventBus.Messages.Event.Product;
 using MassTransit;
 using MediatR;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Store.Application.Feature.Store.Commands.Update.UpdateProductName;
 
 namespace Store.Infrastructure.Consumer;
@@ -8,10 +10,11 @@ namespace Store.Infrastructure.Consumer;
 public class UpdateProductStoreConsumer : IConsumer<ProductStoreUpdateEvent>
 {
     private readonly IMediator _mediator;
-
-    public UpdateProductStoreConsumer(IMediator mediator)
+    private readonly ILogger<UpdateProductStoreConsumer> _logger;
+    public UpdateProductStoreConsumer(IMediator mediator, ILogger<UpdateProductStoreConsumer> logger)
     {
         _mediator = mediator;
+        _logger = logger;
     }
 
     public async Task Consume(ConsumeContext<ProductStoreUpdateEvent> context)
@@ -20,8 +23,11 @@ public class UpdateProductStoreConsumer : IConsumer<ProductStoreUpdateEvent>
         var updateMessage = new UpdateProductNameCommand
         {
             Id = message.ProductId,
-            Name = message.ProductName
+            Name = message.ProductName,
+            Price = message.ProductPrice,
         };
+
+        _logger.LogInformation($"--->{JsonConvert.SerializeObject(updateMessage)}");    
 
         await _mediator.Send(updateMessage);
 

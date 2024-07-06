@@ -32,8 +32,10 @@ namespace Store.Infrastructure.Repository
                     ProductId = storeDto.ProductId,
                     ProductName = storeDto.ProductName,
                     Number = storeDto.Number,
+                    Price = storeDto.Price,
                     Status = storeDto.Number > 0 ? ProductStatus.Available : ProductStatus.OutOfStock,
                     CreateTime = DateTime.UtcNow,
+                    UpdateTimeStatus = DateTime.UtcNow,
                 };
                 if (createStore == null)
                 {
@@ -65,7 +67,7 @@ namespace Store.Infrastructure.Repository
 
         public async Task<ResultDto> UpdateProductName(UpdateProductNameDto updateName)
         {
-            var getStore = await _context.storeModels.SingleOrDefaultAsync(x => x.Id == updateName.Id);
+            var getStore = await _context.storeModels.SingleOrDefaultAsync(x => x.ProductId == updateName.Id);
             if (getStore == null)
             {
                 return new ResultDto
@@ -77,6 +79,7 @@ namespace Store.Infrastructure.Repository
             }
 
             getStore.ProductName = updateName.Name;
+            getStore.Price = updateName.Price;
             getStore.UpdateTimeProduct = DateTime.UtcNow;
 
             _context.storeModels.Update(getStore);
@@ -154,7 +157,7 @@ namespace Store.Infrastructure.Repository
                 };
             }
         }
-        
+
         public async Task<ResultDto> DeleteStore(Guid productId)
         {
             var getProduct = await _context.storeModels.SingleOrDefaultAsync(x => x.ProductId == productId);
@@ -188,6 +191,7 @@ namespace Store.Infrastructure.Repository
                 ProductId = x.ProductId,
                 ProductName = x.ProductName,
                 Number = x.Number,
+                Price = x.Price,
                 Status = x.Status,
                 CreateTime = x.CreateTime,
                 LastUpdateTimeStatus = x.UpdateTimeStatus,

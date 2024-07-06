@@ -33,6 +33,7 @@ public class AddProductStoreConsumer : IConsumer<ProductStoreEvent>
         {
             ProductId = message.ProductId,
             ProductName = message.ProductName,
+            Price = message.Price,
             Number = message.Number,
             Status = (ProductStatus)(int)message.ProductStatusEvent
         };

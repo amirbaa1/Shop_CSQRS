@@ -14,6 +14,11 @@ public class ProductManagementController : ControllerBase
 {
     private readonly IMediator _mediator;
 
+    public ProductManagementController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
     [HttpPost]
     public async Task<IActionResult> PostProduct([FromBody] CreateProductCommand product)
     {
@@ -38,6 +43,11 @@ public class ProductManagementController : ControllerBase
     [HttpPost("category")]
     public async Task<IActionResult> PostCategory([FromBody] CreateCategoryCommand category)
     {
+        if (category == null)
+        {
+            return BadRequest("Category cannot be null");
+        }
+
         var postCate = await _mediator.Send(category);
         return Ok(postCate);
     }

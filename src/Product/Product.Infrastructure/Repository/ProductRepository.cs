@@ -3,7 +3,6 @@ using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Product.Domain.Model;
 using Product.Domain.Model.Dto;
 using Product.Domain.Repositories;
 using Product.Infrastructure.Data;
@@ -59,6 +58,7 @@ public class ProductRepository : IProductRepository
             ProductId = productCreate.Id,
             ProductName = productCreate.Name,
             Number = productCreate.Number,
+            Price = productCreate.Price,
             ProductStatusEvent = (ProductStatusEvent)(int)productCreate.ProductStatus,
         };
 
@@ -145,11 +145,15 @@ public class ProductRepository : IProductRepository
             Name = getProduct.Name,
             Price = getProduct.Price
         };
+
         var messageUpdateStore = new ProductStoreUpdateEvent
         {
             ProductId = getProduct.Id,
-            ProductName = getProduct.Name
+            ProductName = getProduct.Name,
+            ProductPrice = getProduct.Price
         };
+        _logger.LogInformation($"--->{JsonConvert.SerializeObject(messageUpdateStore)}");
+
         await _publishEndpoint.Publish(message);
         await _publishEndpoint.Publish(messageUpdateStore);
 
