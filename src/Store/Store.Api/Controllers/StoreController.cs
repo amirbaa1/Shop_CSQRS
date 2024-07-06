@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Store.Application.Feature.Store.Commands.Create;
 using Store.Application.Feature.Store.Commands.Delete;
+using Store.Application.Feature.Store.Commands.Update.UpdateProductName;
+using Store.Application.Feature.Store.Commands.Update.UpdateProductStatus;
 using Store.Application.Feature.Store.Commands.Update.UpdateStoreNumber;
 using Store.Application.Feature.Store.Queries.GetStore;
+using Store.Domain.Model.Dto;
 
 namespace Store.Api.Controllers
 {
@@ -29,7 +32,6 @@ namespace Store.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> PostStore([FromBody] CreateStoreCommand command)
         {
-
             var storeCreat = await _mediator.Send(command);
             return Ok(storeCreat);
         }
@@ -43,6 +45,20 @@ namespace Store.Api.Controllers
 
         [HttpPut("UpdateInventory")]
         public async Task<IActionResult> UpdateInventory([FromBody] UpdateStoreNumberCommand command)
+        {
+            var update = await _mediator.Send(command);
+            return Ok(update);
+        }
+
+        [HttpPut("UpdateProductStatus")]
+        public async Task<IActionResult> UpdateProductStatus([FromBody] UpdateProductStatusCommand command)
+        {
+            var update = await _mediator.Send(command);
+            return Ok(update);
+        }
+
+        [HttpPut("UpdateProductName")]
+        public async Task<IActionResult> UpdateProductName([FromBody] UpdateProductNameCommand command)
         {
             var update = await _mediator.Send(command);
             return Ok(update);

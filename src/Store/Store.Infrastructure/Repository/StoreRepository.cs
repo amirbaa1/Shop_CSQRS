@@ -5,6 +5,7 @@ using Store.Domain.Model.Dto;
 using Store.Domain.Repository;
 using Store.Infrastructure.Data;
 using System.Net;
+using Newtonsoft.Json;
 
 
 namespace Store.Infrastructure.Repository
@@ -43,6 +44,7 @@ namespace Store.Infrastructure.Repository
                         Message = "problem in create product."
                     };
                 }
+
                 _context.storeModels.Add(createStore);
                 await _context.SaveChangesAsync();
                 return new ResultDto
@@ -52,6 +54,7 @@ namespace Store.Infrastructure.Repository
                     Message = "Store created successfully"
                 };
             }
+
             return new ResultDto
             {
                 StatusCode = HttpStatusCode.OK,
@@ -60,6 +63,98 @@ namespace Store.Infrastructure.Repository
             };
         }
 
+        public async Task<ResultDto> UpdateProductName(UpdateProductNameDto updateName)
+        {
+            var getStore = await _context.storeModels.SingleOrDefaultAsync(x => x.Id == updateName.Id);
+            if (getStore == null)
+            {
+                return new ResultDto
+                {
+                    StatusCode = HttpStatusCode.NotFound,
+                    IsSuccessful = false,
+                    Message = "Not found id store"
+                };
+            }
+
+            getStore.ProductName = updateName.Name;
+            getStore.UpdateTimeProduct = DateTime.UtcNow;
+
+            _context.storeModels.Update(getStore);
+
+            await _context.SaveChangesAsync();
+            return new ResultDto
+            {
+                StatusCode = HttpStatusCode.OK,
+                IsSuccessful = true,
+                Message = "Change name in store."
+            };
+        }
+
+        public async Task<ResultDto> UpdateStatusProduct(UpdateStatusProductDto updateStatusProductDto)
+        {
+            var getProduct = await _context.storeModels.FirstOrDefaultAsync(x => x.Id == updateStatusProductDto.Id);
+            if (getProduct == null)
+            {
+                return new ResultDto
+                {
+                    StatusCode = HttpStatusCode.NotFound,
+                    IsSuccessful = false,
+                    Message = "Not found product in store"
+                };
+            }
+
+            if (updateStatusProductDto.Number == 0)
+            {
+                getProduct.Number = 0;
+                getProduct.Status = ProductStatus.OutOfStock;
+                getProduct.UpdateTimeStatus = DateTime.UtcNow;
+
+                _context.storeModels.Update(getProduct);
+                await _context.SaveChangesAsync();
+
+                return new ResultDto
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    IsSuccessful = true,
+                    Message = $"change product status : {JsonConvert.SerializeObject(getProduct)}"
+                };
+            }
+            else
+            {
+                if (getProduct.Number > 0)
+                {
+                    getProduct.Number += updateStatusProductDto.Number;
+                    getProduct.Status = ProductStatus.Available;
+                    getProduct.UpdateTimeStatus = DateTime.UtcNow;
+
+
+                    _context.storeModels.Update(getProduct);
+                    await _context.SaveChangesAsync();
+
+                    return new ResultDto
+                    {
+                        StatusCode = HttpStatusCode.OK,
+                        IsSuccessful = true,
+                        Message = $"change product status : {JsonConvert.SerializeObject(getProduct)}"
+                    };
+                }
+
+                //if number == 0
+                getProduct.Number = updateStatusProductDto.Number;
+                getProduct.Status = ProductStatus.Available;
+                getProduct.UpdateTimeStatus = DateTime.UtcNow;
+
+                _context.storeModels.Update(getProduct);
+                await _context.SaveChangesAsync();
+                return new ResultDto
+                {
+                    StatusCode = HttpStatusCode.OK,
+                    IsSuccessful = true,
+                    Message = $"change product status : {JsonConvert.SerializeObject(getProduct)}"
+                };
+            }
+        }
+        
         public async Task<ResultDto> DeleteStore(Guid productId)
         {
             var getProduct = await _context.storeModels.SingleOrDefaultAsync(x => x.ProductId == productId);
@@ -72,6 +167,7 @@ namespace Store.Infrastructure.Repository
                     Message = "Not found product in store"
                 };
             }
+
             _context.storeModels.Remove(getProduct);
 
             await _context.SaveChangesAsync();
@@ -94,7 +190,8 @@ namespace Store.Infrastructure.Repository
                 Number = x.Number,
                 Status = x.Status,
                 CreateTime = x.CreateTime,
-                LastUpdateTime = x.UpdateTime,
+                LastUpdateTimeStatus = x.UpdateTimeStatus,
+                LastUpdateTimeProduct = x.UpdateTimeProduct,
             }).ToListAsync();
 
             return store;
@@ -117,6 +214,16 @@ namespace Store.Infrastructure.Repository
             var updateNumber = getStore.Number - update.Number;
             getStore.Number = updateNumber;
 
+            if (updateNumber < 0)
+            {
+                return new ResultDto
+                {
+                    StatusCode = HttpStatusCode.BadRequest,
+                    IsSuccessful = false,
+                    Message = $"Only product number :{getStore.Number}"
+                };
+            }
+
             if (updateNumber == 0)
             {
                 getStore.Status = ProductStatus.OutOfStock;
@@ -126,7 +233,7 @@ namespace Store.Infrastructure.Repository
                 getStore.Status = ProductStatus.Available;
             }
 
-            getStore.UpdateTime = DateTime.UtcNow;
+            getStore.UpdateTimeStatus = DateTime.UtcNow;
 
             _logger.LogInformation($"---> update : {getStore}");
 

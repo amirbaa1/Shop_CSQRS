@@ -10,7 +10,7 @@ namespace Store.Domain.Model
     {
         public Guid Id { get; set; }
         public DateTime CreateTime { get; set; }
-        public DateTime UpdateTime { get; set; }
+        public DateTime UpdateTimeStatus { get; set; }
+        public DateTime UpdateTimeProduct { get; set; }
     }
-    
 }

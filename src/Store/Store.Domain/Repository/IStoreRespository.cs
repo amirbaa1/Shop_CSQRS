@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace Store.Domain.Repository
 {
-    public interface  IStoreRespository
+    public interface IStoreRespository
     {
         Task<ResultDto> CreateStore(StoreDto storeDto);
         Task<ResultDto> UpdateInventoryAfterPurchase(UpdateNumberDto update);
+        Task<ResultDto> UpdateProductName(UpdateProductNameDto updateName);
+        Task<ResultDto> UpdateStatusProduct(UpdateStatusProductDto updateStatusProductDto);
         Task<ResultDto> DeleteStore(Guid productId);
         Task<List<StoreDto>> GetStore();
     }

@@ -12,13 +12,32 @@
     <projectFile profileName="https">Order/Order.Api/Order.Api.csproj</projectFile>
     <projectFile profileName="http">Product/Product.Api/Product.Api.csproj</projectFile>
     <projectFile profileName="https">Product/Product.Api/Product.Api.csproj</projectFile>
+    <projectFile profileName="http">Store/Store.Api/Store.Api.csproj</projectFile>
+    <projectFile profileName="https">Store/Store.Api/Store.Api.csproj</projectFile>
     <projectFile kind="DockerCompose">docker-compose.dcproj</projectFile>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d7a7d61-af35-4789-a905-8596f200d918" name="Changes" comment="" />
+    <list default="true" id="4d7a7d61-af35-4789-a905-8596f200d918" name="Changes" comment="idea">
+      <change afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateProductName/UpdateProductNameCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateProductName/UpdateProductNameHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateProductStatus/UpdateProductStatusCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateProductStatus/UpdateProductStatusHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store/Store.Domain/Model/Dto/UpdateProductNameDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store/Store.Domain/Model/Dto/UpdateStatusProductDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Controllers/StoreController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Controllers/StoreController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Domain/Model/Dto/StoreDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Domain/Model/Dto/StoreDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Domain/Model/EntityBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Domain/Model/EntityBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Domain/Repository/IStoreRespository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Domain/Repository/IStoreRespository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Migrations/20240705165042_init.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Migrations/20240705165042_init.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Migrations/StoreDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Store.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Store.Infrastructure.csproj" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,6 +68,7 @@
     ".NET Launch Settings Profile.Basket.Api: https.executor": "Run",
     ".NET Launch Settings Profile.Order.Api: https.executor": "Run",
     ".NET Launch Settings Profile.Product.Api: https.executor": "Run",
+    ".NET Launch Settings Profile.Store.Api: https.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "dev",
     "node.js.detected.package.eslint": "true",
@@ -66,7 +86,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Order.Api: https">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Store.Api: https">
     <configuration name="Basket.Api: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Basket/Basket.Api/Basket.Api.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
@@ -217,6 +237,36 @@
         <option name="Build" />
       </method>
     </configuration>
+    <configuration name="Store.Api: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Store/Store.Api/Store.Api.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="http" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="Store.Api: https" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Store/Store.Api/Store.Api.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="https" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
     <configuration name="Basket.Api/Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
@@ -267,6 +317,7 @@
       <option name="presentableId" value="Default" />
       <updated>1719916101805</updated>
       <workItem from="1719916105710" duration="7628000" />
+      <workItem from="1720250605027" duration="4693000" />
     </task>
     <task id="LOCAL-00001" summary="update idea">
       <option name="closed" value="true" />
@@ -332,7 +383,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719928770274</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="idea">
+      <option name="closed" value="true" />
+      <created>1720250769908</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1720250769908</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,6 +418,26 @@
     <MESSAGE value="update emailsend in order" />
     <MESSAGE value="update" />
     <MESSAGE value="update idea" />
-    <option name="LAST_COMMIT_MESSAGE" value="update idea" />
+    <MESSAGE value="idea" />
+    <option name="LAST_COMMIT_MESSAGE" value="idea" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs</url>
+          <line>93</line>
+          <properties documentPath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" containingFunctionPresentation="Method 'UpdateStatusProduct'">
+            <startOffsets>
+              <option value="3204" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3205" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

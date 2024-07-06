@@ -1,6 +1,4 @@
-﻿
-
-namespace Store.Domain.Model.Dto
+﻿namespace Store.Domain.Model.Dto
 {
     public class StoreDto
     {
@@ -10,7 +8,7 @@ namespace Store.Domain.Model.Dto
         public int Number { get; set; }
         public ProductStatus Status { get; set; }
         public DateTime CreateTime { get; set; }
-        public DateTime LastUpdateTime { get; set; }
-
+        public DateTime LastUpdateTimeStatus { get; set; }
+        public DateTime LastUpdateTimeProduct { get; set; }
     }
 }
