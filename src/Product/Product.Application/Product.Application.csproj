@@ -10,16 +10,18 @@
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.3" />
     <PackageReference Include="MediatR" Version="12.3.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\EventBus.Messages\EventBus.Messages.csproj" />
+    <ProjectReference Include="..\..\Store\Store.Application\Store.Application.csproj" />
+    <ProjectReference Include="..\..\Store\Store.Domain\Store.Domain.csproj" />
     <ProjectReference Include="..\Product.Domain\Product.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Features\Category\Commands\Update\" />
-    <Folder Include="Features\Product\" />
   </ItemGroup>
 
 </Project>

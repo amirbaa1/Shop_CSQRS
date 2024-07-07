@@ -1,10 +1,8 @@
 using AutoMapper;
 using EventBus.Messages.Event.Product;
-using Product.Application.Features.Category.Commands;
 using Product.Application.Features.Product.Commands.CreateProduct;
-using Product.Application.Features.Product.Commands.Update;
-using Product.Application.Features.Queries.GetProductList;
-using Product.Domain.Model;
+using Product.Application.Features.Product.Commands.Update.UpdateProduct;
+using Product.Application.Features.Product.Commands.Update.UpdateProductStatus;
 using Product.Domain.Model.Dto;
 
 namespace Product.Application.Mapping;
@@ -18,6 +16,8 @@ public class ProductMapProfile : Profile
         CreateMap<UpdateProductDto, UpdateProductCommand>().ReverseMap();
 
         CreateMap<UpdateProductCommand, ProductQueueEvent>().ReverseMap();
-        
+
+        CreateMap<UpdateProductStatusEvent, UpdateProductStatusDto>().ReverseMap();
+        CreateMap<ProductStatusCommand, UpdateProductStatusDto>().ReverseMap();
     }
 }

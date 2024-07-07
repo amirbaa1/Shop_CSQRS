@@ -8,9 +8,3 @@ public class ProductStoreEvent
     public ProductStatusEvent ProductStatusEvent { get; set; }
     public int Number { get; set; }
 }
-
-public enum ProductStatusEvent
-{
-    Available = 1,
-    OutOfStock = 0
-}

@@ -4,7 +4,7 @@ using Product.Application.Features.Category.Commands.Create;
 using Product.Application.Features.Category.Commands.Delete;
 using Product.Application.Features.Product.Commands.CreateProduct;
 using Product.Application.Features.Product.Commands.Delete;
-using Product.Application.Features.Product.Commands.Update;
+using Product.Application.Features.Product.Commands.Update.UpdateProduct;
 
 namespace Product.Api.Controllers;
 

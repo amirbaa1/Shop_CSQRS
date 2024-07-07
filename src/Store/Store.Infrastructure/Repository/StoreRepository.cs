@@ -6,6 +6,9 @@ using Store.Domain.Repository;
 using Store.Infrastructure.Data;
 using System.Net;
 using Newtonsoft.Json;
+using EventBus.Messages.Event.Product;
+using MassTransit;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
 namespace Store.Infrastructure.Repository
@@ -14,11 +17,12 @@ namespace Store.Infrastructure.Repository
     {
         private readonly StoreDbContext _context;
         private readonly ILogger<StoreRepository> _logger;
-
-        public StoreRepository(StoreDbContext context, ILogger<StoreRepository> logger)
+        private readonly IPublishEndpoint _publishEndpoint;
+        public StoreRepository(StoreDbContext context, ILogger<StoreRepository> logger, IPublishEndpoint publishEndpoint)
         {
             _context = context;
             _logger = logger;
+            _publishEndpoint = publishEndpoint;
         }
 
         public async Task<ResultDto> CreateStore(StoreDto storeDto)
@@ -95,7 +99,7 @@ namespace Store.Infrastructure.Repository
 
         public async Task<ResultDto> UpdateStatusProduct(UpdateStatusProductDto updateStatusProductDto)
         {
-            var getProduct = await _context.storeModels.FirstOrDefaultAsync(x => x.Id == updateStatusProductDto.Id);
+            var getProduct = await _context.storeModels.FirstOrDefaultAsync(x => x.ProductId == updateStatusProductDto.productId);
             if (getProduct == null)
             {
                 return new ResultDto
@@ -115,6 +119,16 @@ namespace Store.Infrastructure.Repository
                 _context.storeModels.Update(getProduct);
                 await _context.SaveChangesAsync();
 
+                var message = new UpdateProductStatusEvent
+                {
+                    ProductId = getProduct.ProductId,
+                    Number = getProduct.Number,
+                    ProductStatus = (ProductStatusEvent)getProduct.Status,
+                };
+
+                await _context.SaveChangesAsync();
+                await _publishEndpoint.Publish(message);
+
                 return new ResultDto
                 {
                     StatusCode = HttpStatusCode.OK,
@@ -132,23 +146,46 @@ namespace Store.Infrastructure.Repository
 
 
                     _context.storeModels.Update(getProduct);
+                    var message = new UpdateProductStatusEvent
+                    {
+                        ProductId = getProduct.ProductId,
+                        Number = getProduct.Number,
+                        ProductStatus = (ProductStatusEvent)getProduct.Status,
+                    };
+
                     await _context.SaveChangesAsync();
+                    await _publishEndpoint.Publish(message);
+                    _logger.LogInformation($"{JsonConvert.SerializeObject(getProduct)}");
+                    _logger.LogInformation($"message---->{JsonConvert.SerializeObject(message)}");
 
                     return new ResultDto
                     {
                         StatusCode = HttpStatusCode.OK,
                         IsSuccessful = true,
-                        Message = $"change product status : {JsonConvert.SerializeObject(getProduct)}"
+                        Message = $"change product status : {getProduct}"
                     };
                 }
 
-                //if number == 0
+                // if number == 0
                 getProduct.Number = updateStatusProductDto.Number;
                 getProduct.Status = ProductStatus.Available;
                 getProduct.UpdateTimeStatus = DateTime.UtcNow;
 
                 _context.storeModels.Update(getProduct);
+
+                var updatedMessage = new UpdateProductStatusEvent
+                {
+                    ProductId = getProduct.Id,
+                    Number = getProduct.Number,
+                    ProductStatus = (ProductStatusEvent)getProduct.Status,
+                };
+
                 await _context.SaveChangesAsync();
+
+                await _publishEndpoint.Publish(updatedMessage);
+
+                _logger.LogInformation($"{JsonConvert.SerializeObject(getProduct)}");
+
                 return new ResultDto
                 {
                     StatusCode = HttpStatusCode.OK,
@@ -242,7 +279,16 @@ namespace Store.Infrastructure.Repository
             _logger.LogInformation($"---> update : {getStore}");
 
             _context.storeModels.Update(getStore);
+
+            var message = new ProductStoreEvent
+            {
+                ProductId = update.Id,
+                Number = update.Number,
+                ProductStatusEvent = (ProductStatusEvent)getStore.Status,
+            };
+
             await _context.SaveChangesAsync();
+            await _publishEndpoint.Publish(message);
 
             return new ResultDto
             {

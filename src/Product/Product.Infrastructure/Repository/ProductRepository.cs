@@ -136,22 +136,26 @@ public class ProductRepository : IProductRepository
             getProduct.Price = updateProduct.Price;
         }
 
+
+        _context.Products.Update(getProduct);
+
         await _context.SaveChangesAsync();
 
 
-        var message = new ProductQueueEvent
+        var message = new ProductQueueEvent //update basket for updare product name or product price
         {
             ProductId = getProduct.Id,
             Name = getProduct.Name,
             Price = getProduct.Price
         };
 
-        var messageUpdateStore = new ProductStoreUpdateEvent
+        var messageUpdateStore = new ProductStoreUpdateEvent // update store for updare product name or product price
         {
             ProductId = getProduct.Id,
             ProductName = getProduct.Name,
             ProductPrice = getProduct.Price
         };
+
         _logger.LogInformation($"--->{JsonConvert.SerializeObject(messageUpdateStore)}");
 
         await _publishEndpoint.Publish(message);
@@ -171,5 +175,23 @@ public class ProductRepository : IProductRepository
         _context.Products.Remove(getProduct);
         await _context.SaveChangesAsync();
         return true;
+    }
+
+    public async Task<string> UpdateProductStatus(UpdateProductStatusDto updateProductStatusDto)
+    {
+       var getProduct = await _context.Products.SingleOrDefaultAsync(x=>x.Id == updateProductStatusDto.ProductId);
+        if (getProduct == null)
+        {
+            return "Not Found product";
+        }
+
+        getProduct.ProductStatus = updateProductStatusDto.ProductStatus;
+        getProduct.Number = updateProductStatusDto.Number;
+
+        _context.Products.Update(getProduct);
+
+        await _context.SaveChangesAsync();
+
+        return "Update status product";
     }
 }

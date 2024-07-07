@@ -8,5 +8,6 @@ public interface IProductRepository
     Task<List<ProductDto>> GetProductList();
     Task<ProductDto> GetProductById(Guid productId);
     Task<string> UpdateProduct(UpdateProductDto updateProduct);
+    Task<string> UpdateProductStatus(UpdateProductStatusDto updateProductStatusDto);
     Task<bool> DeleteProduct(Guid productId);
 }
