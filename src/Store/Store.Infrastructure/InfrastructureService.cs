@@ -1,4 +1,5 @@
 ﻿using EventBus.Messages.Common;
+using EventBus.Messages.Event.Product;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,9 @@ namespace Store.Infrastructure
 
             services.AddMassTransit(x =>
             {
+                //send
+                x.AddRequestClient<UpdateProductStatusEvent>();
+                //get
                 x.AddConsumer<AddProductStoreConsumer>();
                 x.AddConsumer<UpdateProductStoreConsumer>();
                 

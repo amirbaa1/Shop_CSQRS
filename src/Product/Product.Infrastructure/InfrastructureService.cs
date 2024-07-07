@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Product.Domain.Repositories;
+using Product.Infrastructure.Consumser;
 using Product.Infrastructure.Data;
 using Product.Infrastructure.Repository;
 
@@ -22,7 +23,10 @@ public static class InfrastructureService
 
         service.AddMassTransit(x =>
         {
+            //send
             x.AddRequestClient<ProductStoreEvent>();
+            //get
+            x.AddConsumer<UpdateProductStatusConsumer>();
 
             x.SetKebabCaseEndpointNameFormatter();
 
