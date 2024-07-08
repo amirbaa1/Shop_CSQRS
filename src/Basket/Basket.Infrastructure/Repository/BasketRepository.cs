@@ -2,9 +2,10 @@
 using Basket.Domain.Model;
 using Basket.Domain.Model.Dto;
 using Basket.Domain.Repository;
+using Basket.Infrastructure.Consumer;
 using Basket.Infrastructure.Data;
 using EventBus.Messages.Event.Basket;
-using EventBus.Messages.Event.Product;
+using EventBus.Messages.Event.Store;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -19,15 +20,17 @@ namespace Basket.Infrastructure.Repository
         private readonly IBasketService _service;
         private readonly ILogger<BasketRepository> _logger;
         private readonly IPublishEndpoint _publishEndpoint;
+        private readonly IMessageRepository _messageRepository;
 
         public BasketRepository(BasketdbContext context, IMapper mapper, IBasketService service,
-            ILogger<BasketRepository> logger, IPublishEndpoint publishEndpoint)
+            ILogger<BasketRepository> logger, IPublishEndpoint publishEndpoint, IMessageRepository messageRepository)
         {
             _context = context;
             _mapper = mapper;
             _service = service;
             _logger = logger;
             _publishEndpoint = publishEndpoint;
+            _messageRepository = messageRepository;
         }
 
         public async Task<bool> AddBasket(AddItemToBasketDto basketitem)
@@ -150,6 +153,21 @@ namespace Basket.Infrastructure.Repository
                     };
                 }
 
+                //check product in store
+
+                // foreach (var basketItem in getBasket.Items)
+                // {
+                //     var messageStore = new CheckStoreEvent
+                //     {
+                //         ProductId = basketItem.ProductId,
+                //         Number = basketItem.Quantity
+                //     };
+                //     await _publishEndpoint.Publish(messageStore);
+                // }
+
+                //result??
+
+
                 var message = _mapper.Map<BasketQueueEvent>(checkOut);
 
                 int priceTotal = 0;
@@ -173,7 +191,7 @@ namespace Basket.Infrastructure.Repository
 
                 await _context.SaveChangesAsync();
 
-                _logger.LogInformation("Publishing message: {@message}", message);
+                _logger.LogInformation("----> Publishing message: {@message}", message);
                 var pub = _publishEndpoint.Publish(message);
                 if (pub != null)
                 {

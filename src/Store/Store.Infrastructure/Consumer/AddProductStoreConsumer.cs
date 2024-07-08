@@ -11,14 +11,14 @@ namespace Store.Infrastructure.Consumer;
 
 public class AddProductStoreConsumer : IConsumer<ProductStoreEvent>
 {
-    private readonly IStoreRespository _storeRespository;
+    private readonly IStoreRepository _storeRepository;
     private readonly ILogger<AddProductStoreConsumer> _logger;
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
-    public AddProductStoreConsumer(IStoreRespository storeRespository, ILogger<AddProductStoreConsumer> logger,
+    public AddProductStoreConsumer(IStoreRepository storeRepository, ILogger<AddProductStoreConsumer> logger,
         IMediator mediator, IMapper mapper)
     {
-        _storeRespository = storeRespository;
+        _storeRepository = storeRepository;
         _logger = logger;
         _mediator = mediator;
         _mapper = mapper;
@@ -44,7 +44,7 @@ public class AddProductStoreConsumer : IConsumer<ProductStoreEvent>
 
 
 
-        // _storeRespository.CreateStore(storeMessage);
+        // _storeRepository.CreateStore(storeMessage);
         await _mediator.Send(map);
 
         await Task.CompletedTask; 

@@ -7,13 +7,12 @@ using Store.Infrastructure.Data;
 using System.Net;
 using Newtonsoft.Json;
 using EventBus.Messages.Event.Product;
+using EventBus.Messages.Event.Store;
 using MassTransit;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-
 
 namespace Store.Infrastructure.Repository
 {
-    public class StoreRepository : IStoreRespository
+    public class StoreRepository : IStoreRepository
     {
         private readonly StoreDbContext _context;
         private readonly ILogger<StoreRepository> _logger;
@@ -239,6 +238,83 @@ namespace Store.Infrastructure.Repository
             }).ToListAsync();
 
             return store;
+        }
+
+        public async Task<ResultDto> CheckStore(CheckNumberDto checkNumberDto) //Not for control
+        {
+            var getProduct =
+                await _context.storeModels.FirstOrDefaultAsync(x => x.ProductId == checkNumberDto.ProductId);
+            if (getProduct == null)
+            {
+                var message = new MessageCheckStoreEvent
+                {
+                    StatusCode = HttpStatusCode.NotFound,
+                    IsSuccessful = false,
+                    Message = "Not found in store"
+                };
+                await _publishEndpoint.Publish(message);
+
+                return new ResultDto
+                {
+                    StatusCode = HttpStatusCode.NotFound,
+                    IsSuccessful = false,
+                    Message = "Not found in store"
+                };
+            }
+
+            if (getProduct.Number >= checkNumberDto.Number)
+            {
+                var message = new MessageCheckStoreEvent
+                {
+                    StatusCode = HttpStatusCode.Accepted,
+                    IsSuccessful = true,
+                    Message = "Ok"
+                };
+                await _publishEndpoint.Publish(message);
+
+                return new ResultDto
+                {
+                    StatusCode = HttpStatusCode.Accepted,
+                    IsSuccessful = true,
+                    Message = "Ok"
+                };
+            }
+
+            if (getProduct.Number < checkNumberDto.Number && getProduct.Number != 0)
+            {
+                var message = new MessageCheckStoreEvent
+                {
+                    StatusCode = HttpStatusCode.BadGateway,
+                    IsSuccessful = false,
+                    Message = $"The product does not have more than {getProduct.Number}"
+                };
+                await _publishEndpoint.Publish(message);
+
+                return new ResultDto
+                {
+                    StatusCode = HttpStatusCode.BadGateway,
+                    IsSuccessful = false,
+                    Message = $"The product does not have more than {getProduct.Number}"
+                };
+            }
+
+            else
+            {
+                var message = new MessageCheckStoreEvent
+                {
+                    StatusCode = HttpStatusCode.BadGateway,
+                    IsSuccessful = false,
+                    Message = $"The product does not have in store."
+                };
+                await _publishEndpoint.Publish(message);
+
+                return new ResultDto
+                {
+                    StatusCode = HttpStatusCode.BadGateway,
+                    IsSuccessful = false,
+                    Message = $"The product does not have in store."
+                };
+            }
         }
 
         public async Task<ResultDto> UpdateInventoryAfterPurchase(UpdateNumberDto update)

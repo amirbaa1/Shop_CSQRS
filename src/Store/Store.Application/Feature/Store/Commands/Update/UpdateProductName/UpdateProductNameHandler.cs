@@ -6,16 +6,16 @@ namespace Store.Application.Feature.Store.Commands.Update.UpdateProductName;
 
 public class UpdateProductNameHandler : IRequestHandler<UpdateProductNameCommand, ResultDto>
 {
-    private readonly IStoreRespository _storeRespository;
+    private readonly IStoreRepository _storeRepository;
 
-    public UpdateProductNameHandler(IStoreRespository storeRespository)
+    public UpdateProductNameHandler(IStoreRepository storeRepository)
     {
-        _storeRespository = storeRespository;
+        _storeRepository = storeRepository;
     }
 
     public Task<ResultDto> Handle(UpdateProductNameCommand request, CancellationToken cancellationToken)
     {
-        var update = _storeRespository.UpdateProductName(request);
+        var update = _storeRepository.UpdateProductName(request);
         return update;
     }
 }

@@ -8,9 +8,9 @@ namespace Store.Application.Feature.Store.Commands.Create
 {
     internal class CreateStoreHandler : IRequestHandler<CreateStoreCommand, ResultDto>
     {
-        private readonly IStoreRespository _storeRes;
+        private readonly IStoreRepository _storeRes;
         private readonly IMapper _mapper;
-        public CreateStoreHandler(IStoreRespository storeRes, IMapper mapper)
+        public CreateStoreHandler(IStoreRepository storeRes, IMapper mapper)
         {
             _storeRes = storeRes;
             _mapper = mapper;

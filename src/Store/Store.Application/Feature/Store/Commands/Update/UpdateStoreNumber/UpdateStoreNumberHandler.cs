@@ -8,10 +8,10 @@ namespace Store.Application.Feature.Store.Commands.Update.UpdateStoreNumber
 {
     public class UpdateStoreNumberHandler : IRequestHandler<UpdateStoreNumberCommand, ResultDto>
     {
-        private readonly IStoreRespository _storeResp;
+        private readonly IStoreRepository _storeResp;
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateStoreNumberHandler> _logger;
-        public UpdateStoreNumberHandler(IStoreRespository storeResp, IMapper mapper, ILogger<UpdateStoreNumberHandler> logger)
+        public UpdateStoreNumberHandler(IStoreRepository storeResp, IMapper mapper, ILogger<UpdateStoreNumberHandler> logger)
         {
             _storeResp = storeResp;
             _mapper = mapper;

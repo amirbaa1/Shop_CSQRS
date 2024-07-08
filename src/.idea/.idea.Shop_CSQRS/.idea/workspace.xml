@@ -19,17 +19,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d7a7d61-af35-4789-a905-8596f200d918" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/EventBus.Messages/Event/Basket/BasketStoreEvent.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Consumer/BasketStoreConsumer.cs" afterDir="false" />
+    <list default="true" id="4d7a7d61-af35-4789-a905-8596f200d918" name="Changes" comment="update product-store&#10;fix service">
+      <change afterPath="$PROJECT_DIR$/Basket/Basket.Domain/Repository/IMessageRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Consumer/MessageResultConsumer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/MessageRepository.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EventBus.Messages/Event/Store/CheckStoreEvent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/EventBus.Messages/Event/Store/MessageCheckStoreEvent.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Queries/Check/CheckStoreHandler.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Queries/Check/CheckStoreQuery.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store/Store.Domain/Model/Dto/CheckNumberDto.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Consumer/CheckStoreConsumer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/InfrastructureService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/InfrastructureService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Domain/Model/Dto/ResultDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Domain/Model/Dto/ResultDto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/ProductRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/ProductRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateStoreNumber/UpdateStoreNumberCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateStoreNumber/UpdateStoreNumberCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Create/CreateStoreHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Create/CreateStoreHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Delete/DeleteStoreHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Delete/DeleteStoreHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateProductName/UpdateProductNameHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateProductName/UpdateProductNameHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateProductStatus/UpdateProductStatusHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateProductStatus/UpdateProductStatusHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateStoreNumber/UpdateStoreNumberHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateStoreNumber/UpdateStoreNumberHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Queries/GetStore/GetStoreHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Queries/GetStore/GetStoreHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store/Store.Application/Mapper/StoreProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Mapper/StoreProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Domain/Model/Dto/UpdateNumberDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Domain/Model/Dto/UpdateNumberDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Domain/Repository/IStoreRespository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Domain/Repository/IStoreRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Consumer/AddProductStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Consumer/AddProductStoreConsumer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/InfrastructureService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/InfrastructureService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" afterDir="false" />
     </list>
@@ -45,6 +56,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/amirba/Documents/Asp-net/mic2/Shop_CSQRS/src/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Users/amirba/Documents/Asp-net/mic2/Shop_CSQRS/src/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -403,7 +415,7 @@
       <updated>1719916101805</updated>
       <workItem from="1719916105710" duration="7628000" />
       <workItem from="1720250605027" duration="15917000" />
-      <workItem from="1720422799661" duration="6710000" />
+      <workItem from="1720422799661" duration="15765000" />
     </task>
     <task id="LOCAL-00001" summary="update idea">
       <option name="closed" value="true" />
@@ -517,7 +529,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720272249730</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="update product-store&#10;fix service">
+      <option name="closed" value="true" />
+      <created>1720430379256</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1720430379256</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -550,6 +570,7 @@
     <MESSAGE value="add product-store&#10;rabbitmq product-store" />
     <MESSAGE value="update database store" />
     <MESSAGE value="add update product-store" />
-    <option name="LAST_COMMIT_MESSAGE" value="add update product-store" />
+    <MESSAGE value="update product-store&#10;fix service" />
+    <option name="LAST_COMMIT_MESSAGE" value="update product-store&#10;fix service" />
   </component>
 </project>
