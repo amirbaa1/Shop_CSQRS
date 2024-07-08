@@ -195,7 +195,6 @@ namespace Basket.Infrastructure.Repository
                 var pub = _publishEndpoint.Publish(message);
                 if (pub != null)
                 {
-                    // var messageStore;
                     foreach (var basketItem in message.BasketItems)
                     {
                         var messageStore = new BasketStoreEvent
@@ -206,7 +205,6 @@ namespace Basket.Infrastructure.Repository
                         await _publishEndpoint.Publish(messageStore);
                     }
 
-                    // await _publishEndpoint.Publish(messageStore);
                     await RemoveItemFromBasket(basketId: getBasket.Id);
                 }
                 else
