@@ -4,6 +4,7 @@ using Basket.Domain.Model.Dto;
 using Basket.Domain.Repository;
 using Basket.Infrastructure.Data;
 using EventBus.Messages.Event.Basket;
+using EventBus.Messages.Event.Product;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -169,13 +170,25 @@ namespace Basket.Infrastructure.Repository
                     message.BasketItems.Add(basketItem);
                 }
 
+
                 await _context.SaveChangesAsync();
 
                 _logger.LogInformation("Publishing message: {@message}", message);
                 var pub = _publishEndpoint.Publish(message);
-
                 if (pub != null)
                 {
+                    // var messageStore;
+                    foreach (var basketItem in message.BasketItems)
+                    {
+                        var messageStore = new BasketStoreEvent
+                        {
+                            ProductId = basketItem.ProductId,
+                            Number = basketItem.Quantity
+                        };
+                        await _publishEndpoint.Publish(messageStore);
+                    }
+
+                    // await _publishEndpoint.Publish(messageStore);
                     await RemoveItemFromBasket(basketId: getBasket.Id);
                 }
                 else
@@ -185,8 +198,8 @@ namespace Basket.Infrastructure.Repository
                         IsSuccess = false,
                         Message = $"no send message."
                     };
-
                 }
+
                 return new ResultDto
                 {
                     IsSuccess = true,

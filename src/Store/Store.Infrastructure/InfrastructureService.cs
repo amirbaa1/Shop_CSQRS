@@ -30,7 +30,8 @@ namespace Store.Infrastructure
                 //get
                 x.AddConsumer<AddProductStoreConsumer>();
                 x.AddConsumer<UpdateProductStoreConsumer>();
-                
+                x.AddConsumer<BasketStoreConsumer>();
+
                 x.SetKebabCaseEndpointNameFormatter();
                 x.UsingRabbitMq((context, config) =>
                 {

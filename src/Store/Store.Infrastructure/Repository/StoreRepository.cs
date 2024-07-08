@@ -18,7 +18,9 @@ namespace Store.Infrastructure.Repository
         private readonly StoreDbContext _context;
         private readonly ILogger<StoreRepository> _logger;
         private readonly IPublishEndpoint _publishEndpoint;
-        public StoreRepository(StoreDbContext context, ILogger<StoreRepository> logger, IPublishEndpoint publishEndpoint)
+
+        public StoreRepository(StoreDbContext context, ILogger<StoreRepository> logger,
+            IPublishEndpoint publishEndpoint)
         {
             _context = context;
             _logger = logger;
@@ -99,7 +101,8 @@ namespace Store.Infrastructure.Repository
 
         public async Task<ResultDto> UpdateStatusProduct(UpdateStatusProductDto updateStatusProductDto)
         {
-            var getProduct = await _context.storeModels.FirstOrDefaultAsync(x => x.ProductId == updateStatusProductDto.productId);
+            var getProduct =
+                await _context.storeModels.FirstOrDefaultAsync(x => x.ProductId == updateStatusProductDto.productId);
             if (getProduct == null)
             {
                 return new ResultDto
@@ -175,7 +178,7 @@ namespace Store.Infrastructure.Repository
 
                 var updatedMessage = new UpdateProductStatusEvent
                 {
-                    ProductId = getProduct.Id,
+                    ProductId = getProduct.ProductId,
                     Number = getProduct.Number,
                     ProductStatus = (ProductStatusEvent)getProduct.Status,
                 };
@@ -240,7 +243,7 @@ namespace Store.Infrastructure.Repository
 
         public async Task<ResultDto> UpdateInventoryAfterPurchase(UpdateNumberDto update)
         {
-            var getStore = await _context.storeModels.FirstOrDefaultAsync(x => x.Id == update.Id);
+            var getStore = await _context.storeModels.FirstOrDefaultAsync(x => x.ProductId == update.ProductId);
 
             if (getStore == null)
             {
@@ -280,11 +283,11 @@ namespace Store.Infrastructure.Repository
 
             _context.storeModels.Update(getStore);
 
-            var message = new ProductStoreEvent
+            var message = new UpdateProductStatusEvent
             {
-                ProductId = update.Id,
-                Number = update.Number,
-                ProductStatusEvent = (ProductStatusEvent)getStore.Status,
+                ProductId = getStore.ProductId,
+                Number = updateNumber,
+                ProductStatus = (ProductStatusEvent)getStore.Status,
             };
 
             await _context.SaveChangesAsync();

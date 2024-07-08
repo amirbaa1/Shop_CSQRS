@@ -8,7 +8,7 @@ namespace Store.Domain.Model.Dto
 {
     public class UpdateNumberDto
     {
-        public Guid Id { get; set; }
+        public Guid ProductId { get; set; }
         public int Number { get; set; }
     }
 }

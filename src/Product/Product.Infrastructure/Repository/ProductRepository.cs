@@ -78,6 +78,7 @@ public class ProductRepository : IProductRepository
                 Image = p.Image,
                 Name = p.Name,
                 ProductStatus = p.ProductStatus,
+                Number = p.Number,
                 Price = p.Price,
                 CategoryId = p.CategoryId,
                 Category = p.Category
@@ -112,6 +113,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<string> UpdateProduct(UpdateProductDto updateProduct)
     {
+        _logger.LogInformation($"---> repository Updaproduct? : {JsonConvert.SerializeObject(updateProduct)}");
         var getProduct = await _context.Products.FirstOrDefaultAsync(x => x.Id == updateProduct.ProductId);
         if (getProduct == null)
         {
@@ -179,14 +181,19 @@ public class ProductRepository : IProductRepository
 
     public async Task<string> UpdateProductStatus(UpdateProductStatusDto updateProductStatusDto)
     {
-       var getProduct = await _context.Products.SingleOrDefaultAsync(x=>x.Id == updateProductStatusDto.ProductId);
+        _logger.LogInformation($"---> repository UpdateSta? : {JsonConvert.SerializeObject(updateProductStatusDto)}");
+
+        var getProduct = await _context.Products.SingleOrDefaultAsync(x => x.Id == updateProductStatusDto.ProductId);
         if (getProduct == null)
         {
+            _logger.LogError("Not Found product");
             return "Not Found product";
         }
 
+        _logger.LogInformation($"Get Product --->{JsonConvert.SerializeObject(getProduct)}");
         getProduct.ProductStatus = updateProductStatusDto.ProductStatus;
         getProduct.Number = updateProductStatusDto.Number;
+        _logger.LogInformation($"Update --->{JsonConvert.SerializeObject(getProduct)}");
 
         _context.Products.Update(getProduct);
 

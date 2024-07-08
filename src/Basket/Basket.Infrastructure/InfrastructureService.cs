@@ -1,9 +1,9 @@
-﻿using Basket.Application.Features.Basket.Commands.CheckOut;
-using Basket.Domain.Repository;
+﻿using Basket.Domain.Repository;
 using Basket.Infrastructure.Consumer;
 using Basket.Infrastructure.Data;
 using Basket.Infrastructure.Repository;
 using EventBus.Messages.Common;
+using EventBus.Messages.Event.Basket;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +27,10 @@ namespace Basket.Infrastructure
 
             services.AddMassTransit(x =>
             {
+                //send
+                x.AddRequestClient<BasketStoreEvent>();
+
+                //get
                 x.AddConsumer<UpdateProductConsumer>();
 
                 x.SetKebabCaseEndpointNameFormatter();
@@ -40,16 +44,10 @@ namespace Basket.Infrastructure
 
                     //config.ReceiveEndpoint(EventBusConstants.BasketQueue, ep => { });
                     config.ConfigureEndpoints(context);
-                    config.UseTimeout(timeConfig =>
-                    {
-                        timeConfig.Timeout = TimeSpan.FromSeconds(60);
-                    });
+                    config.UseTimeout(timeConfig => { timeConfig.Timeout = TimeSpan.FromSeconds(60); });
 
                     config.ReceiveEndpoint(EventBusConstants.UpdateProductQueue,
-                        ep =>
-                        {
-                            ep.ConfigureConsumer<UpdateProductConsumer>(context);
-                        });
+                        ep => { ep.ConfigureConsumer<UpdateProductConsumer>(context); });
                 });
             });
 

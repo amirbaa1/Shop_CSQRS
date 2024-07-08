@@ -10,7 +10,7 @@ namespace Store.Application.Feature.Store.Commands.Update.UpdateStoreNumber
 {
     public class UpdateStoreNumberCommand : IRequest<ResultDto>
     {
-        public Guid Id { get; set; }
+        public Guid ProductId { get; set; }
         public int Number { get; set; }
     }
 }
