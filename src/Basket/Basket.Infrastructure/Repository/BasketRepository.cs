@@ -59,16 +59,18 @@ namespace Basket.Infrastructure.Repository
             };
             _logger.LogWarning("---> Send");
             await _publishEndpoint.Publish(check);
-            
+
+             await Task.Delay(3000);
+
             // انتظار برای دریافت پاسخ از سرویس فروشگاه
             var m = await _messageRepository.GetMessageResult(map.ProductId.ToString());
 
-            if (m.IsSuccess == false)
+            if (m.IsSuccessful == false)
             {
                 _logger.LogError($"---> {m.Message}");
                 return $"{m.Message}";
             }
-            
+
             _context.basketItems.Add(map);
 
             _logger.LogInformation($"---> add ");
@@ -170,7 +172,7 @@ namespace Basket.Infrastructure.Repository
                 {
                     return new ResultDto
                     {
-                        IsSuccess = false,
+                        IsSuccessful = false,
                         Message = $"{nameof(getBasket)} Not Found!",
                     };
                 }
@@ -218,14 +220,15 @@ namespace Basket.Infrastructure.Repository
                 {
                     return new ResultDto
                     {
-                        IsSuccess = false,
+                        IsSuccessful = false,
                         Message = $"no send message."
                     };
                 }
 
                 return new ResultDto
                 {
-                    IsSuccess = true,
+                    IsSuccessful = true,
+                    StatusCode = System.Net.HttpStatusCode.OK,
                     Message = $"Basket checkout successful and message published."
                 };
             }
