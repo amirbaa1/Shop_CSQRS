@@ -4,6 +4,7 @@ using Basket.Infrastructure.Data;
 using Basket.Infrastructure.Repository;
 using EventBus.Messages.Common;
 using EventBus.Messages.Event.Basket;
+using EventBus.Messages.Event.Store;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,17 +22,29 @@ namespace Basket.Infrastructure
                 op.UseNpgsql(configuration["ConnectionStrings:BasketConnectionString"]));
 
 
+            //------------ localhost Redis ---------------------//
+            services.AddStackExchangeRedisCache(opt =>
+            {
+                opt.Configuration = configuration["CacheSettings:ConnectionString"];
+            });
+
+            //--------------------------------------------------//
+
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IBasketService, BasketService>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
 
             services.AddMassTransit(x =>
             {
                 //send
                 x.AddRequestClient<BasketStoreEvent>();
-
+                x.AddRequestClient<CheckStoreEvent>();
                 //get
                 x.AddConsumer<UpdateProductConsumer>();
+                x.AddConsumer<MessageResultConsumer>();
+                x.AddRequestClient<CheckStoreEvent>(new Uri("queue:check-store-queue"));
+
 
                 x.SetKebabCaseEndpointNameFormatter();
                 x.UsingRabbitMq((context, config) =>
@@ -50,6 +63,8 @@ namespace Basket.Infrastructure
                         ep => { ep.ConfigureConsumer<UpdateProductConsumer>(context); });
                 });
             });
+
+            services.AddMassTransitHostedService();
 
             return services;
         }

@@ -19,29 +19,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4d7a7d61-af35-4789-a905-8596f200d918" name="Changes" comment="update product-store&#10;fix service">
-      <change afterPath="$PROJECT_DIR$/Basket/Basket.Domain/Repository/IMessageRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Consumer/MessageResultConsumer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/MessageRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EventBus.Messages/Event/Store/CheckStoreEvent.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EventBus.Messages/Event/Store/MessageCheckStoreEvent.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Queries/Check/CheckStoreHandler.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Queries/Check/CheckStoreQuery.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store/Store.Domain/Model/Dto/CheckNumberDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Consumer/CheckStoreConsumer.cs" afterDir="false" />
+    <list default="true" id="4d7a7d61-af35-4789-a905-8596f200d918" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Basket/Basket.Application/Features/Basket/Commands/Create/Message/MessageResultCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Basket/Basket.Application/Features/Basket/Commands/Create/Message/MessageResultHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Api/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Application/Features/Basket/Commands/Create/CreateBasketHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Application/Features/Basket/Commands/Create/CreateBasketHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Application/Mapper/BasketMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Application/Mapper/BasketMap.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Basket/Basket.Domain/Model/Dto/ResultDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Domain/Model/Dto/ResultDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Domain/Repository/IBasketRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Domain/Repository/IBasketRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Domain/Repository/IMessageRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Domain/Repository/IMessageRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Basket.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Basket.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Consumer/MessageResultConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Consumer/MessageResultConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/InfrastructureService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/InfrastructureService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Create/CreateStoreHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Create/CreateStoreHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Delete/DeleteStoreHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Delete/DeleteStoreHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateProductName/UpdateProductNameHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateProductName/UpdateProductNameHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateProductStatus/UpdateProductStatusHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateProductStatus/UpdateProductStatusHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateStoreNumber/UpdateStoreNumberHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Commands/Update/UpdateStoreNumber/UpdateStoreNumberHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Queries/GetStore/GetStoreHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Feature/Store/Queries/GetStore/GetStoreHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Application/Mapper/StoreProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Application/Mapper/StoreProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Domain/Repository/IStoreRespository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Domain/Repository/IStoreRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Consumer/AddProductStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Consumer/AddProductStoreConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/InfrastructureService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/InfrastructureService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/MessageRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/MessageRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EventBus.Messages/Event/Store/MessageCheckStoreEvent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/EventBus.Messages/Event/Store/MessageCheckStoreEvent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Consumer/CheckStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Consumer/CheckStoreConsumer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,9 +50,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Users/amirba/Documents/Asp-net/mic2/Shop_CSQRS/src/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Users/amirba/Documents/Asp-net/mic2/Shop_CSQRS/src/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1943fcfe8f0e44abbcda016593c8e18dafe00/d8/feba709c/Response`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/22ddef43109a4adf91934b37cb43d70aae1200/3e/8e1ad55f/AsyncTaskMethodBuilder`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5e2fa6619cdd4cae9f7c2939c91055287890/8b/7668eb94/DistributedCacheExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b47317af1f57473b8219c834cb9f923e6f75aff79b8a65e6fa4fee618eb3eb/ScopeConsumerFactory.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -415,7 +415,8 @@
       <updated>1719916101805</updated>
       <workItem from="1719916105710" duration="7628000" />
       <workItem from="1720250605027" duration="15917000" />
-      <workItem from="1720422799661" duration="15765000" />
+      <workItem from="1720422799661" duration="16263000" />
+      <workItem from="1720510582095" duration="13240000" />
     </task>
     <task id="LOCAL-00001" summary="update idea">
       <option name="closed" value="true" />
@@ -537,7 +538,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720430379256</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="update store and basket">
+      <option name="closed" value="true" />
+      <created>1720444762436</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1720444762436</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,6 +580,78 @@
     <MESSAGE value="update database store" />
     <MESSAGE value="add update product-store" />
     <MESSAGE value="update product-store&#10;fix service" />
-    <option name="LAST_COMMIT_MESSAGE" value="update product-store&#10;fix service" />
+    <MESSAGE value="update store and basket" />
+    <option name="LAST_COMMIT_MESSAGE" value="update store and basket" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Basket/Basket.Infrastructure/Consumer/MessageResultConsumer.cs</url>
+          <line>29</line>
+          <properties documentPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Consumer/MessageResultConsumer.cs" containingFunctionPresentation="Method 'Consume'">
+            <startOffsets>
+              <option value="969" />
+            </startOffsets>
+            <endOffsets>
+              <option value="970" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs</url>
+          <line>243</line>
+          <properties documentPath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" containingFunctionPresentation="Method 'CheckStore'">
+            <startOffsets>
+              <option value="8871" />
+            </startOffsets>
+            <endOffsets>
+              <option value="8872" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/MessageRepository.cs</url>
+          <line>26</line>
+          <properties documentPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/MessageRepository.cs" containingFunctionPresentation="Method 'GetMessageResult'">
+            <startOffsets>
+              <option value="863" />
+            </startOffsets>
+            <endOffsets>
+              <option value="864" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/MessageRepository.cs</url>
+          <line>20</line>
+          <properties documentPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/MessageRepository.cs" containingFunctionPresentation="Method 'MessageResult'">
+            <startOffsets>
+              <option value="641" />
+            </startOffsets>
+            <endOffsets>
+              <option value="642" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/BasketRepository.cs</url>
+          <line>41</line>
+          <properties documentPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" containingFunctionPresentation="Method 'AddBasket'">
+            <startOffsets>
+              <option value="1551" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1552" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

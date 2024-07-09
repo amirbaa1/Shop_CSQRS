@@ -7,8 +7,10 @@ using Basket.Infrastructure.Data;
 using EventBus.Messages.Event.Basket;
 using EventBus.Messages.Event.Store;
 using MassTransit;
+using MassTransit.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 
 namespace Basket.Infrastructure.Repository
@@ -21,9 +23,11 @@ namespace Basket.Infrastructure.Repository
         private readonly ILogger<BasketRepository> _logger;
         private readonly IPublishEndpoint _publishEndpoint;
         private readonly IMessageRepository _messageRepository;
+        private readonly IRequestClient<CheckStoreEvent> _requestClient;
 
         public BasketRepository(BasketdbContext context, IMapper mapper, IBasketService service,
-            ILogger<BasketRepository> logger, IPublishEndpoint publishEndpoint, IMessageRepository messageRepository)
+            ILogger<BasketRepository> logger, IPublishEndpoint publishEndpoint, IMessageRepository messageRepository,
+            IRequestClient<CheckStoreEvent> requestClient)
         {
             _context = context;
             _mapper = mapper;
@@ -31,12 +35,13 @@ namespace Basket.Infrastructure.Repository
             _logger = logger;
             _publishEndpoint = publishEndpoint;
             _messageRepository = messageRepository;
+            _requestClient = requestClient;
         }
 
-        public async Task<bool> AddBasket(AddItemToBasketDto basketitem)
+        public async Task<string> AddBasket(AddItemToBasketDto basketItem)
         {
             var basket =
-                await _context.baskets.FirstOrDefaultAsync(x => x.Id == basketitem.BasketId); // search basketId user
+                await _context.baskets.FirstOrDefaultAsync(x => x.Id == basketItem.BasketId); // search basketId user
 
 
             if (basket == null)
@@ -44,19 +49,36 @@ namespace Basket.Infrastructure.Repository
                 throw new Exception("Basket not found....!");
             }
 
-            var basketItem = _mapper.Map<BasketItem>(basketitem);
+            var map = _mapper.Map<BasketItem>(basketItem);
 
+            //send check store
+            var check = new CheckStoreEvent
+            {
+                ProductId = map.ProductId,
+                Number = map.Quantity
+            };
+            _logger.LogWarning("---> Send");
+            await _publishEndpoint.Publish(check);
+            
+            // انتظار برای دریافت پاسخ از سرویس فروشگاه
+            var m = await _messageRepository.GetMessageResult(map.ProductId.ToString());
 
-            _context.basketItems.Add(basketItem);
+            if (m.IsSuccess == false)
+            {
+                _logger.LogError($"---> {m.Message}");
+                return $"{m.Message}";
+            }
+            
+            _context.basketItems.Add(map);
 
-
-            var productItem = _mapper.Map<ProductDto>(basketitem);
+            _logger.LogInformation($"---> add ");
+            var productItem = _mapper.Map<ProductDto>(basketItem);
 
             _service.CreateProduct(productItem);
 
             await _context.SaveChangesAsync();
 
-            return true;
+            return "Add in Basket";
         }
 
 
@@ -120,9 +142,9 @@ namespace Basket.Infrastructure.Repository
         }
 
 
-        public async Task<string> UpdateQuantities(Guid basketitemId, int quantity)
+        public async Task<string> UpdateQuantities(Guid basketItemId, int quantity)
         {
-            var item = await _context.basketItems.SingleOrDefaultAsync(p => p.Id == basketitemId);
+            var item = await _context.basketItems.SingleOrDefaultAsync(p => p.Id == basketItemId);
             if (item == null)
             {
                 return "Not Found Item.";
@@ -152,21 +174,6 @@ namespace Basket.Infrastructure.Repository
                         Message = $"{nameof(getBasket)} Not Found!",
                     };
                 }
-
-                //check product in store
-
-                // foreach (var basketItem in getBasket.Items)
-                // {
-                //     var messageStore = new CheckStoreEvent
-                //     {
-                //         ProductId = basketItem.ProductId,
-                //         Number = basketItem.Quantity
-                //     };
-                //     await _publishEndpoint.Publish(messageStore);
-                // }
-
-                //result??
-
 
                 var message = _mapper.Map<BasketQueueEvent>(checkOut);
 

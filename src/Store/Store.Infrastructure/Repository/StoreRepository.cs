@@ -266,6 +266,7 @@ namespace Store.Infrastructure.Repository
             {
                 var message = new MessageCheckStoreEvent
                 {
+                    ProductId = getProduct.ProductId,
                     StatusCode = HttpStatusCode.Accepted,
                     IsSuccessful = true,
                     Message = "Ok"
@@ -284,6 +285,7 @@ namespace Store.Infrastructure.Repository
             {
                 var message = new MessageCheckStoreEvent
                 {
+                    ProductId = getProduct.ProductId,
                     StatusCode = HttpStatusCode.BadGateway,
                     IsSuccessful = false,
                     Message = $"The product does not have more than {getProduct.Number}"
@@ -302,6 +304,7 @@ namespace Store.Infrastructure.Repository
             {
                 var message = new MessageCheckStoreEvent
                 {
+                    ProductId = getProduct.ProductId,
                     StatusCode = HttpStatusCode.BadGateway,
                     IsSuccessful = false,
                     Message = $"The product does not have in store."

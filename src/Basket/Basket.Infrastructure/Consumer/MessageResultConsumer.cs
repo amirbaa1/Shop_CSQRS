@@ -1,28 +1,40 @@
 using AutoMapper;
+using Basket.Application.Features.Basket.Commands.Create.Message;
 using Basket.Domain.Model.Dto;
 using Basket.Domain.Repository;
 using EventBus.Messages.Event.Store;
 using MassTransit;
+using MediatR;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace Basket.Infrastructure.Consumer;
 
 public class MessageResultConsumer : IConsumer<MessageCheckStoreEvent>
 {
-    private readonly IMessageRepository _messageRepository;
     private readonly IMapper _mapper;
     private readonly IBasketRepository _basketRepository;
-    public MessageResultConsumer(IMessageRepository messageRepository, IMapper mapper, IBasketRepository basketRepository)
+    private readonly ILogger<MessageResultConsumer> _logger;
+    private readonly IMediator _mediator;
+
+    public MessageResultConsumer(IMapper mapper, IBasketRepository basketRepository,
+        ILogger<MessageResultConsumer> logger, IMediator mediator)
     {
-        _messageRepository = messageRepository;
         _mapper = mapper;
         _basketRepository = basketRepository;
+        _logger = logger;
+        _mediator = mediator;
     }
 
     public async Task Consume(ConsumeContext<MessageCheckStoreEvent> context)
     {
-        var map = _mapper.Map<ResultDto>(context.Message);
+        var message = context.Message;
+        _logger.LogInformation($"---->message :  {JsonConvert.SerializeObject(message)}");
 
-        _messageRepository.MessageResult(map);
+        var map = _mapper.Map<MessageResultCommand>(message);
+        _logger.LogInformation($"---->message :  {map}");
+
+       await _mediator.Send(map);
 
         await Task.CompletedTask;
     }

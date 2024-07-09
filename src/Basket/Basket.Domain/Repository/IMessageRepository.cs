@@ -4,5 +4,6 @@ namespace Basket.Domain.Repository;
 
 public interface IMessageRepository
 {
-    ResultDto MessageResult(ResultDto resultDto);
+    Task<bool> MessageResultSet(ResultDto resultDto);
+    Task<ResultDto> GetMessageResult(string productId);
 }
