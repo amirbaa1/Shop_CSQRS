@@ -1,5 +1,5 @@
 ﻿using Basket.Domain.Repository;
-using Basket.Infrastructure.Consumer;
+using Basket.Application.Consumer;
 using Basket.Infrastructure.Data;
 using Basket.Infrastructure.Repository;
 using EventBus.Messages.Common;

@@ -1,12 +1,11 @@
-﻿using EventBus.Messages.Common;
-using EventBus.Messages.Event.Product;
+﻿using EventBus.Messages.Event.Product;
 using EventBus.Messages.Event.Store;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Store.Application.Consumer;
 using Store.Domain.Repository;
-using Store.Infrastructure.Consumer;
 using Store.Infrastructure.Data;
 using Store.Infrastructure.Repository;
 

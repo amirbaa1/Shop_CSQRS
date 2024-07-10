@@ -31,7 +31,6 @@ public class EmailSend : IEmailSend
                 emailClient.Credentials = new NetworkCredential(_config.User, _config.Password);
                 await emailClient.SendMailAsync(message);
                 _logger.LogInformation($"--->sand Email : {email.To}");
-                _logger.LogInformation($"--->sand Email : {emailClient.SendMailAsync(message)}");
             }
 
             return true;
