@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Order.Domain.Model.Dto;
 using Order.Domain.Repository;
 
-namespace Order.Infrastructure.Consumer
+namespace Order.Application.Consumer
 {
     public class BasketQueueEventConsumer : IConsumer<BasketQueueEvent>            
     {

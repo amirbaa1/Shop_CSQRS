@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Store.Application.Feature.Store.Commands.Update.UpdateProductName;
 
-namespace Store.Infrastructure.Consumer;
+namespace Store.Application.Consumer;
 
 public class UpdateProductStoreConsumer : IConsumer<ProductStoreUpdateEvent>
 {

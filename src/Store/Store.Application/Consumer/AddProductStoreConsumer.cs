@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 using Store.Application.Feature.Store.Commands.Create;
 using Store.Domain.Repository;
 
-namespace Store.Infrastructure.Consumer;
+namespace Store.Application.Consumer;
 
 public class AddProductStoreConsumer : IConsumer<ProductStoreEvent>
 {

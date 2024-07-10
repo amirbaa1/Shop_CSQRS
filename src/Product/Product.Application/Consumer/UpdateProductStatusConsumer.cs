@@ -8,7 +8,7 @@ using Product.Application.Features.Product.Commands.Update.UpdateProductStatus;
 using Product.Domain.Model.Dto;
 
 
-namespace Product.Infrastructure.Consumser
+namespace Product.Application.Consumer
 {
     public class UpdateProductStatusConsumer : IConsumer<UpdateProductStatusEvent>
     {

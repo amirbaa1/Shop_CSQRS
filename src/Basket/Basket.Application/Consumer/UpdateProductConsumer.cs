@@ -3,7 +3,7 @@ using Basket.Domain.Repository;
 using EventBus.Messages.Event.Product;
 using MassTransit;
 
-namespace Basket.Infrastructure.Consumer;
+namespace Basket.Application.Consumer;
 
 public class UpdateProductConsumer : IConsumer<ProductQueueEvent>
 {

@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Basket.Infrastructure.Consumer;
+namespace Basket.Application.Consumer;
 
 public class MessageResultConsumer : IConsumer<MessageCheckStoreEvent>
 {

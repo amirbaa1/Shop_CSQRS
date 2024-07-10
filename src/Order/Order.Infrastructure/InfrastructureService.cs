@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Order.Domain.Model.Email;
 using Order.Domain.Repository;
-using Order.Infrastructure.Consumer;
+using Order.Application.Consumer;
 using Order.Infrastructure.Data;
 using Order.Infrastructure.Repository;
 
