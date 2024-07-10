@@ -1,7 +1,7 @@
 using Basket.Domain.Repository;
 using MediatR;
 
-namespace Basket.Application.Features.Basket.Commands.Create.Message;
+namespace Basket.Application.Features.Basket.Queries.Message;
 
 public class MessageResultHandler : IRequestHandler<MessageResultCommand, bool>
 {

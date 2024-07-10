@@ -2,12 +2,11 @@
 using Basket.Domain.Model;
 using Basket.Domain.Model.Dto;
 using Basket.Domain.Repository;
-using Basket.Infrastructure.Consumer;
 using Basket.Infrastructure.Data;
 using EventBus.Messages.Event.Basket;
 using EventBus.Messages.Event.Store;
 using MassTransit;
-using MassTransit.Testing;
+using MassTransit.Internals;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -41,12 +40,25 @@ namespace Basket.Infrastructure.Repository
         public async Task<string> AddBasket(AddItemToBasketDto basketItem)
         {
             var basket =
-                await _context.baskets.FirstOrDefaultAsync(x => x.Id == basketItem.BasketId); // search basketId user
+                await _context.baskets
+                    .Include(b => b.Items)
+                    .FirstOrDefaultAsync(x => x.Id == basketItem.BasketId); // search basketId user
 
 
             if (basket == null)
             {
                 throw new Exception("Basket not found....!");
+            }
+
+            var existingItem = basket.Items
+                .FirstOrDefault(x => x.ProductId == basketItem.ProductId);
+
+            if (existingItem != null)
+            {
+                // If the item exists, update the quantity
+                var update = await UpdateQuantities(existingItem.Id, basketItem.Quantity);
+
+                return $"{update}";
             }
 
             var map = _mapper.Map<BasketItem>(basketItem);
@@ -60,7 +72,7 @@ namespace Basket.Infrastructure.Repository
             _logger.LogWarning("---> Send");
             await _publishEndpoint.Publish(check);
 
-             await Task.Delay(3000);
+            await Task.Delay(4000);
 
             // انتظار برای دریافت پاسخ از سرویس فروشگاه
             var m = await _messageRepository.GetMessageResult(map.ProductId.ToString());
@@ -123,13 +135,17 @@ namespace Basket.Infrastructure.Repository
 
                 if (item == null)
                 {
+                    _logger.LogError("Not Found Item Id");
                     return "Not Found Item Id";
                 }
 
                 var productItem = await _context.products.SingleOrDefaultAsync(x => x.ProductId == item.ProductId);
 
                 if (item == null)
+                {
+                    _logger.LogError("BasketItem Not Found...!");
                     throw new Exception("BasketItem Not Found...!");
+                }
 
                 _context.basketItems.Remove(item);
                 _context.products.Remove(productItem);
@@ -147,16 +163,39 @@ namespace Basket.Infrastructure.Repository
         public async Task<string> UpdateQuantities(Guid basketItemId, int quantity)
         {
             var item = await _context.basketItems.SingleOrDefaultAsync(p => p.Id == basketItemId);
+
             if (item == null)
             {
+                _logger.LogError("Not Found Item.");
                 return "Not Found Item.";
+            }
+
+            //send check store
+            var check = new CheckStoreEvent
+            {
+                ProductId = item.ProductId,
+                Number = item.Quantity + quantity
+            };
+            await _publishEndpoint.Publish(check);
+
+            await Task.Delay(4000);
+
+            // انتظار برای دریافت پاسخ از سرویس فروشگاه
+            var m = await _messageRepository.GetMessageResult(item.ProductId.ToString());
+
+            if (m.IsSuccessful == false)
+            {
+                _logger.LogError($"---> {m.Message}");
+                return $"{m.Message}";
             }
 
             item.SetQuantity(quantity);
 
             await _context.SaveChangesAsync();
+            _logger.LogInformation("Update Item.");
             return "Update Item.";
         }
+
 
         public async Task<ResultDto> CheckOutBasket(CheckOutDto checkOut)
         {
@@ -185,6 +224,7 @@ namespace Basket.Infrastructure.Repository
                     var basketItem = new BasketItemQueueEvent
                     {
                         BasketItemId = item.Id, // id basketItemId
+                        BasketId = item.BasketId,
                         Name = item.Product.ProductName,
                         ProductId = item.Product.ProductId,
                         Price = item.Product.UnitPrice,
@@ -197,32 +237,20 @@ namespace Basket.Infrastructure.Repository
                     message.BasketItems.Add(basketItem);
                 }
 
-
                 await _context.SaveChangesAsync();
 
-                _logger.LogInformation("----> Publishing message: {@message}", message);
-                var pub = _publishEndpoint.Publish(message);
-                if (pub != null)
-                {
-                    foreach (var basketItem in message.BasketItems)
-                    {
-                        var messageStore = new BasketStoreEvent
-                        {
-                            ProductId = basketItem.ProductId,
-                            Number = basketItem.Quantity
-                        };
-                        await _publishEndpoint.Publish(messageStore);
-                    }
+                await _publishEndpoint.Publish(message);
 
-                    await RemoveItemFromBasket(basketId: getBasket.Id);
-                }
-                else
+                foreach (var basketItem in message.BasketItems)
                 {
-                    return new ResultDto
+                    var messageStore = new BasketStoreEvent
                     {
-                        IsSuccessful = false,
-                        Message = $"no send message."
+                        ProductId = basketItem.ProductId,
+                        Number = basketItem.Quantity
                     };
+                    await _publishEndpoint.Publish(messageStore);
+
+                    await RemoveItemFromBasket(basketId: basketItem.BasketId);
                 }
 
                 return new ResultDto

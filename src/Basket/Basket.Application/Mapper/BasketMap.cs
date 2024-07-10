@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Basket.Application.Features.Basket.Commands.CheckOut;
-using Basket.Application.Features.Basket.Commands.Create.Message;
+using Basket.Application.Features.Basket.Queries.Message;
 using Basket.Domain.Model;
 using Basket.Domain.Model.Dto;
 using EventBus.Messages.Event.Basket;

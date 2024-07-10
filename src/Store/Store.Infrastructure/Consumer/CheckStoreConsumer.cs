@@ -3,6 +3,7 @@ using EventBus.Messages.Event.Store;
 using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Store.Application.Feature.Store.Queries.Check;
 
 namespace Store.Infrastructure.Consumer;
@@ -12,6 +13,7 @@ public class CheckStoreConsumer : IConsumer<CheckStoreEvent>
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
     private readonly ILogger<CheckStoreConsumer> _logger;
+
     public CheckStoreConsumer(IMediator mediator, IMapper mapper, ILogger<CheckStoreConsumer> logger)
     {
         _mediator = mediator;
@@ -22,7 +24,7 @@ public class CheckStoreConsumer : IConsumer<CheckStoreEvent>
     public async Task Consume(ConsumeContext<CheckStoreEvent> context)
     {
         var map = _mapper.Map<CheckStoreQuery>(context.Message);
-        _logger.LogInformation($"---> {map}");
+        _logger.LogInformation($"---> {JsonConvert.SerializeObject(map)}");
         await _mediator.Send(map);
         await Task.CompletedTask;
     }
