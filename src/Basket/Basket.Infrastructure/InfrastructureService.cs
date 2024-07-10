@@ -9,6 +9,7 @@ using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Basket.Infrastructure.Repository.Service;
 
 
 namespace Basket.Infrastructure

@@ -5,7 +5,7 @@ using Basket.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Basket.Infrastructure.Repository
+namespace Basket.Infrastructure.Repository.Service
 {
     public class BasketService : IBasketService
     {

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Basket.Application.Features.Basket.Commands.Create
 {
-    public class CreateBasketHandler : IRequestHandler<CreateBasketCommand, BasketModelDto>
+    public class CreateBasketHandler : IRequestHandler<CreateBasketCommand, string>
     {
         private readonly IMapper _mapper;
         private IBasketRepository _repository;
@@ -20,7 +20,7 @@ namespace Basket.Application.Features.Basket.Commands.Create
             _logger = logger;
         }
 
-        public async Task<BasketModelDto> Handle(CreateBasketCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateBasketCommand request, CancellationToken cancellationToken)
         {
             var basketUser = await _repository.GetOrCreateBasketForUser(request.UserId);
 
@@ -53,12 +53,15 @@ namespace Basket.Application.Features.Basket.Commands.Create
                 throw new Exception("Failed to add items to basket");
             }
 
-            var updatedBasket = await _repository.GetOrCreateBasketForUser(request.UserId);
+            //var updatedBasket = await _repository.GetOrCreateBasketForUser(request.UserId);
 
-            var basketMap = _mapper.Map<BasketModelDto>(updatedBasket);
+            //var basketMap = _mapper.Map<BasketModelDto>(updatedBasket);
 
 
-            return basketMap; // outPrint 
+            //return basketMap; // outPrint 
+
+
+            return addBasket;
         }
     }
 }

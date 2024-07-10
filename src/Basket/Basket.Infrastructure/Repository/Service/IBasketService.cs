@@ -1,7 +1,7 @@
 ﻿using Basket.Domain.Model.Dto;
 
 
-namespace Basket.Infrastructure.Repository
+namespace Basket.Infrastructure.Repository.Service
 {
     public interface IBasketService
     {
