@@ -57,7 +57,6 @@ namespace Basket.Application.Features.Basket.Commands.Create
 
             //var basketMap = _mapper.Map<BasketModelDto>(updatedBasket);
 
-
             //return basketMap; // outPrint 
 
 
