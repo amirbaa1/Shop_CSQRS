@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace Basket.Application.Features.Basket.Commands.Create
 {
-    public class CreateBasketCommand : AddItemToBasketDto , IRequest<BasketModelDto>
+    public class CreateBasketCommand : AddItemToBasketDto , IRequest<string>
     {
         public string UserId { get; set; }
 
