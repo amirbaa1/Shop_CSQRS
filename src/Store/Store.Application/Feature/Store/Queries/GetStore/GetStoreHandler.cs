@@ -9,17 +9,17 @@ namespace Store.Application.Feature.Store.Queries.GetStore
     public class GetStoreHandler : IRequestHandler<GetStoreQuery, List<StoreDto>>
     {
         private readonly IMapper _mapper;
-        private readonly IStoreRespository _storeRespository;
+        private readonly IStoreRepository _storeRepository;
 
-        public GetStoreHandler(IStoreRespository storeRespository, IMapper mapper)
+        public GetStoreHandler(IStoreRepository storeRepository, IMapper mapper)
         {
-            _storeRespository = storeRespository;
+            _storeRepository = storeRepository;
             _mapper = mapper;
         }
 
         public async Task<List<StoreDto>> Handle(GetStoreQuery request, CancellationToken cancellationToken)
         {
-            var getStore = await _storeRespository.GetStore();
+            var getStore = await _storeRepository.GetStore();
 
             return getStore;
         }

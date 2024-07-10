@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Basket.Application.Features.Basket.Commands.CheckOut;
+using Basket.Application.Features.Basket.Queries.Message;
 using Basket.Domain.Model;
 using Basket.Domain.Model.Dto;
 using EventBus.Messages.Event.Basket;
+using EventBus.Messages.Event.Store;
 
 
 namespace Basket.Application.Mapper
@@ -24,7 +26,7 @@ namespace Basket.Application.Mapper
 
             CreateMap<CheckOutCommand, BasketQueueEvent>().ReverseMap();
 
-            //CreateMap<CheckOutBasketDto, BasketCheckoutMessage>().ReverseMap();
+            CreateMap<MessageResultCommand, MessageCheckStoreEvent>().ReverseMap();
         }
     }
 }

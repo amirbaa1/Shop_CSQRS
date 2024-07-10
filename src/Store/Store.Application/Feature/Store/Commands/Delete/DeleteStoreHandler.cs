@@ -6,9 +6,9 @@ namespace Store.Application.Feature.Store.Commands.Delete
 {
     public class DeleteStoreHandler : IRequestHandler<DeleteStoreCommand, ResultDto>
     {
-        private readonly IStoreRespository _store;
+        private readonly IStoreRepository _store;
 
-        public DeleteStoreHandler(IStoreRespository store)
+        public DeleteStoreHandler(IStoreRepository store)
         {
             _store = store;
         }

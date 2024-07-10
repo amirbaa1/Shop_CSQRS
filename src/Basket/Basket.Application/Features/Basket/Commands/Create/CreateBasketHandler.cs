@@ -45,12 +45,10 @@ namespace Basket.Application.Features.Basket.Commands.Create
                 UnitPrice = request.UnitPrice,
                 ImageUrl = request.ImageUrl,
             };
-
-            _logger.LogInformation($"itemBaket ---> {JsonConvert.SerializeObject(itemBasket)}");
-
+            
             var addBasket = await _repository.AddBasket(itemBasket);
 
-            if (!addBasket)
+            if (addBasket == null)
             {
                 throw new Exception("Failed to add items to basket");
             }

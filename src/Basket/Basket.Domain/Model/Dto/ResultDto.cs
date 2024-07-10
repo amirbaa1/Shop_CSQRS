@@ -1,8 +1,12 @@
+using System.Net;
+
 namespace Basket.Domain.Model.Dto;
 
 public class ResultDto
 {
-    public bool IsSuccess { get; set; }
+    public Guid? ProductId { get; set; }
+    public HttpStatusCode StatusCode { get; set; }
+    public bool IsSuccessful { get; set; }
     public string Message { get; set; }
 }
 

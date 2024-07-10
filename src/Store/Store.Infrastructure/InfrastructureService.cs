@@ -1,5 +1,6 @@
 ﻿using EventBus.Messages.Common;
 using EventBus.Messages.Event.Product;
+using EventBus.Messages.Event.Store;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,17 +21,20 @@ namespace Store.Infrastructure
             services.AddDbContext<StoreDbContext>(x =>
                 x.UseNpgsql(configuration["ConnectionStrings:StoreConnectionString"]));
 
-            services.AddScoped<IStoreRespository, StoreRepository>();
+            services.AddScoped<IStoreRepository, StoreRepository>();
 
 
             services.AddMassTransit(x =>
             {
                 //send
                 x.AddRequestClient<UpdateProductStatusEvent>();
+                x.AddRequestClient<MessageCheckStoreEvent>();
                 //get
                 x.AddConsumer<AddProductStoreConsumer>();
                 x.AddConsumer<UpdateProductStoreConsumer>();
-                
+                x.AddConsumer<BasketStoreConsumer>();
+                x.AddConsumer<CheckStoreConsumer>();
+
                 x.SetKebabCaseEndpointNameFormatter();
                 x.UsingRabbitMq((context, config) =>
                 {

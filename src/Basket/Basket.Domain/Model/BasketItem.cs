@@ -10,7 +10,7 @@ namespace Basket.Domain.Model
         public Guid BasketId { get; set; }
         public void SetQuantity(int quantity)
         {
-            Quantity = quantity;
+            Quantity += quantity;
         }
         public Guid ProductId { get; set; }
         public Product Product { get; set; }
