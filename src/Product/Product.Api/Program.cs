@@ -1,7 +1,10 @@
-using System.Reflection;
+
 using MediatR;
 using Product.Application;
 using Product.Infrastructure;
+using Product.Infrastructure.Data;
+using Product.Infrastructure.Extensions;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +23,13 @@ builder.Services.AddMediatR(cfg => {
     cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly);
 });
 var app = builder.Build();
+
+//app.MigrateDatabase<ProductDbContext>();
+
+//app.MigrateDatabase<ProductDbContext>(
+//    seeder: null,
+//    tablesToCheck: new[] { "Categories", "Products" });
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

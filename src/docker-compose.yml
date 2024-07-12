@@ -1,6 +1,53 @@
 version: '3.4'
 
 services:
-   rabbitmq:
-      image: rabbitmq:3-management-alpine
-  
+  # rabbitmq:
+  #   image: rabbitmq:3-management-alpine
+   
+  pgadmin:
+    image: dpage/pgadmin4
+
+  productdb:
+    image: postgres
+
+  # storedb:
+  #   image: postgres
+
+  # basketdb:
+  #   image: postgres
+
+  # orderdb:
+  #   image: postgres
+
+  product.api:
+    image: ${DOCKER_REGISTRY-}productapi
+    build:
+      context: .
+      dockerfile: Product/Product.Api/Dockerfile
+
+  # store.api:
+  #   image: ${DOCKER_REGISTRY-}storeapi
+  #   build:
+  #     context: .
+  #     dockerfile: Store/Store.Api/Dockerfile
+
+
+  # basket.api:
+  #   image: ${DOCKER_REGISTRY-}basketapi
+  #   build:
+  #     context: .
+  #     dockerfile: Basket/Basket.Api/Dockerfile
+
+
+  # order.api:
+  #   image: ${DOCKER_REGISTRY-}orderapi
+  #   build:
+  #     context: .
+  #     dockerfile: Order/Order.Api/Dockerfile
+
+
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+  store_data:  

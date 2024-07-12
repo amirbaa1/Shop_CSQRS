@@ -1,6 +1,8 @@
 using Store.Infrastructure;
 using Store.Application;
 using System.Reflection;
+using Store.Infrastructure.Extensions;
+using Store.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,8 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
 var app = builder.Build();
+
+app.MigrateDatabase<StoreDbContext>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

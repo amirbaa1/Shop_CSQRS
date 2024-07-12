@@ -1,11 +1,153 @@
 version: '3.4'
 
 services:
-   rabbitmq:
-      container_name: rabbitmq
-      restart: always
-      environment:
-        - "TZ: Asia/Tehran"
-      ports:
-        - "5672:5672"
-        - "15672:15672"
+  # rabbitmq:
+  #   container_name: rabbitmq
+  #   restart: always
+  #   environment:
+  #     - "TZ: Asia/Tehran"
+  #   ports:
+  #      - "5672:5672"
+  #      - "15672:15672" 
+ 
+  pgadmin:
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=a@b.com
+      - PGADMIN_DEFAULT_PASSWORD=admin1234
+    restart: always
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/root/.pgadmin
+
+
+       ###########################
+  productdb:
+    container_name: productdb
+    restart: always
+    environment:
+      - POSTGRES_USER=Admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=productdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+   
+
+  # storedb:
+  #   container_name: storedb
+  #   restart: always
+  #   environment:
+  #     - POSTGRES_USER=Admin
+  #     - POSTGRES_PASSWORD=amir$$1379
+  #     - POSTGRES_DB=storedb
+  #   ports:
+  #     - "5436:5432"
+  #   volumes:
+  #     - store_data:/var/lib/postgresql/data
+
+  # basketdb:
+  #   container_name: basketdb
+  #   restart: always
+  #   environment:
+  #     - POSTGRES_USER=Admin
+  #     - POSTGRES_PASSWORD=admin1234
+  #     - POSTGRES_DB=basketdb
+  #   ports:
+  #     - "5434:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+ 
+  # orderdb:
+  #   container_name: orderdb
+  #   restart: always
+  #   environment:
+  #     - POSTGRES_USER=Admin
+  #     - POSTGRES_PASSWORD=admin1234
+  #     - POSTGRES_DB=orderdb
+  #   ports:
+  #     - "5435:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+    
+
+
+      ###########################
+  product.api:
+    container_name: product.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+      - "ConnectionStrings:ProductConnectionString=Host=productdb;Port=5432;Database=Productdb;Username=Admin;Password=admin1234;"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      # - rabbitmq
+      - productdb
+    ports:
+      - "6001:80"
+      
+
+
+
+  # store.api:
+  #   container_name: stroe.api
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_URLS=http://+:80
+  #     - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672" 
+  #     - "ConnectionStrings:StoreConnectionString=Host=storedb;Port=5436;Database=Storedb;Username=Admin;Password=admin1234;"
+  #   volumes:
+  #     - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+  #     - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  #   depends_on:
+  #     - rabbitmq
+  #     - storedb 
+  #   ports:
+  #     - "6002:80"
+
+
+
+  # basket.api:
+  #   container_name: basket.api
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_URLS=http://+:80
+  #     - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672" 
+  #     - ConnectionStrings__DefaultConnection=Host=basketdb;Port=5434;Database=Basketdb;Username=postgres;Password=amir$$1379 
+  #   volumes:
+  #     - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+  #     - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  #   ports:
+  #     - "6003:80"
+  #   depends_on:
+  #     - rabbitmq
+  #     - basketdb 
+
+
+
+
+  # order.api:
+  #   container_name: order.api
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_URLS=http://+:80
+  #     - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672" 
+  #     - "ConnectionStrings:OrderConnectionString=Host=orderdb;Port=5435;Database=orderdb;Username=postgres;Password=amir$$1379;"
+  #   ports:
+  #     - "6004:80"
+  #   volumes:
+  #     - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+  #     - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  #   depends_on:
+  #     - rabbitmq
+  #     - orderdb 
+         
+
+
+
+

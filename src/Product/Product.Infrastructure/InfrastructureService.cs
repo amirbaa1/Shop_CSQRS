@@ -7,6 +7,7 @@ using Product.Application.Consumer;
 using Product.Domain.Repositories;
 using Product.Infrastructure.Data;
 using Product.Infrastructure.Repository;
+using Product.Infrastructure.Extensions;
 
 namespace Product.Infrastructure;
 
@@ -31,7 +32,11 @@ public static class InfrastructureService
 
             x.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host("localhost", "/", c =>
+                //local
+                //cfg.Host("localhost", "/", c =>
+                //docker
+                var rabbitMqHost = configuration["EventBusSettings:HostAddress"];
+                cfg.Host(new Uri(rabbitMqHost), c =>
                 {
                     c.Username("guest");
                     c.Password("guest");
@@ -43,6 +48,9 @@ public static class InfrastructureService
                 cfg.UseTimeout(timeConfig => { timeConfig.Timeout = TimeSpan.FromSeconds(60); });
             });
         });
+
+       //service.MigrateDatabase<ProductDbContext>();
+
 
         return service;
     }
