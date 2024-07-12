@@ -12,7 +12,7 @@ using Store.Infrastructure.Data;
 namespace Store.Infrastructure.Migrations
 {
     [DbContext(typeof(StoreDbContext))]
-    [Migration("20240706083932_init")]
+    [Migration("20240712222302_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -35,6 +35,9 @@ namespace Store.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Number")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Price")
                         .HasColumnType("integer");
 
                     b.Property<Guid>("ProductId")

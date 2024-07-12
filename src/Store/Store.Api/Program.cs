@@ -21,7 +21,12 @@ builder.Services.AddMediatR(cfg =>
 
 var app = builder.Build();
 
-app.MigrateDatabase<StoreDbContext>();
+//app.MigrateDatabase<StoreDbContext>();
+
+
+app.MigrateDatabase<StoreDbContext>(
+    seeder: null,
+    tablesToCheck: new[] { "storeModels" });
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

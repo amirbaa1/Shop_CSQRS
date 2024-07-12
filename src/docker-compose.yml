@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  # rabbitmq:
-  #   image: rabbitmq:3-management-alpine
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
    
   pgadmin:
     image: dpage/pgadmin4
@@ -10,8 +10,8 @@ services:
   productdb:
     image: postgres
 
-  # storedb:
-  #   image: postgres
+  storedb:
+    image: postgres
 
   # basketdb:
   #   image: postgres
@@ -25,11 +25,11 @@ services:
       context: .
       dockerfile: Product/Product.Api/Dockerfile
 
-  # store.api:
-  #   image: ${DOCKER_REGISTRY-}storeapi
-  #   build:
-  #     context: .
-  #     dockerfile: Store/Store.Api/Dockerfile
+  store.api:
+    image: ${DOCKER_REGISTRY-}storeapi
+    build:
+      context: .
+      dockerfile: Store/Store.Api/Dockerfile
 
 
   # basket.api:

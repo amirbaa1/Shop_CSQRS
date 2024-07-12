@@ -24,7 +24,7 @@ builder.Services.AddMediatR(cfg => {
 });
 var app = builder.Build();
 
-//app.MigrateDatabase<ProductDbContext>();
+app.MigrateDatabase<ProductDbContext>();
 
 //app.MigrateDatabase<ProductDbContext>(
 //    seeder: null,

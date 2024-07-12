@@ -12,8 +12,8 @@ using Product.Infrastructure.Data;
 namespace Product.Infrastructure.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20240618141634_Initial")]
-    partial class Initial
+    [Migration("20240712220056_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,7 +77,13 @@ namespace Product.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("Number")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Price")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProductStatus")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -90,17 +96,12 @@ namespace Product.Infrastructure.Migrations
             modelBuilder.Entity("Product.Domain.Model.Product", b =>
                 {
                     b.HasOne("Product.Domain.Model.Category", "Category")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("Product.Domain.Model.Category", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

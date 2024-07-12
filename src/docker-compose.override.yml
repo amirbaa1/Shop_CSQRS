@@ -1,14 +1,14 @@
 version: '3.4'
 
 services:
-  # rabbitmq:
-  #   container_name: rabbitmq
-  #   restart: always
-  #   environment:
-  #     - "TZ: Asia/Tehran"
-  #   ports:
-  #      - "5672:5672"
-  #      - "15672:15672" 
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    environment:
+      - "TZ: Asia/Tehran"
+    ports:
+       - "5672:5672"
+       - "15672:15672" 
  
   pgadmin:
     container_name: pgadmin
@@ -36,17 +36,17 @@ services:
       - postgres_data:/var/lib/postgresql/data
    
 
-  # storedb:
-  #   container_name: storedb
-  #   restart: always
-  #   environment:
-  #     - POSTGRES_USER=Admin
-  #     - POSTGRES_PASSWORD=amir$$1379
-  #     - POSTGRES_DB=storedb
-  #   ports:
-  #     - "5436:5432"
-  #   volumes:
-  #     - store_data:/var/lib/postgresql/data
+  storedb:
+    container_name: storedb
+    restart: always
+    environment:
+      - POSTGRES_USER=Admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=storedb
+    ports:
+      - "5436:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   # basketdb:
   #   container_name: basketdb
@@ -94,21 +94,21 @@ services:
 
 
 
-  # store.api:
-  #   container_name: stroe.api
-  #   environment:
-  #     - ASPNETCORE_ENVIRONMENT=Development
-  #     - ASPNETCORE_URLS=http://+:80
-  #     - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672" 
-  #     - "ConnectionStrings:StoreConnectionString=Host=storedb;Port=5436;Database=Storedb;Username=Admin;Password=admin1234;"
-  #   volumes:
-  #     - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-  #     - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-  #   depends_on:
-  #     - rabbitmq
-  #     - storedb 
-  #   ports:
-  #     - "6002:80"
+  store.api:
+    container_name: stroe.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672" 
+      - "ConnectionStrings:StoreConnectionString=Host=storedb;Port=5436;Database=Storedb;Username=Admin;Password=admin1234;"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+      # - rabbitmq
+      - storedb 
+    ports:
+      - "6002:80"
 
 
 
