@@ -2,11 +2,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/basket/{UserId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7003"
+          "Host": "basket.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/basket/{UserId}",
@@ -14,14 +14,13 @@
         "GET"
       ]
     },
-
     {
       "DownstreamPathTemplate": "/api/basket?UserId={userId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7003"
+          "Host": "basket.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/basket?UserId={userId}",
@@ -29,14 +28,13 @@
         "POST"
       ]
     },
-
     {
       "DownstreamPathTemplate": "/api/basket",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7003"
+          "Host": "basket.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/basket",
@@ -44,14 +42,13 @@
         "POST"
       ]
     },
-
     {
       "DownstreamPathTemplate": "/api/Basket?basketId={basketId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7003"
+          "Host": "basket.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/Basket?basketId={basketId}",
@@ -59,14 +56,13 @@
         "DELETE"
       ]
     },
-
     {
       "DownstreamPathTemplate": "/api/Basket?BasketItemId={BasketItemId}&Quantity={Quantity}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7003"
+          "Host": "basket.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/Basket?BasketItemId={BasketItemId}&Quantity={Quantity}",
@@ -74,14 +70,13 @@
         "PUT"
       ]
     },
-
     {
       "DownstreamPathTemplate": "/api/Basket/sent",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7003"
+          "Host": "basket.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/Basket/sent",
@@ -89,10 +84,8 @@
         "POST"
       ]
     }
-
-
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https//localhost:7070"
+    "BaseUrl": "http//localhost:6060"
   }
 }

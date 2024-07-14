@@ -2,11 +2,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/store",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7002"
+          "Host": "store.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/store",
@@ -15,14 +15,13 @@
         "POST"
       ]
     },
-
     {
       "DownstreamPathTemplate": "/api/Store?productId={productId}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7002"
+          "Host": "store.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/store?productId={productId}",
@@ -30,15 +29,13 @@
         "DELETE"
       ]
     },
-
-
     {
       "DownstreamPathTemplate": "/api/store/UpdateInventory",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7002"
+          "Host": "store.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/store/UpdateInventory",
@@ -46,14 +43,13 @@
         "PUT"
       ]
     },
-
     {
       "DownstreamPathTemplate": "/api/store/UpdateProductStatus",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7002"
+          "Host": "store.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/store/UpdateProductStatus",
@@ -61,14 +57,13 @@
         "PUT"
       ]
     },
-
     {
       "DownstreamPathTemplate": "/api/store/UpdateProductName",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7002"
+          "Host": "store.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/store/UpdateProductName",
@@ -76,9 +71,8 @@
         "PUT"
       ]
     }
-
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https//localhost:7070"
+    "BaseUrl": "http//localhost:6060"
   }
 }

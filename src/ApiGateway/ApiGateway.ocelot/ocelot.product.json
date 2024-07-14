@@ -2,11 +2,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/product",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7001"
+          "Host": "product.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/product",
@@ -16,11 +16,11 @@
     },
     {
       "DownstreamPathTemplate": "/api/product/category",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7001"
+          "Host": "product.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/product/category",
@@ -31,11 +31,11 @@
     //ProductManagement
     {
       "DownstreamPathTemplate": "/api/ProductManagement",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7001"
+          "Host": "product.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/ProductManagement",
@@ -48,11 +48,11 @@
 
     {
       "DownstreamPathTemplate": "/api/ProductManagement/category",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7001"
+          "Host": "product.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/ProductManagement/category",
@@ -63,11 +63,11 @@
 
     {
       "DownstreamPathTemplate": "/api/ProductManagement/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "7001"
+          "Host": "product.api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/ProductManagement/{id}",
@@ -78,6 +78,6 @@
 
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https//localhost:7070"
+    "BaseUrl": "http//localhost:6060"
   }
 }

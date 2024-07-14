@@ -1,5 +1,7 @@
 using Basket.Infrastructure;
 using Basket.Application;
+using Basket.Infrastructure.Data;
+using Basket.Infrastructure.Extensions;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,12 +17,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-builder.Services.AddMediatR(cfg =>
-{
-    cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly);
-});
+builder.Services.AddMediatR(cfg => { cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly); });
 
 var app = builder.Build();
+
+app.MigrateDatabase<BasketdbContext>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

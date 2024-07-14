@@ -2,6 +2,8 @@ using System.Reflection;
 using MediatR;
 using Order.Infrastructure;
 using Order.Application;
+using Order.Infrastructure.Data;
+using order.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +17,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
-builder.Services.AddMediatR(cfg => {
-    cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly);
-});
+builder.Services.AddMediatR(cfg => { cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly); });
 var app = builder.Build();
+
+app.MigrateDatabase<OrderdbContext>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
