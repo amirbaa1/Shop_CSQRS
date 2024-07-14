@@ -50,10 +50,14 @@ namespace Basket.Infrastructure
                 x.SetKebabCaseEndpointNameFormatter();
                 x.UsingRabbitMq((context, config) =>
                 {
-                    config.Host("localhost", "/", hostConfigurator =>
+                    //local
+                    //cfg.Host("localhost", "/", c =>
+                    //docker
+                    var rabbitMqHost = configuration["EventBusSettings:HostAddress"];
+                    config.Host(new Uri(rabbitMqHost), c =>
                     {
-                        hostConfigurator.Username("guest");
-                        hostConfigurator.Password("guest");
+                        c.Username("guest");
+                        c.Password("guest");
                     });
 
                     //config.ReceiveEndpoint(EventBusConstants.BasketQueue, ep => { });

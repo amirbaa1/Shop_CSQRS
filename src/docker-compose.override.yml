@@ -1,11 +1,140 @@
 version: '3.4'
 
 services:
-   rabbitmq:
-      container_name: rabbitmq
-      restart: always
-      environment:
-        - "TZ: Asia/Tehran"
-      ports:
-        - "5672:5672"
-        - "15672:15672"
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    environment:
+      - "TZ: Asia/Tehran"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  
+  pgadmin:
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=a@b.com
+      - PGADMIN_DEFAULT_PASSWORD=admin1234
+    restart: always
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/root/.pgadmin
+      
+      
+      ###########################
+  productdb:
+    container_name: productdb
+    restart: always
+    environment:
+      - POSTGRES_USER=Admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=productdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - product_data:/var/lib/postgresql/data
+  
+  
+  storedb:
+    container_name: storedb
+    restart: always
+    environment:
+      - POSTGRES_USER=Admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=storedb
+    ports:
+      - "5436:5432"
+    volumes:
+      - store_data:/var/lib/postgresql/data
+  
+  basketdb:
+    container_name: basketdb
+    restart: always
+    environment:
+      - POSTGRES_USER=Admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=basketdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - basket_data:/var/lib/postgresql/data
+  
+  orderdb:
+    container_name: orderdb
+    restart: always
+    environment:
+      - POSTGRES_USER=Admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=orderdb
+    ports:
+      - "5434:5432"
+    volumes:
+      - order_data:/var/lib/postgresql/data
+    
+    
+    
+    ###########################
+  product.api:
+    container_name: product.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+      - "ConnectionStrings:ProductConnectionString=Host=productdb;Port=5432;Database=productdb;Username=Admin;Password=admin1234;"
+    depends_on:
+      - rabbitmq
+      - productdb
+    ports:
+      - "6001:80"
+  
+  
+  store.api:
+    container_name: stroe.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+      - "ConnectionStrings:StoreConnectionString=Host=storedb;Port=5432;Database=storedb;Username=Admin;Password=admin1234;"
+    depends_on:
+      - rabbitmq
+      - storedb
+    ports:
+      - "6002:80"
+  
+  
+  basket.api:
+    container_name: basket.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+      - "ConnectionStrings:BasketConnectionString=Host=basketdb;Port=5432;Database=basketdb;Username=Admin;Password=admin1234;"
+    ports:
+      - "6003:80"
+    depends_on:
+      - rabbitmq
+      - basketdb
+  
+  
+  order.api:
+    container_name: order.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+      - "ConnectionStrings:OrderConnectionString=Host=orderdb;Port=5432;Database=orderdb;Username=Admin;Password=admin1234;"
+    ports:
+      - "6004:80"
+    depends_on:
+      - rabbitmq
+      - orderdb
+  
+  
+  apigateway.ocelot:
+    container_name: apigateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+    ports:
+      - "6060:80"

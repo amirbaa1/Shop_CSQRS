@@ -32,8 +32,11 @@ public static class InfrastructureService
 
             x.UsingRabbitMq((context, cfg) =>
             {
-                cfg.Host("localhost", "/", c =>
-                {
+                //local
+                //cfg.Host("localhost", "/", c =>
+                //docker
+                var rabbitMqHost = configuration["EventBusSettings:HostAddress"];
+                cfg.Host(new Uri(rabbitMqHost), c => {
                     c.Username("guest");
                     c.Password("guest");
                 });

@@ -1,0 +1,78 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/store",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "store.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/store",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Store?productId={productId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "store.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/store?productId={productId}",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/store/UpdateInventory",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "store.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/store/UpdateInventory",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/store/UpdateProductStatus",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "store.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/store/UpdateProductStatus",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/store/UpdateProductName",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "store.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/store/UpdateProductName",
+      "UpstreamHttpMethod": [
+        "PUT"
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http//localhost:6060"
+  }
+}

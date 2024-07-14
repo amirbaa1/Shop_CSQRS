@@ -12,7 +12,7 @@ using Product.Infrastructure.Data;
 namespace Product.Infrastructure.Migrations
 {
     [DbContext(typeof(ProductDbContext))]
-    [Migration("20240620105643_init")]
+    [Migration("20240712220056_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -77,7 +77,13 @@ namespace Product.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("Number")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Price")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProductStatus")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");

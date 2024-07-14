@@ -1,0 +1,83 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/product",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/product",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/product/category",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/product/category",
+      "UpstreamHttpMethod": [
+        "GET"
+      ]
+    },
+    //ProductManagement
+    {
+      "DownstreamPathTemplate": "/api/ProductManagement",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ProductManagement",
+      "UpstreamHttpMethod": [
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/ProductManagement/category",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ProductManagement/category",
+      "UpstreamHttpMethod": [
+        "POST"
+      ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/ProductManagement/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "product.api",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ProductManagement/{id}",
+      "UpstreamHttpMethod": [
+        "DELETE"
+      ]
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http//localhost:6060"
+  }
+}
