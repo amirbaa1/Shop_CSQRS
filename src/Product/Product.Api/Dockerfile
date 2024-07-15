@@ -11,8 +11,6 @@ WORKDIR /src
 COPY ["Product/Product.Api/Product.Api.csproj", "Product/Product.Api/"]
 COPY ["Product/Product.Application/Product.Application.csproj", "Product/Product.Application/"]
 COPY ["EventBus.Messages/EventBus.Messages.csproj", "EventBus.Messages/"]
-COPY ["Store/Store.Application/Store.Application.csproj", "Store/Store.Application/"]
-COPY ["Store/Store.Domain/Store.Domain.csproj", "Store/Store.Domain/"]
 COPY ["Product/Product.Domain/Product.Domain.csproj", "Product/Product.Domain/"]
 COPY ["Product/Product.Infrastructure/Product.Infrastructure.csproj", "Product/Product.Infrastructure/"]
 RUN dotnet restore "./Product/Product.Api/Product.Api.csproj"

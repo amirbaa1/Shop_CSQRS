@@ -154,7 +154,8 @@ public class OrderRepository : IOrderRepository
 
                 _logger.LogInformation($"order : {JsonConvert.SerializeObject(orderLineUser)}");
 
-                body += $"\n Product: {productCheck.ProductName}, Quantity: {item.Quantity}, Total: {item.Total}\n \n";
+                body += $"\n Product: {item.Product.ProductName},Price : {item.Product.ProductPrice}, Quantity: {item.Quantity}, Total: {item.Total}\n \n";
+                body += "\n";
 
                 var emailCreate = new EmailModel
                 {

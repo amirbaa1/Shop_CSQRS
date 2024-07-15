@@ -9,8 +9,6 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Store/Store.Api/Store.Api.csproj", "Store/Store.Api/"]
-COPY ["Identity/Identity.Infrastructure/Identity.Infrastructure.csproj", "Identity/Identity.Infrastructure/"]
-COPY ["Identity/Identity.Domain/Identity.Domain.csproj", "Identity/Identity.Domain/"]
 COPY ["Store/Store.Application/Store.Application.csproj", "Store/Store.Application/"]
 COPY ["EventBus.Messages/EventBus.Messages.csproj", "EventBus.Messages/"]
 COPY ["Store/Store.Domain/Store.Domain.csproj", "Store/Store.Domain/"]

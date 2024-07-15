@@ -20,6 +20,7 @@ services:
       - "5050:80"
     volumes:
       - pgadmin_data:/root/.pgadmin
+   
       
       
       ###########################
@@ -72,7 +73,17 @@ services:
     volumes:
       - order_data:/var/lib/postgresql/data
     
-    
+  identitydb:
+    container_name: identitydb
+    restart: always
+    environment:
+      - POSTGRES_USER=Admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=identitydb
+    ports:
+      - "5435:5432"
+    volumes:
+      - identity_data:/var/lib/postgresql/data
     
     ###########################
   product.api:
@@ -110,11 +121,13 @@ services:
       - ASPNETCORE_URLS=http://+:80
       - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
       - "ConnectionStrings:BasketConnectionString=Host=basketdb;Port=5432;Database=basketdb;Username=Admin;Password=admin1234;"
+      - "CacheSettings:ConnectionString=basketRedis:6379" 
     ports:
       - "6003:80"
     depends_on:
       - rabbitmq
       - basketdb
+      - basketRedis 
   
   
   order.api:
@@ -138,3 +151,16 @@ services:
       - ASPNETCORE_URLS=http://+:80
     ports:
       - "6060:80"
+
+
+  identity.api:
+    container_name: identity.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - "ConnectionStrings:IdentityConnectionString=Host=identitydb;Port=5432;Database=identitydb;Username=Admin;Password=admin1234;" 
+    ports:
+      - "6015:80"
+    depends_on:
+      - identitydb
+

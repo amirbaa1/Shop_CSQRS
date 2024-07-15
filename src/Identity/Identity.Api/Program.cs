@@ -1,6 +1,10 @@
 using System.Reflection;
 using Identity.Application;
+using Identity.Domain.Models;
 using Identity.Infrastructure;
+using Identity.Infrastructure.Data;
+using Identity.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +22,8 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
 var app = builder.Build();
+
+app.MigrateDatabase<AuthDbContext>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
