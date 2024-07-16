@@ -17,7 +17,7 @@ public static class InfrastructureService
     public static IServiceCollection AddInfrastructure(this IServiceCollection service, IConfiguration configuration)
     {
         service.AddDbContext<AuthDbContext>(
-            x => x.UseNpgsql(configuration["ConnectionStrings:AccountConnectionString"]));
+            x => x.UseNpgsql(configuration["ConnectionStrings:IdentityConnectionString"]));
 
         service.AddIdentity<AppUser, IdentityRole>(
                 op => { op.SignIn.RequireConfirmedEmail = false; })

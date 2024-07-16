@@ -158,7 +158,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - "ConnectionStrings:IdentityConnectionString=Host=identitydb;Port=5432;Database=identitydb;Username=Admin;Password=admin1234;" 
+      - "ConnectionStrings:IdentityConnectionString=Host=identitydb;Port=5432;Database=identitydb;Username=Admin;Password=admin1234;"
     ports:
       - "6015:80"
     depends_on:
