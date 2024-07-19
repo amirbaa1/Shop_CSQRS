@@ -71,7 +71,7 @@
       ]
     },
     {
-      "DownstreamPathTemplate": "/api/Basket/sent",
+      "DownstreamPathTemplate": "/api/Basket/send",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -79,7 +79,7 @@
           "Port": "80"
         }
       ],
-      "UpstreamPathTemplate": "/Basket/sent",
+      "UpstreamPathTemplate": "/Basket/send",
       "UpstreamHttpMethod": [
         "POST"
       ]

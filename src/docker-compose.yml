@@ -7,6 +7,12 @@ services:
   pgadmin:
     image: dpage/pgadmin4
 
+  basketRedis:
+    container_name: basketRedis
+    image: redis
+    ports:
+      - "6379:6379"
+
   productdb:
     image: postgres
 
@@ -17,6 +23,9 @@ services:
     image: postgres
 
   orderdb:
+    image: postgres
+   
+  identitydb:
     image: postgres
 
   product.api:
@@ -52,6 +61,12 @@ services:
       dockerfile: ApiGateway/ApiGateway.ocelot/Dockerfile
 
 
+  identity.api:
+    image: ${DOCKER_REGISTRY-}identityapi
+    build:
+      context: .
+      dockerfile: Identity/Identity.Api/Dockerfile
+
 volumes:
   postgres_data:
   pgadmin_data:
@@ -59,4 +74,6 @@ volumes:
   store_data:
   basket_data:
   order_data:
+  identity_data:
+
 

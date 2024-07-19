@@ -1,3 +1,4 @@
+using Identity.Application.Features.Commands.AssignRole;
 using Identity.Application.Features.Commands.Login;
 using Identity.Application.Features.Commands.Register;
 using Identity.Application.Features.Commands.Update;
@@ -22,22 +23,22 @@ public class AuthController : ControllerBase
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] LoginCommand loginModel)
     {
-        var request = await _mediator.Send(loginModel);
-        return Ok(request);
+        var response = await _mediator.Send(loginModel);
+        return Ok(response);
     }
 
     [HttpPost("Register")]
     public async Task<IActionResult> Register([FromBody] RegisterCommand registerCommand)
     {
-        var request = await _mediator.Send(registerCommand);
-        return Ok(request);
+        var response = await _mediator.Send(registerCommand);
+        return Ok(response);
     }
 
     [HttpGet("profile/{id}")]
     public async Task<IActionResult> Profile(string id)
     {
-        var request = await _mediator.Send(new ProfileQuery(id));
-        return Ok(request);
+        var response = await _mediator.Send(new ProfileQuery(id));
+        return Ok(response);
     }
 
     [HttpPut("Update")]
@@ -50,7 +51,17 @@ public class AuthController : ControllerBase
             Id = id,
             Image = update.Image
         };
-        var request = await _mediator.Send(command);
-        return Ok(request);
+        var result = await _mediator.Send(command);
+        return Ok(result);
     }
+
+    [HttpPost("AssignRole")]
+    public async Task<IActionResult> AssignRole([FromBody] AssignRoleCommand command)
+    {
+        var response = await _mediator.Send(command);
+
+        return Ok(response);
+    }
+
+
 }

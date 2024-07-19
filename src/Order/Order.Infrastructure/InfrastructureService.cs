@@ -8,6 +8,9 @@ using Order.Domain.Repository;
 using Order.Application.Consumer;
 using Order.Infrastructure.Data;
 using Order.Infrastructure.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Order.Infrastructure;
 
@@ -36,7 +39,8 @@ public static class InfrastructureService
                 //cfg.Host("localhost", "/", c =>
                 //docker
                 var rabbitMqHost = configuration["EventBusSettings:HostAddress"];
-                cfg.Host(new Uri(rabbitMqHost), c => {
+                cfg.Host(new Uri(rabbitMqHost), c =>
+                {
                     c.Username("guest");
                     c.Password("guest");
                 });
@@ -48,6 +52,40 @@ public static class InfrastructureService
                     });
             });
         });
+
+        //identityServer 
+
+
+        service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(op =>
+    {
+        //op.Authority = "https://localhost:7015";
+        op.Authority = "identity.api";
+        op.Audience = "webShop_client";
+        op.RequireHttpsMetadata = false;
+        op.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = "webShop_Api",
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.ASCII.GetBytes(configuration.GetValue<string>("TokenAuthAPI:JWTOption:Secret")!)),
+            ClockSkew = TimeSpan.Zero,
+        };
+    });
+
+        //policy
+        service.AddAuthorization(op =>
+        {
+            op.AddPolicy("orderManagement", policy =>
+                policy.RequireClaim("scope", "orderApi.Management"));
+
+            op.AddPolicy("orderUser", policy =>
+             policy.RequireClaim("scope", "orderApi.User"));
+        });
+
 
 
         service.AddMassTransitHostedService();

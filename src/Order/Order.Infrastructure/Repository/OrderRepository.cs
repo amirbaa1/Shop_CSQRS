@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -15,14 +16,15 @@ public class OrderRepository : IOrderRepository
     private readonly ILogger<OrderRepository> _logger;
     private readonly IProductRepository _productRepository;
     private readonly IEmailSend _emailSend;
-
+    private readonly IMapper _mapper;
     public OrderRepository(OrderdbContext orderdbContext, ILogger<OrderRepository> logger,
-        IProductRepository productRepository, IEmailSend emailSend)
+        IProductRepository productRepository, IEmailSend emailSend, IMapper mapper)
     {
         _orderdbContext = orderdbContext;
         _logger = logger;
         _productRepository = productRepository;
         _emailSend = emailSend;
+        _mapper = mapper;
     }
 
     public async Task<List<OrderModelDto>> GetOrdersByUserId(string userid)
@@ -154,7 +156,8 @@ public class OrderRepository : IOrderRepository
 
                 _logger.LogInformation($"order : {JsonConvert.SerializeObject(orderLineUser)}");
 
-                body += $"\n Product: {productCheck.ProductName}, Quantity: {item.Quantity}, Total: {item.Total}\n \n";
+                body += $"\n Product: {item.Product.ProductName},Price : {item.Product.ProductPrice}, Quantity: {item.Quantity}, Total: {item.Total}\n \n";
+                body += "\n";
 
                 var emailCreate = new EmailModel
                 {
@@ -176,5 +179,42 @@ public class OrderRepository : IOrderRepository
             _logger.LogError($"Error Model :{e.Message}");
             return false;
         }
+    }
+
+    public async Task<List<OrderModelDto>> GetAll()
+    {
+        var getAll = await _orderdbContext.Orders
+                   .Include(x => x.OrderLines)
+                   .Select(x =>
+                       new OrderModelDto
+                       {
+                           Id = x.Id,
+                           OrderPaid = x.OrderPaid,
+                           UserId = x.UserId,
+                           TotalPrice = x.TotalPrice,
+                           OrderPlaced = x.OrderPlaced,
+                           PhoneNumber = x.PhoneNumber,
+                           Address = x.Address,
+                           ZipCode = x.ZipCode,
+                           EmailAddress = x.EmailAddress,
+                           FirstName = x.FirstName,
+                           LastName = x.LastName,
+                           OrderLines = x.OrderLines.Select(xl => new OrderLineDto
+                           {
+                               Id = xl.Id,
+                               Quantity = xl.Quantity,
+                               ProductId = xl.Product.ProductId,
+                               Product = new ProductDto
+                               {
+                                   ProductId = xl.ProductId,
+                                   ProductName = xl.Product.ProductName,
+                                   ProductPrice = xl.Product.ProductPrice
+                               },
+                               Total = xl.Total,
+                           }).ToList()
+                       }).ToListAsync();
+
+
+        return getAll;
     }
 }

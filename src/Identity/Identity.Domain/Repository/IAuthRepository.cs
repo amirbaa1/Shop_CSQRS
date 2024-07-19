@@ -14,4 +14,8 @@ public interface IAuthRepository
     Task<ResponseDto> UpdateProfile(string id, UpdateProfile updateProfiles);
 
     // Task<string> SendActivateEmail(string userId);
+
+    Task<ResponseDto> DeleteProfile(string id);
+
+    Task<ResponseDto> AssignRole(string email, string roleName);
 }

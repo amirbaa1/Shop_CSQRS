@@ -23,11 +23,6 @@ var app = builder.Build();
 
 app.MigrateDatabase<StoreDbContext>();
 
-//
-// app.MigrateDatabase<StoreDbContext>(
-//     seeder: null,
-//     tablesToCheck: new[] { "storeModels" });
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -37,6 +32,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

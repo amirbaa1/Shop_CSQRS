@@ -1,6 +1,8 @@
 using System.Reflection;
 using Identity.Application;
 using Identity.Infrastructure;
+using Identity.Infrastructure.Data;
+using Identity.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,8 @@ builder.Services.AddMediatR(cfg =>
 
 var app = builder.Build();
 
+app.MigrateDatabase<AuthDbContext>();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -28,6 +32,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+app.UseRouting();
+
+app.UseIdentityServer();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

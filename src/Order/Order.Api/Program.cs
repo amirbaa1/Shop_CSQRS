@@ -1,9 +1,8 @@
-using System.Reflection;
-using MediatR;
 using Order.Infrastructure;
 using Order.Application;
-using Order.Infrastructure.Data;
 using order.Infrastructure.Extensions;
+using Order.Infrastructure.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +30,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

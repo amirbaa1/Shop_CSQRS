@@ -6,17 +6,56 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "order.api",
-          "Port": "80"
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/order?userId={userId}",
       "UpstreamHttpMethod": [
-        "GET",
+        "GET"
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "ApiGatewayAdminAuthenticationScheme",
+      //  "AllowedScopes": [ "orderApi.User" ]
+      //}
+    },
+    {
+      "DownstreamPathTemplate": "/api/Order",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "order.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/order",
+      "UpstreamHttpMethod": [
         "POST"
-      ]
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "ApiGatewayAdminAuthenticationScheme",
+      //  "AllowedScopes": [ "orderApi.User" ]
+      //}
+    },
+    {
+      "DownstreamPathTemplate": "/api/OrderManagement",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "order.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/OrderManagement",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "ApiGatewayAdminAuthenticationScheme",
+      //  "AllowedScopes": [ "orderApi.Management" ]
+      //}
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http//localhost:6060"
+    "BaseUrl": "http://localhost:6060"
   }
 }

@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Product.Application.Features.Category.Commands.Create;
 using Product.Application.Features.Category.Commands.Delete;
@@ -10,6 +11,7 @@ namespace Product.Api.Controllers;
 
 [ApiController]
 [Route("api/[Controller]")]
+[Authorize(Policy = "productManagement")]
 public class ProductManagementController : ControllerBase
 {
     private readonly IMediator _mediator;

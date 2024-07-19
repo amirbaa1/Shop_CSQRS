@@ -22,6 +22,7 @@ public class TokenGenerator : ITokenGenerator
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_jwtOption.Secret!);
 
+
         var claim = new List<Claim>
         {
             new Claim(JwtRegisteredClaimNames.Name, appUser.FirstName),
@@ -29,7 +30,24 @@ public class TokenGenerator : ITokenGenerator
             new Claim(JwtRegisteredClaimNames.Name, appUser.UserName),
             new Claim(JwtRegisteredClaimNames.Email, appUser.Email),
             new Claim(JwtRegisteredClaimNames.Sub, appUser.Id),
+            //new Claim("scope","productApi.Management"),
         };
+
+        if (appUser.Role == "Admin")
+        {
+            claim.AddRange(new[]
+            {
+                    new Claim("scope", "productApi.Management"),
+                    new Claim("scope", "orderApi.Management"),
+                    new Claim("scope" , "storeApi.Management")
+            });
+        }
+        if (appUser.Role == "User")
+        {
+            claim.Add(new Claim("scope", "orderApi.User"));
+        }
+
+
 
         var tokenDescription = new SecurityTokenDescriptor
         {
