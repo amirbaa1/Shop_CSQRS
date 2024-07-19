@@ -26,10 +26,6 @@ var app = builder.Build();
 
 app.MigrateDatabase<ProductDbContext>();
 
-//app.MigrateDatabase<ProductDbContext>(
-//    seeder: null,
-//    tablesToCheck: new[] { "Categories", "Products" });
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -40,6 +36,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

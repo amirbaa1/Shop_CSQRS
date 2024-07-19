@@ -8,6 +8,6 @@ public interface IOrderRepository
 
     Task<OrderModelDto> GetOrderById(Guid id);
 
-    // Task<List<OrderModelDto>> GetAll();
+    Task<List<OrderModelDto>> GetAll();
     bool CreateOrder(OrderModelDto orderModelDtos);
 }

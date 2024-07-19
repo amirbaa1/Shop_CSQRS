@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store.Application.Feature.Store.Commands.Create;
 using Store.Application.Feature.Store.Commands.Delete;
@@ -12,6 +13,7 @@ namespace Store.Api.Controllers
 {
     [ApiController]
     [Route("api/[Controller]")]
+    [Authorize(Policy = "storeManagement")]
     public class StoreController : ControllerBase
     {
         private readonly IMediator _mediator;

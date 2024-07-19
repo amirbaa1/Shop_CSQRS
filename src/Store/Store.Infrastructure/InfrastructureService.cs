@@ -1,13 +1,16 @@
 ﻿using EventBus.Messages.Event.Product;
 using EventBus.Messages.Event.Store;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Store.Application.Consumer;
 using Store.Domain.Repository;
 using Store.Infrastructure.Data;
 using Store.Infrastructure.Repository;
+using System.Text;
 
 
 namespace Store.Infrastructure
@@ -54,6 +57,36 @@ namespace Store.Infrastructure
                     //     ep => { ep.ConfigureConsumer<AddProductStoreConsumer>(context); });
                 });
             });
+
+            //identity
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(op =>
+                {
+                    //op.Authority = "https://localhost:7015";
+                    op.Authority = "http://identity.api";
+                    op.Audience = "webShop_client";
+                    op.RequireHttpsMetadata = false;
+                    op.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = "webShop_Api",
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.ASCII.GetBytes(configuration.GetValue<string>("TokenAuthAPI:JWTOption:Secret")!)),
+                        ClockSkew = TimeSpan.Zero,
+                    };
+                });
+
+            //policy
+            services.AddAuthorization(op =>
+            {
+                op.AddPolicy("storeManagement", policy =>
+                    policy.RequireClaim("scope", "storeApi.Management"));
+            });
+
+
             return services;
         }
     }

@@ -1,10 +1,8 @@
 using System.Reflection;
 using Identity.Application;
-using Identity.Domain.Models;
 using Identity.Infrastructure;
 using Identity.Infrastructure.Data;
 using Identity.Infrastructure.Extensions;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +32,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+app.UseRouting();
+
+app.UseIdentityServer();
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

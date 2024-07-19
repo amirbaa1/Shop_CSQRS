@@ -43,7 +43,11 @@
         "POST",
         "PUT",
         "DELETE"
-      ]
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "ApiGatewayAdminAuthenticationScheme",
+      //  "AllowedScopes": [ "productApi.Management" ]
+      //}
     },
 
     {
@@ -58,7 +62,11 @@
       "UpstreamPathTemplate": "/ProductManagement/category",
       "UpstreamHttpMethod": [
         "POST"
-      ]
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "ApiGatewayAdminAuthenticationScheme",
+      //  "AllowedScopes": [ "productApi.Management" ]
+      //}
     },
 
     {
@@ -73,7 +81,11 @@
       "UpstreamPathTemplate": "/ProductManagement/{id}",
       "UpstreamHttpMethod": [
         "DELETE"
-      ]
+      ],
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "ApiGatewayAdminAuthenticationScheme",
+      //  "AllowedScopes": [ "productApi.Management" ]
+      //}
     }
 
   ],

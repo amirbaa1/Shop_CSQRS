@@ -110,6 +110,7 @@ services:
     depends_on:
       - rabbitmq
       - storedb
+      - identity.api 
     ports:
       - "6002:80"
   
@@ -151,6 +152,8 @@ services:
       - ASPNETCORE_URLS=http://+:80
     ports:
       - "6060:80"
+    depends_on:
+      - identity.api
 
 
   identity.api:

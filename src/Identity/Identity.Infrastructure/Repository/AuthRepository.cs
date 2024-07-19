@@ -2,10 +2,10 @@ using Identity.Domain.Models;
 using Identity.Domain.Models.Dto;
 using Identity.Domain.Repository;
 using Identity.Infrastructure.Data;
-using IdentityServer4.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Security.Claims;
 
 namespace Identity.Infrastructure.Repository;
 
@@ -56,6 +56,8 @@ public class AuthRepository : IAuthRepository
 
                 //Confirmed email
                 // var createConfirmationTokenAsync = await _userManager.GenerateEmailConfirmationTokenAsync(appUser);
+
+                await AssignRole(user.Email, "User");
 
                 return "Create Register";
             }
@@ -258,9 +260,151 @@ public class AuthRepository : IAuthRepository
         }
     }
 
-    //
-    // public Task<string> SendActivateEmail(string userId)
-    // {
-    //     throw new NotImplementedException();
-    // }
+    public async Task<ResponseDto> DeleteProfile(string id)
+    {
+        var getUser = await _userManager.Users.FirstOrDefaultAsync(x => x.Id == id);
+
+        if (getUser == null)
+        {
+            return new ResponseDto
+            {
+                Result = false,
+                IsSuccess = false,
+                Message = "User not found"
+            };
+        }
+
+        var result = await _userManager.DeleteAsync(getUser);
+
+        if (result.Succeeded)
+        {
+            return new ResponseDto
+            {
+
+                IsSuccess = true,
+                Message = "Delete account",
+                Result = result
+            };
+        }
+
+        return new ResponseDto
+        {
+            Result = false,
+            IsSuccess = false,
+            Message = "User not found"
+        };
+
+    }
+
+    public async Task<ResponseDto> AssignRole(string email, string roleName)
+    {           // Create Role with IdentityRole
+
+        //    var user = await _userManager.FindByEmailAsync(email);
+        //    if (user == null)
+        //    {
+        //        return false;
+        //    }
+
+        //    else
+        //    {
+        //        if (!_roleManager.RoleExistsAsync(roleName).GetAwaiter().GetResult())
+        //        {
+        //            await _roleManager.CreateAsync(new IdentityRole(roleName));
+        //        }
+
+        //        await _userManager.AddToRoleAsync(user, roleName);
+
+        //        var claim = new Claim("Role", roleName);
+
+        //        user.Role = roleName;
+        //        var result = await _userManager.UpdateAsync(user);
+        //        if (!result.Succeeded)
+        //        {
+        //            return false;
+        //        }
+
+        //        return true;
+        //    }
+
+
+        // Create Role with Claim
+        var user = await _userManager.FindByEmailAsync(email);
+
+        if (user == null)
+        {
+            return new ResponseDto
+            {
+                IsSuccess = false,
+                Message = "Not found account",
+                Result = false
+            };
+        }
+        if (!string.IsNullOrEmpty(user.Role)) // if user have role
+        {
+            var oldClaimRole = (await _userManager.GetClaimsAsync(user)).FirstOrDefault(c => c.Type == "RoleAccount");
+            if (oldClaimRole != null)
+            {
+                var Remove = await _userManager.RemoveClaimAsync(user, oldClaimRole);
+                if (!Remove.Succeeded)
+                {
+                    return new ResponseDto
+                    {
+                        IsSuccess = false,
+                        Message = "error role claim",
+                        Result = false
+                    };
+                }
+
+            }
+            var newClaim = new Claim("RoleAccount", roleName);
+
+            user.Role = roleName;
+            await _userManager.UpdateAsync(user);
+
+            var resultUpdate = await _userManager.AddClaimAsync(user, newClaim);
+
+            if (resultUpdate.Succeeded)
+            {
+                //var userRole = await _roleManager
+                return new ResponseDto
+                {
+                    IsSuccess = true,
+                    Message = "add role",
+                    Result = true
+                };
+            }
+            return new ResponseDto
+            {
+                IsSuccess = false,
+                Message = "error add role",
+                Result = false,
+            };
+        }
+        else
+        {
+            var claim = new Claim("RoleAccount", roleName);
+            var result = await _userManager.AddClaimAsync(user, claim);
+
+            user.Role = roleName;
+            await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                return new ResponseDto
+                {
+                    IsSuccess = true,
+                    Message = "update role",
+                    Result = true
+                };
+            }
+            return new ResponseDto
+            {
+                IsSuccess = false,
+                Message = "error update role",
+                Result = false
+            };
+        }
+    }
+
+
 }

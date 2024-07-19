@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Order.Application.Features.Order.Commands.Create;
@@ -8,6 +9,7 @@ namespace Order.Api.Controllers;
 
 [ApiController]
 [Route("api/[Controller]")]
+[Authorize(Policy = "orderUser")]
 public class OrderController : ControllerBase
 {
     private readonly IMediator _mediator;

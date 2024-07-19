@@ -7,7 +7,10 @@ using Product.Application.Consumer;
 using Product.Domain.Repositories;
 using Product.Infrastructure.Data;
 using Product.Infrastructure.Repository;
-using Product.Infrastructure.Extensions;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 namespace Product.Infrastructure;
 
@@ -32,9 +35,6 @@ public static class InfrastructureService
 
             x.UsingRabbitMq((context, cfg) =>
             {
-                //local
-                //cfg.Host("localhost", "/", c =>
-                //docker
                 var rabbitMqHost = configuration["EventBusSettings:HostAddress"];
                 cfg.Host(new Uri(rabbitMqHost), c =>
                 {
@@ -49,7 +49,36 @@ public static class InfrastructureService
             });
         });
 
-       //service.MigrateDatabase<ProductDbContext>();
+
+
+        // identityServer
+
+        service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(op =>
+    {
+        //op.Authority = "https://localhost:7015";
+        op.Authority = "http://identity.api";
+        op.Audience = "webShop_client";
+        op.RequireHttpsMetadata = false;
+        op.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = "webShop_Api",
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.ASCII.GetBytes(configuration.GetValue<string>("TokenAuthAPI:JWTOption:Secret")!)),
+            ClockSkew = TimeSpan.Zero,
+        };
+    });
+
+        //policy
+        service.AddAuthorization(op =>
+        {
+            op.AddPolicy("productManagement", policy =>
+                policy.RequireClaim("scope", "productApi.Management"));
+        });
 
 
         return service;

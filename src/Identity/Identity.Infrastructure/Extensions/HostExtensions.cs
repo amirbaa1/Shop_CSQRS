@@ -1,20 +1,15 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Npgsql;
 using Polly;
 
 namespace Identity.Infrastructure.Extensions;
 
-
-
-
 public static class HostExtensions
 {
-    public static IHost MigrateDatabase<TContext>(this IHost host,
-        Action<TContext, IServiceProvider>? seeder = null)
-        where TContext : DbContext
+    public static IHost MigrateDatabase<TContext>(this IHost host, Action<TContext, IServiceProvider>? seeder = null) where TContext : DbContext
     {
         using (var scope = host.Services.CreateScope())
         {
@@ -24,144 +19,52 @@ public static class HostExtensions
 
             try
             {
-                logger.LogInformation("Migrating database associated with context {DbContextName}",
-                    typeof(TContext).Name);
+                logger.LogInformation("Checking for pending migrations for context {DbContextName}", typeof(TContext).Name);
 
-                var retry = Policy.Handle<SqlException>()
-                    .WaitAndRetry(
-                        retryCount: 5,
-                        sleepDurationProvider: retryAttempt =>
-                            TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), // 2,4,8,16,32 sc
-                        onRetry: (exception, retryCount, context) =>
-                        {
-                            logger.LogError(
-                                $"Retry {retryCount} of {context.PolicyKey} at {context.OperationKey}, due to: {exception}.");
-                        });
+                if (context.Database.GetPendingMigrations().Any())
+                {
+                    logger.LogInformation("Migrating database associated with context {DbContextName}", typeof(TContext).Name);
 
-                //if the sql server container is not created on run docker compose this
-                //migration can't fail for network related exception. The retry options for DbContext only 
-                //apply to transient exceptions                    
-                retry.Execute(() => InvokeSeeder(seeder, context, services));
+                    var retry = Policy.Handle<NpgsqlException>()
+                        .WaitAndRetry(
+                            retryCount: 5,
+                            sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), // 2,4,8,16,32 sc
+                            onRetry: (exception, retryCount, context) =>
+                            {
+                                logger.LogError($"Retry {retryCount} of {context.PolicyKey} at {context.OperationKey}, due to: {exception}.");
+                            });
 
-                logger.LogInformation("Migrated database associated with context {DbContextName}",
-                    typeof(TContext).Name);
+                    retry.Execute(() => InvokeSeeder(seeder, context, services));
+
+                    logger.LogInformation("Migrated database associated with context {DbContextName}", typeof(TContext).Name);
+                }
+                else
+                {
+                    logger.LogInformation("No pending migrations for context {DbContextName}", typeof(TContext).Name);
+                }
             }
-            catch (SqlException ex)
+            catch (NpgsqlException ex)
             {
-                logger.LogError(ex,
-                    "An error occurred while migrating the database used on context {DbContextName}",
-                    typeof(TContext).Name);
+                logger.LogError(ex, "An error occurred while migrating the database used on context {DbContextName}", typeof(TContext).Name);
             }
         }
 
         return host;
     }
 
-    private static void InvokeSeeder<TContext>(Action<TContext, IServiceProvider>? seeder, TContext context,
-        IServiceProvider services)
-        where TContext : DbContext
+    private static void InvokeSeeder<TContext>(Action<TContext, IServiceProvider>? seeder, TContext context, IServiceProvider services) where TContext : DbContext
     {
-        context.Database.Migrate();
-        // seeder(context, services);
-        seeder?.Invoke(context, services);
+        var tableExists = context.Database.ExecuteSqlRaw("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'Categories')");
+
+        if (tableExists == null)
+        {
+            context.Database.Migrate();
+            seeder?.Invoke(context, services);
+        }
+        else
+        {
+            var logger = services.GetRequiredService<ILogger<TContext>>();
+            logger.LogInformation("Table 'Categories' already exists. Skipping migration.");
+        }
     }
 }
-
-
-
-/// <summary>
-/// 
-/// </summary>
-
-//public static class HostExtensions
-//{
-//    public static IHost MigrateDatabase<TContext>(this IHost host,
-//        Action<TContext, IServiceProvider>? seeder = null,
-//        params string[] tablesToCheck) where TContext : DbContext
-//    {
-//        using (var scope = host.Services.CreateScope())
-//        {
-//            var services = scope.ServiceProvider;
-//            var logger = services.GetRequiredService<ILogger<TContext>>();
-//            var context = services.GetService<TContext>();
-
-//            try
-//            {
-//                logger.LogInformation("Migrating database associated with context {DbContextName}", typeof(TContext).Name);
-
-//                if (!TablesExistAndHaveData(context, tablesToCheck))
-//                {
-//                    var retry = Policy.Handle<SqlException>()
-//                        .WaitAndRetry(
-//                            retryCount: 5,
-//                            sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), // 2,4,8,16,32 sec
-//                            onRetry: (exception, retryCount, context) =>
-//                            {
-//                                logger.LogError($"Retry {retryCount} of {context.PolicyKey} at {context.OperationKey}, due to: {exception}.");
-//                            });
-
-//                    retry.Execute(() => InvokeSeeder(seeder, context, services));
-
-//                    logger.LogInformation("Migrated database associated with context {DbContextName}", typeof(TContext).Name);
-//                }
-//                else
-//                {
-//                    logger.LogInformation("The tables already exist and have data. Migration skipped.");
-//                }
-//            }
-//            catch (SqlException ex)
-//            {
-//                logger.LogError(ex, "An error occurred while migrating the database used on context {DbContextName}", typeof(TContext).Name);
-//            }
-//        }
-
-//        return host;
-//    }
-
-//    private static bool TablesExistAndHaveData<TContext>(TContext context, params string[] tableNames) where TContext : DbContext
-//    {
-//        var allTablesHaveData = true;
-
-//        using (var command = context.Database.GetDbConnection().CreateCommand())
-//        {
-//            context.Database.OpenConnection();
-
-//            foreach (var tableName in tableNames)
-//            {
-//                var tableExistsQuery = $"SELECT 1 FROM information_schema.tables WHERE table_name = '{tableName}'";
-//                var tableHasDataQuery = $"SELECT COUNT(*) FROM \"{tableName}\"";
-
-//                // Check if table exists
-//                command.CommandText = tableExistsQuery;
-//                var tableExists = command.ExecuteScalar() != null;
-
-//                if (!tableExists)
-//                {
-//                    allTablesHaveData = false;
-//                    break;
-//                }
-
-//                // Check if table has data
-//                command.CommandText = tableHasDataQuery;
-//                var tableHasData = (long)command.ExecuteScalar() > 0;
-
-//                if (!tableHasData)
-//                {
-//                    allTablesHaveData = false;
-//                    break;
-//                }
-//            }
-
-//            context.Database.CloseConnection();
-//        }
-
-//        return allTablesHaveData;
-//    }
-
-//    private static void InvokeSeeder<TContext>(Action<TContext, IServiceProvider>? seeder, TContext context,
-//        IServiceProvider services) where TContext : DbContext
-//    {
-//        context.Database.Migrate();
-//        seeder?.Invoke(context, services);
-//    }
-//}
