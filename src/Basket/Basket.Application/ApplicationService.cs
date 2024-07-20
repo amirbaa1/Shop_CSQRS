@@ -1,8 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using Basket.Application.Features.Basket.Commands.CheckOut;
-using EventBus.Messages.Common;
-using MassTransit;
+
 
 namespace Basket.Application
 {

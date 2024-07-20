@@ -18,6 +18,7 @@
     <projectFile kind="Docker">Product/Product.Api/Product.Api.csproj</projectFile>
     <projectFile profileName="http">Product/Product.Api/Product.Api.csproj</projectFile>
     <projectFile profileName="https">Product/Product.Api/Product.Api.csproj</projectFile>
+    <projectFile>Product/Product.Worker/Product.Worker.csproj</projectFile>
     <projectFile kind="Docker">Store/Store.Api/Store.Api.csproj</projectFile>
     <projectFile profileName="http">Store/Store.Api/Store.Api.csproj</projectFile>
     <projectFile profileName="https">Store/Store.Api/Store.Api.csproj</projectFile>
@@ -27,17 +28,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dca26908-aecd-42fd-a1c0-433132e52991" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/shelf/Uncommitted_changes_before_Update_at_7_13_24,_10_44 AM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/shelf/Uncommitted_changes_before_Update_at_7_13_24__10_44AM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="dca26908-aecd-42fd-a1c0-433132e52991" name="Changes" comment="update migration">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Extensions/HostExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Extensions/HostExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity/Identity.Infrastructure/Extensions/HostExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Identity/Identity.Infrastructure/Extensions/HostExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Infrastructure/Extensions/HostExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Infrastructure/Extensions/HostExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Infrastructure/InfrastructureService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Infrastructure/InfrastructureService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Extensions/HostExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Extensions/HostExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Extensions/HostExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Extensions/HostExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Application/ApplicationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Application/ApplicationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Shop_CSQRS.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Shop_CSQRS.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +71,24 @@
   }
 }]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.ApiGateway.ocelot: http">
+    <configuration name="Product.Worker" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Product/Product.Worker/Product.Worker.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
     <configuration name="ApiGateway.ocelot: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/ApiGateway/ApiGateway.ocelot/ApiGateway.ocelot.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
@@ -399,8 +411,17 @@
       <workItem from="1721460650764" duration="164000" />
       <workItem from="1721460885491" duration="384000" />
       <workItem from="1721461327238" duration="59000" />
-      <workItem from="1721461405283" duration="4344000" />
+      <workItem from="1721461405283" duration="7249000" />
     </task>
+    <task id="LOCAL-00001" summary="update migration">
+      <option name="closed" value="true" />
+      <created>1721467742272</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1721467742272</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -421,6 +442,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="update migration" />
+    <option name="LAST_COMMIT_MESSAGE" value="update migration" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
