@@ -7,6 +7,7 @@ using Polly;
 
 namespace Identity.Infrastructure.Extensions;
 
+
 public static class HostExtensions
 {
     public static IHost MigrateDatabase<TContext>(this IHost host, Action<TContext, IServiceProvider>? seeder = null) where TContext : DbContext
@@ -21,9 +22,11 @@ public static class HostExtensions
             {
                 logger.LogInformation("Checking for pending migrations for context {DbContextName}", typeof(TContext).Name);
 
-                if (context.Database.GetPendingMigrations().Any())
+                var tableExists = context.Database.ExecuteSqlRaw("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = '__EFMigrationsHistory')");
+
+                if (tableExists == 0)
                 {
-                    logger.LogInformation("Migrating database associated with context {DbContextName}", typeof(TContext).Name);
+                    logger.LogInformation("The __EFMigrationsHistory table does not exist. Applying migrations.");
 
                     var retry = Policy.Handle<NpgsqlException>()
                         .WaitAndRetry(
@@ -40,7 +43,29 @@ public static class HostExtensions
                 }
                 else
                 {
-                    logger.LogInformation("No pending migrations for context {DbContextName}", typeof(TContext).Name);
+                    logger.LogInformation("__EFMigrationsHistory table exists. Checking for pending migrations.");
+
+                    if (context.Database.GetPendingMigrations().Any())
+                    {
+                        logger.LogInformation("Pending migrations found. Applying migrations.");
+
+                        var retry = Policy.Handle<NpgsqlException>()
+                            .WaitAndRetry(
+                                retryCount: 5,
+                                sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), // 2,4,8,16,32 sc
+                                onRetry: (exception, retryCount, context) =>
+                                {
+                                    logger.LogError($"Retry {retryCount} of {context.PolicyKey} at {context.OperationKey}, due to: {exception}.");
+                                });
+
+                        retry.Execute(() => InvokeSeeder(seeder, context, services));
+
+                        logger.LogInformation("Migrated database associated with context {DbContextName}", typeof(TContext).Name);
+                    }
+                    else
+                    {
+                        logger.LogInformation("No pending migrations for context {DbContextName}", typeof(TContext).Name);
+                    }
                 }
             }
             catch (NpgsqlException ex)
@@ -54,17 +79,7 @@ public static class HostExtensions
 
     private static void InvokeSeeder<TContext>(Action<TContext, IServiceProvider>? seeder, TContext context, IServiceProvider services) where TContext : DbContext
     {
-        var tableExists = context.Database.ExecuteSqlRaw("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = 'Categories')");
-
-        if (tableExists == null)
-        {
-            context.Database.Migrate();
-            seeder?.Invoke(context, services);
-        }
-        else
-        {
-            var logger = services.GetRequiredService<ILogger<TContext>>();
-            logger.LogInformation("Table 'Categories' already exists. Skipping migration.");
-        }
+        context.Database.Migrate();
+        seeder?.Invoke(context, services);
     }
 }

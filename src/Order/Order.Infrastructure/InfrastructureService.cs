@@ -28,16 +28,12 @@ public static class InfrastructureService
         service.Configure<EmailConfig>(configuration.GetSection("stmp"));
 
 
-
         service.AddMassTransit(x =>
         {
             x.AddConsumer<BasketQueueEventConsumer>();
 
             x.UsingRabbitMq((context, cfg) =>
             {
-                //local
-                //cfg.Host("localhost", "/", c =>
-                //docker
                 var rabbitMqHost = configuration["EventBusSettings:HostAddress"];
                 cfg.Host(new Uri(rabbitMqHost), c =>
                 {
@@ -46,10 +42,7 @@ public static class InfrastructureService
                 });
 
                 cfg.ReceiveEndpoint(EventBusConstants.BasketQueue,
-                    e =>
-                    {
-                        e.ConfigureConsumer<BasketQueueEventConsumer>(context);
-                    });
+                    e => { e.ConfigureConsumer<BasketQueueEventConsumer>(context); });
             });
         });
 
@@ -57,24 +50,24 @@ public static class InfrastructureService
 
 
         service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(op =>
-    {
-        //op.Authority = "https://localhost:7015";
-        op.Authority = "identity.api";
-        op.Audience = "webShop_client";
-        op.RequireHttpsMetadata = false;
-        op.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidIssuer = "webShop_Api",
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.ASCII.GetBytes(configuration.GetValue<string>("TokenAuthAPI:JWTOption:Secret")!)),
-            ClockSkew = TimeSpan.Zero,
-        };
-    });
+            .AddJwtBearer(op =>
+            {
+                //op.Authority = "https://localhost:7015";
+                op.Authority = "http://identity.api";
+                op.Audience = "webShop_client";
+                op.RequireHttpsMetadata = false;
+                op.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = "webShop_Api",
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.ASCII.GetBytes(configuration.GetValue<string>("TokenAuthAPI:JWTOption:Secret")!)),
+                    ClockSkew = TimeSpan.Zero,
+                };
+            });
 
         //policy
         service.AddAuthorization(op =>
@@ -83,9 +76,8 @@ public static class InfrastructureService
                 policy.RequireClaim("scope", "orderApi.Management"));
 
             op.AddPolicy("orderUser", policy =>
-             policy.RequireClaim("scope", "orderApi.User"));
+                policy.RequireClaim("scope", "orderApi.User"));
         });
-
 
 
         service.AddMassTransitHostedService();
