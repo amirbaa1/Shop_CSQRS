@@ -8,13 +8,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Consumers\" />
-      <Folder Include="Extentions\" />
+      <PackageReference Include="AutoMapper" Version="13.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
-      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
+      <ProjectReference Include="..\..\EventBus.Messages\EventBus.Messages.csproj" />
+      <ProjectReference Include="..\Product.Api\Product.Api.csproj" />
+      <ProjectReference Include="..\Product.Domain\Product.Domain.csproj" />
+      <ProjectReference Include="..\Product.Infrastructure\Product.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

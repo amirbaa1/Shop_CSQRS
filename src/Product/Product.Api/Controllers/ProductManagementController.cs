@@ -1,11 +1,12 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Product.Application.Features.Category.Commands.Create;
-using Product.Application.Features.Category.Commands.Delete;
-using Product.Application.Features.Product.Commands.CreateProduct;
-using Product.Application.Features.Product.Commands.Delete;
-using Product.Application.Features.Product.Commands.Update.UpdateProduct;
+using Product.Api.Features.Category.Commands.Create;
+using Product.Api.Features.Category.Commands.Delete;
+using Product.Api.Features.Product.Commands.CreateProduct;
+using Product.Api.Features.Product.Commands.Delete;
+using Product.Api.Features.Product.Commands.Update.UpdateProduct;
+
 
 namespace Product.Api.Controllers;
 

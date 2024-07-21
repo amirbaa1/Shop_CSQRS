@@ -1,33 +1,34 @@
-
-using MediatR;
-using Product.Application;
-using Product.Infrastructure;
+using System.Reflection;
+using Common.Infrastructure.Extensions;
+using Product.Api.Extensions;
 using Product.Infrastructure.Data;
 using Product.Infrastructure.Extensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
-// builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddMediatR(cfg => {
-    cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly);
-});
+//v1
+// builder.Services.AddApplication();
+// builder.Services.AddInfrastructure(builder.Configuration);
+
+// v2
+builder.Services.RegisterVariables(builder.Configuration);
+builder.Services.RegisterMassTransit(Assembly.GetExecutingAssembly());
+builder.Services.RegisterMediatR(Assembly.GetExecutingAssembly());
+builder.Services.RegisterAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.RegisterProductService(builder.Configuration);
+
+
 var app = builder.Build();
 
 app.MigrateDatabase<ProductDbContext>();
 
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

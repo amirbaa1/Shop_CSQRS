@@ -1,7 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Product.Application.Features.Category.Queries.GetCategory;
-using Product.Application.Features.Queries.GetProductList;
+using Product.Api.Features.Category.Queries.GetCategory;
+using Product.Api.Features.Product.Queries.GetProductList;
 
 namespace Product.Api.Controllers;
 

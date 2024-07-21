@@ -7,6 +7,10 @@
     <projectFile kind="Docker">Basket/Basket.Api/Basket.Api.csproj</projectFile>
     <projectFile profileName="http">Basket/Basket.Api/Basket.Api.csproj</projectFile>
     <projectFile profileName="https">Basket/Basket.Api/Basket.Api.csproj</projectFile>
+    <projectFile profileName="http">Common.Api/Common.Api.csproj</projectFile>
+    <projectFile profileName="https">Common.Api/Common.Api.csproj</projectFile>
+    <projectFile>Common/Common.Api/Common.Api.csproj</projectFile>
+    <projectFile>Common/Common.Domin/Common.Domin.csproj</projectFile>
     <projectFile kind="Docker">Identity/Identity.Api/Identity.Api.csproj</projectFile>
     <projectFile profileName="http">Identity/Identity.Api/Identity.Api.csproj</projectFile>
     <projectFile profileName="https">Identity/Identity.Api/Identity.Api.csproj</projectFile>
@@ -28,9 +32,48 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dca26908-aecd-42fd-a1c0-433132e52991" name="Changes" comment="update migration">
+    <list default="true" id="dca26908-aecd-42fd-a1c0-433132e52991" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Helpers/PublicVariables.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Product/Product.Api/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Product/Product.Api/Mapping/CategoryMapProfile.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Product/Product.Api/Mapping/ProductMapProfile.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Product/Product.Api/Mapping/ProductMapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Product/Product.Worker/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Application/ApplicationService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Application/ApplicationService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductManagementController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductManagementController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Product.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Product.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/ApplicationService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Consumer/UpdateProductStatusConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Consumers/UpdateProductStatusConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Create/CreateCategoryCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Category/Commands/Create/CreateCategoryCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Create/CreateCategoryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Category/Commands/Create/CreateCategoryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Delete/DeleteCategoryCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Category/Commands/Delete/DeleteCategoryCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Delete/DeleteCategoryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Category/Commands/Delete/DeleteCategoryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Queries/GetCategory/GetCategoryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Category/Queries/GetCategory/GetCategoryHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Queries/GetCategory/GetCategoryQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Category/Queries/GetCategory/GetCategoryQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/CreateProduct/CreatProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/CreateProduct/CreatProductHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/CreateProduct/CreateProductCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/CreateProduct/CreateProductCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Delete/DeleteProductCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Delete/DeleteProductCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Delete/DeleteProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Delete/DeleteProductHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Update/UpdateProduct/UpdateProductCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Update/UpdateProduct/UpdateProductCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Update/UpdateProduct/UpdateProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Update/UpdateProduct/UpdateProductHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Update/UpdateProductStatus/ProductStatusCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Update/UpdateProductStatus/ProductStatusCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Update/UpdateProductStatus/ProductStatusHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Update/UpdateProductStatus/ProductStatusHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductById/GetProductByIdHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Queries/GetProductById/GetProductByIdHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductById/GetProductByIdQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Queries/GetProductById/GetProductByIdQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductById/ProductResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Queries/GetProductById/ProductResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductList/GetProductListHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Queries/GetProductList/GetProductListHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductList/GetProductListQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Queries/GetProductList/GetProductListQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Mapping/CategoryMapProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Mapping/CategoryMapProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Mapping/ProductMapProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Mapping/ProductMapProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Mapping/ProductMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Mapping/ProductMapper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Product.Application.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/InfrastructureService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/InfrastructureService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Product.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Product.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Product.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Product.Worker.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shop_CSQRS.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Shop_CSQRS.sln" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,6 +83,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/amirba/Documents/Asp-net/mic2/Shop_CSQRS/src/Basket/Basket.Application/ApplicationService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -52,6 +98,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    ".NET Project.Product.Worker.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "dev",
     "node.js.detected.package.eslint": "true",
@@ -70,7 +117,43 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.ApiGateway.ocelot: http">
+  <component name="RunManager" selected=".NET Project.Product.Worker">
+    <configuration name="Common.Api" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Common/Common.Api/Common.Api.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="Common.Domin" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="$PROJECT_DIR$/Common/Common.Domin/Common.Domin.csproj" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_TFM" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
     <configuration name="Product.Worker" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -136,6 +219,36 @@
     </configuration>
     <configuration name="Basket.Api: https" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Basket/Basket.Api/Basket.Api.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="https" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="Common.Api: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Common.Api/Common.Api.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="http" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="Common.Api: https" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Common.Api/Common.Api.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
       <option name="LAUNCH_PROFILE_NAME" value="https" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
@@ -411,7 +524,8 @@
       <workItem from="1721460650764" duration="164000" />
       <workItem from="1721460885491" duration="384000" />
       <workItem from="1721461327238" duration="59000" />
-      <workItem from="1721461405283" duration="7249000" />
+      <workItem from="1721461405283" duration="7661000" />
+      <workItem from="1721547142405" duration="12954000" />
     </task>
     <task id="LOCAL-00001" summary="update migration">
       <option name="closed" value="true" />
@@ -421,7 +535,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721467742272</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add worker&#10;START V2">
+      <option name="closed" value="true" />
+      <created>1721484596167</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1721484596167</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -443,7 +565,8 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="update migration" />
-    <option name="LAST_COMMIT_MESSAGE" value="update migration" />
+    <MESSAGE value="add worker&#10;START V2" />
+    <option name="LAST_COMMIT_MESSAGE" value="add worker&#10;START V2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
