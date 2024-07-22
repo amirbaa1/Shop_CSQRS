@@ -8,7 +8,10 @@ public static class ServiceCollectionExtension
 {
     public static void RegisterProductService(this IServiceCollection service)
     {
-        service.AddSingleton<IProductRepository, ProductRepository>();
-        service.AddSingleton<ICategoryRepository, CategoryRepository>();
+
+   
+
+        service.AddScoped<IProductRepository, ProductRepository>();
+        service.AddScoped<ICategoryRepository, CategoryRepository>();
     }
 }

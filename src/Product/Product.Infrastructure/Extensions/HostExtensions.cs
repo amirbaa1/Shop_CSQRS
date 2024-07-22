@@ -3,10 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Npgsql;
+
 using Polly;
+using System.Data;
 
 namespace Product.Infrastructure.Extensions;
-
 public static class HostExtensions
 {
     public static IHost MigrateDatabase<TContext>(this IHost host, Action<TContext, IServiceProvider>? seeder = null) where TContext : DbContext
@@ -17,13 +18,29 @@ public static class HostExtensions
             var logger = services.GetRequiredService<ILogger<TContext>>();
             var context = services.GetService<TContext>();
 
+            if (context == null)
+            {
+                throw new InvalidOperationException("DbContext is not registered.");
+            }
+
             try
             {
                 logger.LogInformation("Checking for pending migrations for context {DbContextName}", typeof(TContext).Name);
 
-                var tableExists = context.Database.ExecuteSqlRaw("SELECT EXISTS (SELECT 1 FROM pg_tables WHERE schemaname = 'public' AND tablename = '__EFMigrationsHistory')");
+                // Ensure that DbContext is properly opened
+                context.Database.OpenConnection();
 
-                if (tableExists == 0)
+                // Check if the __EFMigrationsHistory table exists
+                bool tableExists;
+                using (var command = context.Database.GetDbConnection().CreateCommand())
+                {
+                    command.CommandText = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'public' AND table_name = '__EFMigrationsHistory'";
+                    command.CommandType = CommandType.Text;
+
+                    tableExists = Convert.ToInt32(command.ExecuteScalar()) > 0;
+                }
+
+                if (!tableExists)
                 {
                     logger.LogInformation("The __EFMigrationsHistory table does not exist. Applying migrations.");
 
@@ -70,6 +87,10 @@ public static class HostExtensions
             catch (NpgsqlException ex)
             {
                 logger.LogError(ex, "An error occurred while migrating the database used on context {DbContextName}", typeof(TContext).Name);
+            }
+            finally
+            {
+                context.Database.CloseConnection();
             }
         }
 

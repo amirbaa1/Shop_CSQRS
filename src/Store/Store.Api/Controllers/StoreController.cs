@@ -1,14 +1,12 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Store.Application.Feature.Store.Commands.Create;
-using Store.Application.Feature.Store.Commands.Delete;
-using Store.Application.Feature.Store.Commands.Update.UpdateProductName;
-using Store.Application.Feature.Store.Commands.Update.UpdateProductStatus;
-using Store.Application.Feature.Store.Commands.Update.UpdateStoreNumber;
-using Store.Application.Feature.Store.Queries.GetStore;
-using Store.Domain.Model.Dto;
-
+using Store.Api.Feature.Store.Commands.Create;
+using Store.Api.Feature.Store.Commands.Delete;
+using Store.Api.Feature.Store.Commands.Update.UpdateProductName;
+using Store.Api.Feature.Store.Commands.Update.UpdateProductStatus;
+using Store.Api.Feature.Store.Commands.Update.UpdateStoreNumber;
+using Store.Api.Feature.Store.Queries.GetStore;
 namespace Store.Api.Controllers
 {
     [ApiController]

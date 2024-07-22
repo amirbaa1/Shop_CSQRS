@@ -1,0 +1,26 @@
+﻿using AutoMapper;
+using EventBus.Messages.Event.Basket;
+using EventBus.Messages.Event.Product;
+using EventBus.Messages.Event.Store;
+using Store.Api.Feature.Store.Commands.Create;
+using Store.Api.Feature.Store.Commands.Update.UpdateStoreNumber;
+using Store.Api.Feature.Store.Queries.Check;
+using Store.Domain.Model.Dto;
+
+
+namespace Store.Api.Mapper
+{
+    public class StoreProfile : Profile
+    {
+        public StoreProfile()
+        {
+            CreateMap<UpdateNumberDto, UpdateStoreNumberCommand>().ReverseMap();
+
+            CreateMap<ProductStoreEvent, CreateStoreCommand>().ReverseMap();
+
+            CreateMap<BasketStoreEvent, UpdateStoreNumberCommand>().ReverseMap();
+
+            CreateMap<CheckStoreEvent, CheckStoreQuery>().ReverseMap();
+        }
+    }
+}

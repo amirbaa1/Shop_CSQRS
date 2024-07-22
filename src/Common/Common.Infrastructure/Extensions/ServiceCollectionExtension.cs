@@ -19,26 +19,26 @@ public static class ServiceCollectionExtension
         PublicVariables.JwtAudience = Environment.GetEnvironmentVariable("Audience");
 
         if (string.IsNullOrEmpty(PublicVariables.RabbitmqHost) &&
-            !string.IsNullOrEmpty(configuration["RabbitmqHost"]))
-            PublicVariables.RabbitmqHost = configuration["RabbitmqHost"];
+            !string.IsNullOrEmpty(configuration["EventBusSettings:RabbitmqHost"]))
+            PublicVariables.RabbitmqHost = configuration["EventBusSettings:RabbitmqHost"];
         if (string.IsNullOrEmpty(PublicVariables.RabbitmqUserName) &&
-            !string.IsNullOrEmpty(configuration["RabbitmqUserName"]))
-            PublicVariables.RabbitmqUserName = configuration["RabbitmqUserName"];
+            !string.IsNullOrEmpty(configuration["EventBusSettings:RabbitmqUserName"]))
+            PublicVariables.RabbitmqUserName = configuration["EventBusSettings:RabbitmqUserName"];
         if (string.IsNullOrEmpty(PublicVariables.RabbitmqPassword) &&
-            !string.IsNullOrEmpty(configuration["RabbitmqPassword"]))
-            PublicVariables.RabbitmqPassword = configuration["RabbitmqPassword"];
+            !string.IsNullOrEmpty(configuration["EventBusSettings:RabbitmqPassword"]))
+            PublicVariables.RabbitmqPassword = configuration["EventBusSettings:RabbitmqPassword"];
         if (string.IsNullOrEmpty(PublicVariables.ProductConnectionString) &&
             !string.IsNullOrEmpty(configuration["ProductConnectionString"]))
             PublicVariables.ProductConnectionString = configuration["ProductConnectionString"];
         if (string.IsNullOrEmpty(PublicVariables.JwtSecret) &&
-            !string.IsNullOrEmpty(configuration["Secret"]))
-            PublicVariables.JwtSecret = configuration["Secret"];
+            !string.IsNullOrEmpty(configuration["JWTOption:Secret"]))
+            PublicVariables.JwtSecret = configuration["JWTOption:Secret"];
         if (string.IsNullOrEmpty(PublicVariables.JwtIssuer) &&
-            !string.IsNullOrEmpty(configuration["Issuer"]))
-            PublicVariables.JwtIssuer = configuration["Issuer"];
+            !string.IsNullOrEmpty(configuration["JWTOption:Issuer"]))
+            PublicVariables.JwtIssuer = configuration["JWTOption:Issuer"];
         if (string.IsNullOrEmpty(PublicVariables.JwtAudience) &&
-            !string.IsNullOrEmpty(configuration["Audience"]))
-            PublicVariables.JwtIssuer = configuration["Audience"];
+            !string.IsNullOrEmpty(configuration["JWTOption:Audience"]))
+            PublicVariables.JwtIssuer = configuration["JWTOption:Audience"];
     }
     
 
