@@ -27,7 +27,7 @@ builder.Services.RegisterProductService(builder.Configuration);
 
 var app = builder.Build();
 
-//app.MigrateDatabase<ProductDbContext>();
+// app.MigrateDatabase<ProductDbContext>();
 
 if (app.Environment.IsDevelopment())
 {

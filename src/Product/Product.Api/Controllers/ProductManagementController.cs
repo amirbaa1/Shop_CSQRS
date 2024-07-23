@@ -12,7 +12,7 @@ namespace Product.Api.Controllers;
 
 [ApiController]
 [Route("api/[Controller]")]
-[Authorize(Policy = "productManagement")]
+// [Authorize(Policy = "productManagement")]
 public class ProductManagementController : ControllerBase
 {
     private readonly IMediator _mediator;

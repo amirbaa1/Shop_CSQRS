@@ -240,6 +240,21 @@ namespace Store.Infrastructure.Repository
             return store;
         }
 
+        public async Task<StoreDto> GetStoreByProductId(Guid productId)
+        {
+            var foundProduct = await _context.storeModels.FirstOrDefaultAsync(x => x.ProductId == productId);
+            if (foundProduct == null)
+            {
+                return null;
+            }
+
+            return new StoreDto
+            {
+                ProductId = foundProduct.ProductId,
+                ProductName = foundProduct.ProductName
+            };
+        }
+
         public async Task<ResultDto> CheckStore(CheckNumberDto checkNumberDto) //Not for control
         {
             var getProduct =

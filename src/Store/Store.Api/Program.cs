@@ -23,7 +23,7 @@ builder.Services.RegisterStoreService(builder.Configuration);
 
 var app = builder.Build();
 
-app.MigrateDatabase<StoreDbContext>();
+// app.MigrateDatabase<StoreDbContext>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

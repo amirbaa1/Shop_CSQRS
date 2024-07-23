@@ -26,6 +26,7 @@
     <projectFile kind="Docker">Store/Store.Api/Store.Api.csproj</projectFile>
     <projectFile profileName="http">Store/Store.Api/Store.Api.csproj</projectFile>
     <projectFile profileName="https">Store/Store.Api/Store.Api.csproj</projectFile>
+    <projectFile>Store/Store.Worker/Store.Worker.csproj</projectFile>
     <projectFile kind="DockerCompose">docker-compose.dcproj</projectFile>
   </component>
   <component name="AutoImportSettings">
@@ -33,55 +34,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dca26908-aecd-42fd-a1c0-433132e52991" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Helpers/PublicVariables.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Product/Product.Api/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Product/Product.Api/Mapping/CategoryMapProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Product/Product.Api/Mapping/ProductMapProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Product/Product.Api/Mapping/ProductMapper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Product/Product.Worker/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Service/ProductService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Service/StoreService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Contracts/Contracts/General/ResponseResult.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Contracts/Contracts/Product/ProductAddStoreRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Contracts/Contracts/Product/ProductDeleteRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Contracts/Contracts/Product/ProductStatusRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Contracts/Contracts/Product/UpdateProductRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Product/Product.Domain/Model/Dto/ResponseResult.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store/Store.Api/Consumer/ProductDeleteStore.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Common.Infrastructure/Common.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Common.Infrastructure.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductManagementController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductManagementController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Product.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Product.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Extensions/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Delete/DeleteProductCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Delete/DeleteProductCommand.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Delete/DeleteProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Delete/DeleteProductHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Product/Product.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/ApplicationService.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Consumer/UpdateProductStatusConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Consumers/UpdateProductStatusConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Create/CreateCategoryCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Category/Commands/Create/CreateCategoryCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Create/CreateCategoryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Category/Commands/Create/CreateCategoryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Delete/DeleteCategoryCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Category/Commands/Delete/DeleteCategoryCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Commands/Delete/DeleteCategoryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Category/Commands/Delete/DeleteCategoryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Queries/GetCategory/GetCategoryHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Category/Queries/GetCategory/GetCategoryHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Category/Queries/GetCategory/GetCategoryQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Category/Queries/GetCategory/GetCategoryQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/CreateProduct/CreatProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/CreateProduct/CreatProductHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/CreateProduct/CreateProductCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/CreateProduct/CreateProductCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Delete/DeleteProductCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Delete/DeleteProductCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Delete/DeleteProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Delete/DeleteProductHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Update/UpdateProduct/UpdateProductCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Update/UpdateProduct/UpdateProductCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Update/UpdateProduct/UpdateProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Update/UpdateProduct/UpdateProductHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Update/UpdateProductStatus/ProductStatusCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Update/UpdateProductStatus/ProductStatusCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Commands/Update/UpdateProductStatus/ProductStatusHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Update/UpdateProductStatus/ProductStatusHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductById/GetProductByIdHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Queries/GetProductById/GetProductByIdHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductById/GetProductByIdQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Queries/GetProductById/GetProductByIdQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductById/ProductResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Queries/GetProductById/ProductResponse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductList/GetProductListHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Queries/GetProductList/GetProductListHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Features/Product/Queries/GetProductList/GetProductListQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Queries/GetProductList/GetProductListQuery.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Mapping/CategoryMapProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Mapping/CategoryMapProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Mapping/ProductMapProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Mapping/ProductMapProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Mapping/ProductMapper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Mapping/ProductMapper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Application/Product.Application.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/InfrastructureService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/InfrastructureService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Product.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Product.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Product.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Product.Worker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Domain/Model/ProductStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Domain/Model/ProductStatus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/ProductRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/ProductRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Shop_CSQRS.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Shop_CSQRS.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Consumer/AddProductStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Consumer/AddProductStoreConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Consumer/UpdateProductStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Consumer/UpdateProductStoreConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Controllers/StoreController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Controllers/StoreController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Extensions/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Mapper/StoreProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Mapper/StoreProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Domain/Repository/IStoreRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Domain/Repository/IStoreRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DpaMonitoringSettings">
+    <option name="autoShow" value="false" />
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -98,6 +94,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    ".NET Launch Settings Profile.Product.Api: https.executor": "Run",
+    ".NET Launch Settings Profile.Store.Api: https.executor": "Run",
     ".NET Project.Product.Worker.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "dev",
@@ -110,6 +108,9 @@
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "DotEnv"
+    ],
     "rider.external.source.directories": [
       "/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
       "/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
@@ -117,7 +118,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected=".NET Project.Product.Worker">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Store.Api: https">
     <configuration name="Common.Api" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -526,6 +527,7 @@
       <workItem from="1721461327238" duration="59000" />
       <workItem from="1721461405283" duration="7661000" />
       <workItem from="1721547142405" duration="12954000" />
+      <workItem from="1721722564584" duration="11754000" />
     </task>
     <task id="LOCAL-00001" summary="update migration">
       <option name="closed" value="true" />

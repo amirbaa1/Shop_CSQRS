@@ -6,6 +6,7 @@ using Store.Domain.Repository;
 using Store.Infrastructure.Data;
 using Store.Infrastructure.Repository;
 using System.Text;
+using Common.Infrastructure.Service;
 
 namespace Store.Api.Extensions
 {
@@ -51,7 +52,7 @@ namespace Store.Api.Extensions
 
 
             services.AddScoped<IStoreRepository, StoreRepository>();
-
+            services.AddScoped<ProductService>();
         }
     }
 }
