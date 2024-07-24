@@ -2,7 +2,6 @@ using Contracts.General;
 using Contracts.Product;
 using MassTransit;
 using Microsoft.Extensions.Logging;
-using Product.Domain.Model;
 
 namespace Common.Infrastructure.Service;
 
@@ -23,7 +22,7 @@ public class ProductService
     }
 
     public async Task<bool> PostProductStore(Guid productId, string productName, int number, int price,
-        ProductStatus productStatus)
+        ProductStatusRequest productStatus)
     {
         var response = await _productAddStore.GetResponse<ResponseResult>(new ProductAddStoreRequest
         {

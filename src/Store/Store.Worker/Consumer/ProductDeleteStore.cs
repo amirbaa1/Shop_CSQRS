@@ -1,10 +1,9 @@
-using Common.Infrastructure.Service;
 using Contracts.General;
 using Contracts.Product;
 using MassTransit;
 using Store.Domain.Repository;
 
-namespace Store.Api.Consumer;
+namespace Store.Worker.Consumer;
 
 public class ProductDeleteStore : IConsumer<ProductDeleteRequest>
 {

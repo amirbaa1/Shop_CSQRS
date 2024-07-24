@@ -1,5 +1,6 @@
 using Common.Infrastructure.Service;
 using Contracts.General;
+using Contracts.Product;
 using EventBus.Messages.Event.Product;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
@@ -56,7 +57,7 @@ public class ProductRepository : IProductRepository
         _context.Add(productCreate);
 
         var store = await _productService.PostProductStore(productCreate.Id, productCreate.Name, productCreate.Number,
-            productCreate.Price, productCreate.ProductStatus);
+            productCreate.Price, (ProductStatusRequest)productCreate.ProductStatus);
 
         if (store == true)
         {

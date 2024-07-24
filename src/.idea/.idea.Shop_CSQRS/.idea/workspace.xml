@@ -34,35 +34,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dca26908-aecd-42fd-a1c0-433132e52991" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Service/ProductService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Service/StoreService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Contracts/Contracts/General/ResponseResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Contracts/Contracts/Product/ProductAddStoreRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Contracts/Contracts/Product/ProductDeleteRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Contracts/Contracts/Product/ProductStatusRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Contracts/Contracts/Product/UpdateProductRequest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Product/Product.Domain/Model/Dto/ResponseResult.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store/Store.Api/Consumer/ProductDeleteStore.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Contracts/Contracts/Store/CheckOutStore.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Contracts/Contracts/Store/UpdateStoreStatusRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Store/Store.Worker/Mapper/StoreProfile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Common.Infrastructure/Common.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Common.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductManagementController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Controllers/ProductManagementController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Extensions/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Delete/DeleteProductCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Delete/DeleteProductCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Delete/DeleteProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/Delete/DeleteProductHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Domain/Model/ProductStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Domain/Model/ProductStatus.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/ProductRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Repository/ProductRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shop_CSQRS.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Shop_CSQRS.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Consumer/AddProductStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Consumer/AddProductStoreConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Consumer/UpdateProductStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Consumer/UpdateProductStoreConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Controllers/StoreController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Controllers/StoreController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Extensions/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Mapper/StoreProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Mapper/StoreProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Domain/Repository/IStoreRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Domain/Repository/IStoreRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Common.Infrastructure/Extensions/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Common.Infrastructure/Service/StoreService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Service/StoreService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Contracts/Contracts/Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Contracts/Contracts/Contracts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Consumer/AddProductStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/AddProductStoreConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Consumer/BasketStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/BasketStoreConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Consumer/CheckStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/CheckStoreConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Consumer/ProductDeleteStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/ProductDeleteStore.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Consumer/UpdateProductStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/UpdateProductStoreConsumer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Store.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Store.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Store.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Store.Worker.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +67,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Users/amirba/Documents/Asp-net/mic2/Shop_CSQRS/src/Basket/Basket.Application/ApplicationService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/amirba/Documents/Asp-net/mic2/Shop_CSQRS/src/Store/Store.Api/Consumer/AddProductStoreConsumer.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -92,32 +78,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Product.Api: https.executor": "Run",
-    ".NET Launch Settings Profile.Store.Api: https.executor": "Run",
-    ".NET Project.Product.Worker.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Product.Api: https.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Store.Api: https.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Project.Product.Worker.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "DotEnv"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;DotEnv&quot;
     ],
-    "rider.external.source.directories": [
-      "/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
-      "/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
-      "/Users/amirba/Library/Application Support/Symbols/src"
+    &quot;rider.external.source.directories&quot;: [
+      &quot;/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache&quot;,
+      &quot;/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache&quot;,
+      &quot;/Users/amirba/Library/Application Support/Symbols/src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Store.Api: https">
     <configuration name="Common.Api" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -527,7 +513,8 @@
       <workItem from="1721461327238" duration="59000" />
       <workItem from="1721461405283" duration="7661000" />
       <workItem from="1721547142405" duration="12954000" />
-      <workItem from="1721722564584" duration="11754000" />
+      <workItem from="1721722564584" duration="12040000" />
+      <workItem from="1721815459186" duration="2658000" />
     </task>
     <task id="LOCAL-00001" summary="update migration">
       <option name="closed" value="true" />
@@ -545,7 +532,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721484596167</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update product">
+      <option name="closed" value="true" />
+      <created>1721740695039</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1721740695039</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -568,7 +563,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="update migration" />
     <MESSAGE value="add worker&#10;START V2" />
-    <option name="LAST_COMMIT_MESSAGE" value="add worker&#10;START V2" />
+    <MESSAGE value="update product" />
+    <option name="LAST_COMMIT_MESSAGE" value="update product" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

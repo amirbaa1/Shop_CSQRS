@@ -2,10 +2,11 @@ using AutoMapper;
 using EventBus.Messages.Event.Store;
 using MassTransit;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Store.Api.Feature.Store.Queries.Check;
 
-namespace Store.Api.Consumer;
+namespace Store.Worker.Consumer;
 
 public class CheckStoreConsumer : IConsumer<CheckStoreEvent>
 {

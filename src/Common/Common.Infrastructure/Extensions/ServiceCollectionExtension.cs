@@ -78,7 +78,9 @@ public static class ServiceCollectionExtension
         service.AddAutoMapper(assembly);
     }
 
-    public static void RegisterDatabase(this IServiceCollection service)
+    public static void RegisterDatabase(this IServiceCollection service,IConfiguration configuration)
     {
+        // service.AddDbContext<StoreDbContext>(x =>
+        //     x.UseNpgsql());
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Contracts.Store;
 using EventBus.Messages.Event.Product;
 using MassTransit;
 using MediatR;
@@ -6,11 +7,13 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Product.Api.Features.Product.Commands.Update.UpdateProductStatus;
 using Product.Domain.Model.Dto;
+using ResponseResult = Contracts.General.ResponseResult;
 
 
 namespace Product.Worker.Consumers
 {
-    public class UpdateProductStatusConsumer : IConsumer<UpdateProductStatusEvent>
+    // public class UpdateProductStatusConsumer : IConsumer<UpdateProductStatusEvent>
+    public class UpdateProductStatusConsumer : IConsumer<UpdateStoreStatusRequest>
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
@@ -24,7 +27,7 @@ namespace Product.Worker.Consumers
             _logger = logger;
         }
 
-        public async Task Consume(ConsumeContext<UpdateProductStatusEvent> context)
+        public async Task Consume(ConsumeContext<UpdateStoreStatusRequest> context)
         {
             var message = context.Message;
             //var updateMessage = new UpdateProductStatusCommand
@@ -43,14 +46,25 @@ namespace Product.Worker.Consumers
 
 
             //TODO:MAP
-            await _mediator.Send(new ProductStatusCommand
+            var productStatus = await _mediator.Send(new ProductStatusCommand
             {
                 ProductId = map.ProductId,
                 ProductStatus = map.ProductStatus,
                 Number = map.Number,
             });
 
-            await Task.CompletedTask;
+            var result = new ResponseResult();
+            if (productStatus == null)
+            {
+                result.Isuccess = false;
+                result.Message = $"{productStatus}";
+            }
+
+            result.Isuccess = true;
+            result.Message = "Update store";
+
+
+            await context.RespondAsync(result);
         }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Store.Api.Feature.Store.Commands.Update.UpdateStoreNumber;
 
-namespace Store.Api.Consumer;
+namespace Store.Worker.Consumer;
 
 public class BasketStoreConsumer : IConsumer<BasketStoreEvent>
 {

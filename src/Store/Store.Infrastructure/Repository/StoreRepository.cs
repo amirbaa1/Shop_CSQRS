@@ -5,6 +5,8 @@ using Store.Domain.Model.Dto;
 using Store.Domain.Repository;
 using Store.Infrastructure.Data;
 using System.Net;
+using Common.Infrastructure.Service;
+using Contracts.Product;
 using Newtonsoft.Json;
 using EventBus.Messages.Event.Product;
 using EventBus.Messages.Event.Store;
@@ -17,13 +19,15 @@ namespace Store.Infrastructure.Repository
         private readonly StoreDbContext _context;
         private readonly ILogger<StoreRepository> _logger;
         private readonly IPublishEndpoint _publishEndpoint;
+        private readonly StoreService _storeService;
 
         public StoreRepository(StoreDbContext context, ILogger<StoreRepository> logger,
-            IPublishEndpoint publishEndpoint)
+            IPublishEndpoint publishEndpoint, StoreService storeService)
         {
             _context = context;
             _logger = logger;
             _publishEndpoint = publishEndpoint;
+            _storeService = storeService;
         }
 
         public async Task<ResultDto> CreateStore(StoreDto storeDto)
@@ -121,15 +125,29 @@ namespace Store.Infrastructure.Repository
                 _context.storeModels.Update(getProduct);
                 await _context.SaveChangesAsync();
 
-                var message = new UpdateProductStatusEvent
+                // var message = new UpdateProductStatusEvent
+                // {
+                //     ProductId = getProduct.ProductId,
+                //     Number = getProduct.Number,
+                //     ProductStatus = (ProductStatusEvent)getProduct.Status,
+                // };
+
+                var result =
+                    await _storeService.UpdateStoreStatus(getProduct.ProductId, (ProductStatusRequest)getProduct.Status,
+                        getProduct.Price, getProduct.Number);
+
+                if (result.Isuccess == false)
                 {
-                    ProductId = getProduct.ProductId,
-                    Number = getProduct.Number,
-                    ProductStatus = (ProductStatusEvent)getProduct.Status,
-                };
+                    return new ResultDto
+                    {
+                        StatusCode = HttpStatusCode.BadGateway,
+                        IsSuccessful = true,
+                        Message = $"Error : {result.Message}"
+                    };
+                }
 
                 await _context.SaveChangesAsync();
-                await _publishEndpoint.Publish(message);
+                // await _publishEndpoint.Publish(message);
 
                 return new ResultDto
                 {
@@ -148,23 +166,39 @@ namespace Store.Infrastructure.Repository
 
 
                     _context.storeModels.Update(getProduct);
-                    var message = new UpdateProductStatusEvent
+                    // var message = new UpdateProductStatusEvent
+                    // {
+                    //     ProductId = getProduct.ProductId,
+                    //     Number = getProduct.Number,
+                    //     ProductStatus = (ProductStatusEvent)getProduct.Status,
+                    // };
+
+                    var result =
+                        await _storeService.UpdateStoreStatus(getProduct.ProductId,
+                            (ProductStatusRequest)getProduct.Status,
+                            getProduct.Price, getProduct.Number);
+
+                    if (result.Isuccess == false)
                     {
-                        ProductId = getProduct.ProductId,
-                        Number = getProduct.Number,
-                        ProductStatus = (ProductStatusEvent)getProduct.Status,
-                    };
+                        return new ResultDto
+                        {
+                            StatusCode = HttpStatusCode.BadGateway,
+                            IsSuccessful = true,
+                            Message = $"Error : {result.Message}"
+                        };
+                    }
+
 
                     await _context.SaveChangesAsync();
-                    await _publishEndpoint.Publish(message);
+                    // await _publishEndpoint.Publish(message);
                     _logger.LogInformation($"{JsonConvert.SerializeObject(getProduct)}");
-                    _logger.LogInformation($"message---->{JsonConvert.SerializeObject(message)}");
+                    // _logger.LogInformation($"message---->{JsonConvert.SerializeObject(message)}");
 
                     return new ResultDto
                     {
                         StatusCode = HttpStatusCode.OK,
                         IsSuccessful = true,
-                        Message = $"change product status : {getProduct}"
+                        Message = $"change product status : {getProduct}\n message {result.Message}"
                     };
                 }
 
@@ -175,16 +209,31 @@ namespace Store.Infrastructure.Repository
 
                 _context.storeModels.Update(getProduct);
 
-                var updatedMessage = new UpdateProductStatusEvent
+                // var updatedMessage = new UpdateProductStatusEvent
+                // {
+                //     ProductId = getProduct.ProductId,
+                //     Number = getProduct.Number,
+                //     ProductStatus = (ProductStatusEvent)getProduct.Status,
+                // };
+
+                var result1 =
+                    await _storeService.UpdateStoreStatus(getProduct.ProductId, (ProductStatusRequest)getProduct.Status,
+                        getProduct.Price, getProduct.Number);
+
+                if (result1.Isuccess == false)
                 {
-                    ProductId = getProduct.ProductId,
-                    Number = getProduct.Number,
-                    ProductStatus = (ProductStatusEvent)getProduct.Status,
-                };
+                    return new ResultDto
+                    {
+                        StatusCode = HttpStatusCode.BadGateway,
+                        IsSuccessful = true,
+                        Message = $"Error : {result1.Message}"
+                    };
+                }
 
                 await _context.SaveChangesAsync();
 
-                await _publishEndpoint.Publish(updatedMessage);
+                // await _publishEndpoint.Publish(updatedMessage);
+
 
                 _logger.LogInformation($"{JsonConvert.SerializeObject(getProduct)}");
 
@@ -377,21 +426,34 @@ namespace Store.Infrastructure.Repository
 
             _context.storeModels.Update(getStore);
 
-            var message = new UpdateProductStatusEvent
+            // var message = new UpdateProductStatusEvent
+            // {
+            //     ProductId = getStore.ProductId,
+            //     Number = updateNumber,
+            //     ProductStatus = (ProductStatusEvent)getStore.Status,
+            // };
+            var result =
+                await _storeService.UpdateStoreStatus(getStore.ProductId, (ProductStatusRequest)getStore.Status,
+                    getStore.Price, getStore.Number);
+
+            if (result.Isuccess == false)
             {
-                ProductId = getStore.ProductId,
-                Number = updateNumber,
-                ProductStatus = (ProductStatusEvent)getStore.Status,
-            };
+                return new ResultDto
+                {
+                    StatusCode = HttpStatusCode.BadGateway,
+                    IsSuccessful = true,
+                    Message = $"Error : {result.Message}"
+                };
+            }
 
             await _context.SaveChangesAsync();
-            await _publishEndpoint.Publish(message);
+            // await _publishEndpoint.Publish(message);
 
             return new ResultDto
             {
                 StatusCode = HttpStatusCode.OK,
                 IsSuccessful = true,
-                Message = "Update store"
+                Message = $"Update store message {result.Message}"
             };
         }
     }

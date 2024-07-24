@@ -1,14 +1,14 @@
 using AutoMapper;
 using Contracts.General;
 using Contracts.Product;
-using EventBus.Messages.Event.Product;
 using MassTransit;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Store.Api.Feature.Store.Commands.Create;
 using Store.Domain.Repository;
 
-namespace Store.Api.Consumer;
+namespace Store.Worker.Consumer;
 
 // public class AddProductStoreConsumer : IConsumer<ProductStoreEvent>
 public class AddProductStoreConsumer : IConsumer<ProductAddStoreRequest>

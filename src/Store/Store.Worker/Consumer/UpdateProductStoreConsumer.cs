@@ -1,12 +1,12 @@
 using Contracts.General;
 using Contracts.Product;
-using EventBus.Messages.Event.Product;
 using MassTransit;
 using MediatR;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Store.Api.Feature.Store.Commands.Update.UpdateProductName;
 
-namespace Store.Api.Consumer;
+namespace Store.Worker.Consumer;
 
 public class UpdateProductStoreConsumer : IConsumer<UpdateProductRequest>
 {
