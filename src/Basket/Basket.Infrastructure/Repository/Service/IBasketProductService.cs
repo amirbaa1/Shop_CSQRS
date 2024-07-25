@@ -3,7 +3,7 @@
 
 namespace Basket.Infrastructure.Repository.Service
 {
-    public interface IBasketService
+    public interface IBasketProductService
     {
         BasketModelDto CreateBasketForUser(string UserId);
         ProductDto CreateProduct(ProductDto product);

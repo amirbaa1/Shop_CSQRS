@@ -47,7 +47,7 @@ public static class ServiceCollectionExtension
         service.AddMassTransit(x =>
         {
             //send
-            // x.AddRequestClient<ProductStoreEvent>();
+             //x.AddRequestClient<ProductStoreEvent>();
             //get
             x.AddConsumers(assembly);
 

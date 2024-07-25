@@ -11,6 +11,7 @@ using Order.Infrastructure.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Common.Infrastructure.Extensions;
 
 namespace Order.Infrastructure;
 
@@ -28,23 +29,24 @@ public static class InfrastructureService
         service.Configure<EmailConfig>(configuration.GetSection("stmp"));
 
 
-        service.AddMassTransit(x =>
-        {
-            x.AddConsumer<BasketQueueEventConsumer>();
+        //service.AddMassTransit(x =>
+        //{
+        //    x.AddConsumer<BasketQueueEventConsumer>();
 
-            x.UsingRabbitMq((context, cfg) =>
-            {
-                var rabbitMqHost = configuration["EventBusSettings:HostAddress"];
-                cfg.Host(new Uri(rabbitMqHost), c =>
-                {
-                    c.Username("guest");
-                    c.Password("guest");
-                });
+        //    x.UsingRabbitMq((context, cfg) =>
+        //    {
+        //        var rabbitMqHost = configuration["EventBusSettings:HostAddress"];
+        //        cfg.Host(new Uri(rabbitMqHost), c =>
+        //        {
+        //            c.Username("guest");
+        //            c.Password("guest");
+        //        });
 
-                cfg.ReceiveEndpoint(EventBusConstants.BasketQueue,
-                    e => { e.ConfigureConsumer<BasketQueueEventConsumer>(context); });
-            });
-        });
+        //        cfg.ReceiveEndpoint(EventBusConstants.BasketQueue,
+        //            e => { e.ConfigureConsumer<BasketQueueEventConsumer>(context); });
+        //    });
+        //});
+
 
         //identityServer 
 

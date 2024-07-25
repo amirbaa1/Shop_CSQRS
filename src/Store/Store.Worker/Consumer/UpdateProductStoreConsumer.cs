@@ -35,7 +35,7 @@ public class UpdateProductStoreConsumer : IConsumer<UpdateProductRequest>
 
         var result = new ResponseResult
         {
-            Isuccess = true,
+            IsSuccessful = true,
             Message = "Update product in store"
         };
 

@@ -22,7 +22,7 @@ public class ProductDeleteStore : IConsumer<ProductDeleteRequest>
         var result = new ResponseResult();
 
         result.Message = response.Message;
-        result.Isuccess = response.IsSuccessful;
+        result.IsSuccessful = response.IsSuccessful;
 
         await context.RespondAsync(result);
     }

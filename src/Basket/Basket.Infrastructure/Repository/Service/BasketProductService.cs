@@ -7,12 +7,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Basket.Infrastructure.Repository.Service
 {
-    public class BasketService : IBasketService
+    public class BasketProductService : IBasketProductService
     {
         private readonly IMapper _mapper;
         private readonly BasketdbContext _context;
 
-        public BasketService(IMapper mapper, BasketdbContext context)
+        public BasketProductService(IMapper mapper, BasketdbContext context)
         {
             _mapper = mapper;
             _context = context;

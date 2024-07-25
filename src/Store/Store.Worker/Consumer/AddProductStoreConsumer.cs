@@ -68,12 +68,12 @@ public class AddProductStoreConsumer : IConsumer<ProductAddStoreRequest>
         if (store == null)
         {
             result.Message = "No save in store";
-            result.Isuccess = false;
+            result.IsSuccessful = false;
             await context.RespondAsync(result);
         }
 
         result.Message = "save in store";
-        result.Isuccess = true;
+        result.IsSuccessful = true;
         await context.RespondAsync(result);
     }
 }

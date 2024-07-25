@@ -181,7 +181,7 @@ public class ProductRepository : IProductRepository
         // await _publishEndpoint.Publish(message);
         // await _publishEndpoint.Publish(messageUpdateStore);
 
-        if (response.Isuccess == false)
+        if (response.IsSuccessful == false)
         {
             return $"error : {response}";
         }
@@ -205,7 +205,7 @@ public class ProductRepository : IProductRepository
         _context.Products.Remove(getProduct);
 
         var result = await _productService.DeleteProduct(productId);
-        if (result.Isuccess == false)
+        if (result.IsSuccessful == false)
         {
             // return new ResponseResult
             // {

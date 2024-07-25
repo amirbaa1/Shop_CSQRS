@@ -52,7 +52,7 @@ namespace Store.Api.Extensions
 
 
             services.AddScoped<IStoreRepository, StoreRepository>();
-            services.AddScoped<ProductService>();
+            services.AddScoped<StoreService>();
         }
     }
 }

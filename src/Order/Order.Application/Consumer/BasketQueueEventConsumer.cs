@@ -1,4 +1,5 @@
 ﻿
+using Contracts.Basket;
 using EventBus.Messages.Event.Basket;
 using MassTransit;
 using Microsoft.Extensions.Logging;
@@ -8,7 +9,7 @@ using Order.Domain.Repository;
 
 namespace Order.Application.Consumer
 {
-    public class BasketQueueEventConsumer : IConsumer<BasketQueueEvent>            
+    public class BasketQueueEventConsumer : IConsumer<SendToOrderRequest>            
     {
         private readonly ILogger<BasketQueueEventConsumer> _logger;
         private readonly IOrderRepository _orderRepository;
@@ -19,7 +20,7 @@ namespace Order.Application.Consumer
             _orderRepository = orderRepository;
         }
 
-        public Task Consume(ConsumeContext<BasketQueueEvent> context)
+        public Task Consume(ConsumeContext<SendToOrderRequest> context)
         {
             var getMessage = context.Message;
 
@@ -27,7 +28,7 @@ namespace Order.Application.Consumer
 
             var orderModelMessage = new OrderModelDto
             {
-                Id = getMessage.Id,
+                Id = getMessage.BasketId,  //basketId or create Id?
                 FirstName = getMessage.FirstName,
                 LastName = getMessage.LastName,
                 UserId = getMessage.UserId,

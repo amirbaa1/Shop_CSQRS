@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
+using Contracts.General;
 using Contracts.Store;
-using EventBus.Messages.Event.Product;
 using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Product.Api.Features.Product.Commands.Update.UpdateProductStatus;
 using Product.Domain.Model.Dto;
-using ResponseResult = Contracts.General.ResponseResult;
 
 
 namespace Product.Worker.Consumers
@@ -56,11 +55,11 @@ namespace Product.Worker.Consumers
             var result = new ResponseResult();
             if (productStatus == null)
             {
-                result.Isuccess = false;
+                result.IsSuccessful = false;
                 result.Message = $"{productStatus}";
             }
 
-            result.Isuccess = true;
+            result.IsSuccessful = true;
             result.Message = "Update store";
 
 

@@ -9,7 +9,7 @@ namespace Order.Api.Controllers;
 
 [ApiController]
 [Route("api/[Controller]")]
-[Authorize(Policy = "orderUser")]
+//[Authorize(Policy = "orderUser")]
 public class OrderController : ControllerBase
 {
     private readonly IMediator _mediator;

@@ -25,41 +25,19 @@ public class StoreService
             Number = number
         });
 
-        if (response.Message.Isuccess == false)
+        if (response.Message.IsSuccessful == false)
         {
             return new ResponseResult
             {
-                Isuccess = false,
+                IsSuccessful = false,
                 Message = $"message : {response.Message.Message}"
             };
         }
 
         return new ResponseResult
         {
-            Isuccess = true,
+            IsSuccessful = true,
             Message = $"message {response.Message.Message}"
         };
     }
-
-//     public async Task<ResponseResult> CheckOutStore(Guid productId)
-//     {
-//         var response = await _updateStoreStatusPro.GetResponse<ResponseResult>(new CheckOutStore
-//         {
-//             ProductId = productId
-//         });
-//         if (response.Message.Isuccess == false)
-//         {
-//             return new ResponseResult
-//             {
-//                 Isuccess = false,
-//                 Message = $"message : {response.Message.Message}"
-//             };
-//         }
-//
-//         return new ResponseResult
-//         {
-//             Isuccess = true,
-//             Message = $"message {response.Message.Message}"
-//         };
-//     }
 }

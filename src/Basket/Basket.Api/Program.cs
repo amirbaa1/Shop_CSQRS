@@ -1,9 +1,9 @@
-using Basket.Infrastructure;
-using Basket.Application;
+
 using Basket.Infrastructure.Data;
 using Basket.Infrastructure.Extensions;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+using Common.Infrastructure.Extensions;
+using Basket.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,10 +14,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddApplication();
-builder.Services.AddInfrastructure(builder.Configuration);
 
-builder.Services.AddMediatR(cfg => { cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly); });
+
+builder.Services.RegisterVariables(builder.Configuration);
+builder.Services.RegisterMassTransit(Assembly.GetExecutingAssembly());
+builder.Services.RegisterMediatR(Assembly.GetExecutingAssembly());
+builder.Services.RegisterAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.RegisterBasket(builder.Configuration);
+
+
 
 var app = builder.Build();
 

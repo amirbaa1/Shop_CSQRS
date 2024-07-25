@@ -35,7 +35,7 @@ public class ProductService
 
         _logger.LogInformation($"---> response : {response.Message.Message}");
 
-        if (response.Message.Isuccess == false)
+        if (response.Message.IsSuccessful == false)
         {
             return false;
         }
@@ -52,18 +52,18 @@ public class ProductService
             ProductPrice = price
         });
 
-        if (response.Message.Isuccess == false)
+        if (response.Message.IsSuccessful == false)
         {
             return new ResponseResult
             {
-                Isuccess = false,
+                IsSuccessful = false,
                 Message = response.Message.Message
             };
         }
 
         return new ResponseResult
         {
-            Isuccess = true,
+            IsSuccessful = true,
             Message = response.Message.Message
         };
     }
@@ -74,18 +74,18 @@ public class ProductService
         {
             productId = productId
         });
-        if (response.Message.Isuccess == false)
+        if (response.Message.IsSuccessful == false)
         {
             return new ResponseResult
             {
-                Isuccess = false,
+                IsSuccessful = false,
                 Message = response.Message.Message
             };
         }
 
         return new ResponseResult
         {
-            Isuccess = true,
+            IsSuccessful = true,
             Message = response.Message.Message
         };
     }
