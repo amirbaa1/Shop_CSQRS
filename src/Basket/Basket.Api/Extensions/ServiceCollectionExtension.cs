@@ -14,7 +14,7 @@ namespace Basket.Api.Extensions
         public static void RegisterBasket(this IServiceCollection service, IConfiguration configuration)
         {
             service.AddDbContext<BasketdbContext>(op =>
-               op.UseNpgsql(configuration["ConnectionStrings:BasketConnectionString"]));
+                          op.UseNpgsql(Environment.GetEnvironmentVariable("BasketConnectionString")));
 
 
 

@@ -15,7 +15,7 @@ namespace Store.Api.Extensions
         public static void RegisterStoreService(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<StoreDbContext>(x =>
-                x.UseNpgsql(configuration["ConnectionStrings:StoreConnectionString"]));
+                x.UseNpgsql((configuration["ConnectionStrings:StoreConnectionString"])));
 
 
             //identity

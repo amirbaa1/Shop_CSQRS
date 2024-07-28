@@ -6,7 +6,7 @@ using Store.Domain.Repository;
 
 namespace Store.Api.Feature.Store.Commands.Create
 {
-    internal class CreateStoreHandler : IRequestHandler<CreateStoreCommand, ResultDto>
+    public class CreateStoreHandler : IRequestHandler<CreateStoreCommand, ResultDto>
     {
         private readonly IStoreRepository _storeRes;
         private readonly IMapper _mapper;

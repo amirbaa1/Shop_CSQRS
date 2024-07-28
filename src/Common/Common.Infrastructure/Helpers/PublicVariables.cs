@@ -9,6 +9,11 @@ public static class PublicVariables
     public static string RabbitmqPassword { get; set; }
 
     public static string ProductConnectionString { get; set; }
+    public static string BasketConnectionString { get; set; }
+
+    public static string StoreConnectionString { get; set; }
+    public static string OrderConnectionString { get; set; }
+
 
     public static string JwtSecret { get; set; }
 

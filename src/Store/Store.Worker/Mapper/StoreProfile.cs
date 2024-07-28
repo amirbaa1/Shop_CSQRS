@@ -21,6 +21,8 @@ namespace Store.Worker.Mapper
             CreateMap<BasketStoreEvent, UpdateStoreNumberCommand>().ReverseMap();
 
             CreateMap<CheckStoreEvent, CheckStoreQuery>().ReverseMap();
+
+            CreateMap<ProductAddStoreRequest,StoreDto>().ReverseMap();
         }
     }
 }

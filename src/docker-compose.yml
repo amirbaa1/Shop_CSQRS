@@ -67,6 +67,12 @@ services:
       context: .
       dockerfile: Identity/Identity.Api/Dockerfile
 
+  order.worker:
+    image: ${DOCKER_REGISTRY-}orderworker
+    build:
+      context: .
+      dockerfile: Order/Order.Worker/Dockerfile
+
 volumes:
   postgres_data:
   pgadmin_data:
@@ -75,5 +81,6 @@ volumes:
   basket_data:
   order_data:
   identity_data:
+
 
 

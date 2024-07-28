@@ -1,3 +1,4 @@
+using Common.Infrastructure.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Product.Domain.Repositories;
@@ -12,10 +13,12 @@ public static class ServiceCollectionExtension
     {
 
         //dbContext
-        //service.AddDbContext<ProductDbContext>(x => x.UseNpgsql(configuration["ConnectionStrings:ProductConnectionString"]));
+        service.AddDbContext<ProductDbContext>(x => x.UseNpgsql(Environment.GetEnvironmentVariable("ProductConnectionString")));
 
 
         service.AddScoped<IProductRepository, ProductRepository>();
         service.AddScoped<ICategoryRepository, CategoryRepository>();
+
+        service.AddScoped<ProductService>();
     }
 }

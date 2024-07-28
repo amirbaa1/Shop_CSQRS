@@ -1,6 +1,3 @@
-
-using Store.Infrastructure.Extensions;
-using Store.Infrastructure.Data;
 using Store.Api.Extensions;
 using Common.Infrastructure.Extensions;
 using System.Reflection;
@@ -17,8 +14,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.RegisterVariables(builder.Configuration);
 builder.Services.RegisterMassTransit(Assembly.GetExecutingAssembly());
-builder.Services.RegisterMediatR(Assembly.GetExecutingAssembly());
 builder.Services.RegisterAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.RegisterMediatR(Assembly.GetExecutingAssembly());
 builder.Services.RegisterStoreService(builder.Configuration);
 
 var app = builder.Build();
