@@ -1,10 +1,26 @@
+//{
+//  "profiles": {
+//    "Basket.Worker": {
+//      "commandName": "Project",
+//      "environmentVariables": {
+//        "ASPNETCORE_ENVIRONMENT": "Development"
+//      }
+//    }
+//  }
+//}
+
 {
   "profiles": {
     "Order.Worker": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true
     },
     "Container (Dockerfile)": {
       "commandName": "Docker"
     }
-  }
+  },
+  "$schema": "http://json.schemastore.org/launchsettings.json"
 }

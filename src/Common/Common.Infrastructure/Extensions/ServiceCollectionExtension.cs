@@ -27,20 +27,22 @@ public static class ServiceCollectionExtension
         if (string.IsNullOrEmpty(PublicVariables.RabbitmqHost) &&
             !string.IsNullOrEmpty(configuration["EventBusSettings:RabbitmqHost"]))
             PublicVariables.RabbitmqHost = configuration["EventBusSettings:RabbitmqHost"];
+        
         if (string.IsNullOrEmpty(PublicVariables.RabbitmqUserName) &&
             !string.IsNullOrEmpty(configuration["EventBusSettings:RabbitmqUserName"]))
             PublicVariables.RabbitmqUserName = configuration["EventBusSettings:RabbitmqUserName"];
+        
         if (string.IsNullOrEmpty(PublicVariables.RabbitmqPassword) &&
             !string.IsNullOrEmpty(configuration["EventBusSettings:RabbitmqPassword"]))
             PublicVariables.RabbitmqPassword = configuration["EventBusSettings:RabbitmqPassword"];
 
         if (string.IsNullOrEmpty(PublicVariables.ProductConnectionString) &&
-            !string.IsNullOrEmpty(configuration["ProductConnectionString"]))
-            PublicVariables.ProductConnectionString = configuration["ProductConnectionString"];
+            !string.IsNullOrEmpty(configuration["ConnectionStrings:ProductConnectionString"]))
+            PublicVariables.ProductConnectionString = configuration["ConnectionStrings:ProductConnectionString"];
 
         if (string.IsNullOrEmpty(PublicVariables.BasketConnectionString) &&
-          !string.IsNullOrEmpty(configuration["BasketConnectionString"]))
-            PublicVariables.BasketConnectionString = configuration["BasketConnectionString"];
+          !string.IsNullOrEmpty(configuration["ConnectionStrings:BasketConnectionString"]))
+            PublicVariables.BasketConnectionString = configuration["ConnectionStrings:BasketConnectionString"];
 
         if (string.IsNullOrEmpty(PublicVariables.StoreConnectionString) &&
          !string.IsNullOrEmpty(configuration["ConnectionStrings:StoreConnectionString"]))

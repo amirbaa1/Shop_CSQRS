@@ -1,6 +1,6 @@
-﻿
+﻿using System.Net;
 using Contracts.Basket;
-using EventBus.Messages.Event.Basket;
+using Contracts.General;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -9,18 +9,18 @@ using Order.Domain.Repository;
 
 namespace Order.Worker.Consumer
 {
-    public class BasketQueueEventConsumer : IConsumer<SendToOrderRequest>            
+    public class OrderBasketConsumer : IConsumer<SendToOrderRequest>
     {
-        private readonly ILogger<BasketQueueEventConsumer> _logger;
+        private readonly ILogger<OrderBasketConsumer> _logger;
         private readonly IOrderRepository _orderRepository;
 
-        public BasketQueueEventConsumer(ILogger<BasketQueueEventConsumer> logger, IOrderRepository orderRepository)
+        public OrderBasketConsumer(ILogger<OrderBasketConsumer> logger, IOrderRepository orderRepository)
         {
             _logger = logger;
             _orderRepository = orderRepository;
         }
 
-        public Task Consume(ConsumeContext<SendToOrderRequest> context)
+        public async Task Consume(ConsumeContext<SendToOrderRequest> context)
         {
             var getMessage = context.Message;
 
@@ -28,7 +28,7 @@ namespace Order.Worker.Consumer
 
             var orderModelMessage = new OrderModelDto
             {
-                Id = getMessage.BasketId,  //basketId or create Id?
+                Id = getMessage.BasketId, //basketId or create Id?
                 FirstName = getMessage.FirstName,
                 LastName = getMessage.LastName,
                 UserId = getMessage.UserId,
@@ -40,7 +40,7 @@ namespace Order.Worker.Consumer
                 OrderLines = getMessage.BasketItems.Select(x => new OrderLineDto
                 {
                     Id = x.BasketItemId,
-                    ProductId =x.ProductId,
+                    ProductId = x.ProductId,
                     Quantity = x.Quantity,
                     Product = new ProductDto()
                     {
@@ -54,8 +54,21 @@ namespace Order.Worker.Consumer
 
             _logger.LogInformation($"---> orderModelMessage {JsonConvert.SerializeObject(orderModelMessage)}");
 
-            _orderRepository.CreateOrder(orderModelMessage);
-            return Task.CompletedTask;
+            var response = _orderRepository.CreateOrder(orderModelMessage);
+
+            var result = new ResponseResult();
+            if (response == false)
+            {
+                result.IsSuccessful = false;
+                result.Message = $"problem create order";
+                result.StatusCode = HttpStatusCode.BadRequest;
+            }
+
+            result.IsSuccessful = true;
+            result.Message = $"crete order";
+            result.StatusCode = HttpStatusCode.OK;
+
+            await context.RespondAsync(result);
         }
     }
 }

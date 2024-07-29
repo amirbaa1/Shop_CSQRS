@@ -1,17 +1,15 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using System.Reflection;
 using Common.Infrastructure.Extensions;
-using System.Reflection;
+using Microsoft.Extensions.Hosting;
 using Order.Worker.Extensions;
 
 var builder = Host.CreateApplicationBuilder(args);
-
-DotNetEnv.Env.Load();
 
 builder.Services.RegisterVariables(builder.Configuration);
 builder.Services.RegisterMassTransit(Assembly.GetExecutingAssembly());
 builder.Services.RegisterAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.RegisterMediatR(Assembly.GetExecutingAssembly());
 builder.Services.RegisterOrderService(builder.Configuration);
+var app = builder.Build();
 
-var host = builder.Build();
-host.Run();
+app.Run();

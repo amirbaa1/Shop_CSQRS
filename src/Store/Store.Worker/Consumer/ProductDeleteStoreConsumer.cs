@@ -5,11 +5,11 @@ using Store.Domain.Repository;
 
 namespace Store.Worker.Consumer;
 
-public class ProductDeleteStore : IConsumer<ProductDeleteRequest>
+public class ProductDeleteStoreConsumer : IConsumer<ProductDeleteRequest>
 {
     private readonly IStoreRepository _storeRepository;
 
-    public ProductDeleteStore(IStoreRepository storeRepository)
+    public ProductDeleteStoreConsumer(IStoreRepository storeRepository)
     {
         _storeRepository = storeRepository;
     }
@@ -23,6 +23,7 @@ public class ProductDeleteStore : IConsumer<ProductDeleteRequest>
 
         result.Message = response.Message;
         result.IsSuccessful = response.IsSuccessful;
+        result.StatusCode = response.StatusCode;
 
         await context.RespondAsync(result);
     }

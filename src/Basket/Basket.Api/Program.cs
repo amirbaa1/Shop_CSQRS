@@ -26,7 +26,7 @@ builder.Services.RegisterBasket(builder.Configuration);
 
 var app = builder.Build();
 
-app.MigrateDatabase<BasketdbContext>();
+// app.MigrateDatabase<BasketdbContext>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

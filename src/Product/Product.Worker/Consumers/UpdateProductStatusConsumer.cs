@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Product.Api.Features.Product.Commands.Update.UpdateProductStatus;
 using Product.Domain.Model.Dto;
+using Product.Domain.Repositories;
 
 
 namespace Product.Worker.Consumers
@@ -17,13 +18,15 @@ namespace Product.Worker.Consumers
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
         private readonly ILogger<UpdateProductStatusConsumer> _logger;
+        private readonly IProductRepository _productRepository;
 
         public UpdateProductStatusConsumer(IMediator mediator, IMapper mapper,
-            ILogger<UpdateProductStatusConsumer> logger)
+            ILogger<UpdateProductStatusConsumer> logger, IProductRepository productRepository)
         {
             _mediator = mediator;
             _mapper = mapper;
             _logger = logger;
+            _productRepository = productRepository;
         }
 
         public async Task Consume(ConsumeContext<UpdateStoreStatusRequest> context)
@@ -40,29 +43,33 @@ namespace Product.Worker.Consumers
 
 
             var map = _mapper.Map<UpdateProductStatusDto>(message);
+            //
+            // _logger.LogInformation($"---> Consumer Update Statsu : {JsonConvert.SerializeObject(map)} ");
+            //
+            //
+            // 
+            // var productStatus = await _mediator.Send(new ProductStatusCommand
+            // {
+            //     ProductId = map.ProductId,
+            //     ProductStatus = map.ProductStatus,
+            //     Number = map.Number,
+            // });
 
-            _logger.LogInformation($"---> Consumer Update Statsu : {JsonConvert.SerializeObject(map)} ");
+            var response = await _productRepository.UpdateProductStatus(map);
 
-
-            //TODO:MAP
-            var productStatus = await _mediator.Send(new ProductStatusCommand
-            {
-                ProductId = map.ProductId,
-                ProductStatus = map.ProductStatus,
-                Number = map.Number,
-            });
 
             var result = new ResponseResult();
-            if (productStatus == null)
+            if (response == null)
             {
                 result.IsSuccessful = false;
-                result.Message = $"{productStatus}";
+                result.Message = $"error :{response}";
+                result.StatusCode = result.StatusCode;
             }
 
             result.IsSuccessful = true;
-            result.Message = "Update store";
-
-
+            result.Message = $"OK : {response}";
+            result.StatusCode = result.StatusCode;
+            
             await context.RespondAsync(result);
         }
     }

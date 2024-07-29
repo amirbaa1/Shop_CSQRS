@@ -67,11 +67,11 @@ services:
       context: .
       dockerfile: Identity/Identity.Api/Dockerfile
 
-  order.worker:
-    image: ${DOCKER_REGISTRY-}orderworker
-    build:
-      context: .
-      dockerfile: Order/Order.Worker/Dockerfile
+#  order.worker:
+#    image: ${DOCKER_REGISTRY-}orderworker
+#    build:
+#      context: .
+#      dockerfile: Order/Order.Worker/Dockerfile
 
 volumes:
   postgres_data:
@@ -84,3 +84,17 @@ volumes:
 
 
 
+
+#  product.worker:
+#    image: product.worker
+#    build:
+#      context: .
+#      dockerfile: Product/Product.Worker/Dockerfile
+
+
+
+  order.worker:
+    image: order.worker
+    build:
+      context: .
+      dockerfile: Order/Order.Worker/Dockerfile

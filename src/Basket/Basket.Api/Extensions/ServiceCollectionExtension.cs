@@ -1,8 +1,8 @@
-﻿
-using Basket.Domain.Repository;
+﻿using Basket.Domain.Repository;
 using Basket.Infrastructure.Data;
 using Basket.Infrastructure.Repository;
 using Basket.Infrastructure.Repository.Service;
+using Common.Infrastructure.Helpers;
 using Common.Infrastructure.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,8 +14,7 @@ namespace Basket.Api.Extensions
         public static void RegisterBasket(this IServiceCollection service, IConfiguration configuration)
         {
             service.AddDbContext<BasketdbContext>(op =>
-                          op.UseNpgsql(Environment.GetEnvironmentVariable("BasketConnectionString")));
-
+                op.UseNpgsql(PublicVariables.BasketConnectionString));
 
 
             service.AddScoped<IBasketRepository, BasketRepository>();

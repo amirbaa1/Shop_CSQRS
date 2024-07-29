@@ -58,16 +58,15 @@ public class AddProductStoreConsumer : IConsumer<ProductAddStoreRequest>
     {
         var message = context.Message;
 
-        //var map = _mapper.Map<CreateStoreCommand>(message);
-
-        //_logger.LogInformation($"--->Add product in store ,consumer : {JsonConvert.SerializeObject(map)}");
-
-        //await _mediator.Send(map);
+        // var map = _mapper.Map<CreateStoreCommand>(message);
+        //
+        // _logger.LogInformation($"--->Add product in store ,consumer : {JsonConvert.SerializeObject(map)}");
+        //
+        // await _mediator.Send(map);
 
         var map = _mapper.Map<StoreDto>(message);
 
-
-        var create = await _storeRepository.CreateStore(map);
+        await _storeRepository.CreateStore(map);
 
         var result = new ResponseResult();
         var store = await _storeRepository.GetStoreByProductId(context.Message.ProductId);

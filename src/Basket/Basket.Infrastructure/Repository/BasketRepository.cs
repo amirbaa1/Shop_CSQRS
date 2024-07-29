@@ -6,7 +6,6 @@ using Basket.Infrastructure.Data;
 using Basket.Infrastructure.Repository.Service;
 using Common.Infrastructure.Service;
 using Contracts.Basket;
-using EventBus.Messages.Event.Store;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -20,17 +19,15 @@ namespace Basket.Infrastructure.Repository
         private readonly IMapper _mapper;
         private readonly IBasketProductService _service;
         private readonly ILogger<BasketRepository> _logger;
-        //private readonly IPublishEndpoint _publishEndpoint;
-        private readonly IRequestClient<CheckStoreEvent> _requestClient;
         private readonly BasketService _basketService;
 
-        public BasketRepository(BasketdbContext context, IMapper mapper, IBasketProductService service, ILogger<BasketRepository> logger, IRequestClient<CheckStoreEvent> requestClient, BasketService basketService)
+        public BasketRepository(BasketdbContext context, IMapper mapper, IBasketProductService service,
+            ILogger<BasketRepository> logger, BasketService basketService)
         {
             _context = context;
             _mapper = mapper;
             _service = service;
             _logger = logger;
-            _requestClient = requestClient;
             _basketService = basketService;
         }
 
@@ -73,7 +70,6 @@ namespace Basket.Infrastructure.Repository
 
 
             var result = await _basketService.CheckStore(map.ProductId, map.Quantity);
-
 
 
             // انتظار برای دریافت پاسخ از سرویس فروشگاه
@@ -275,10 +271,10 @@ namespace Basket.Infrastructure.Repository
                         };
                         //await _publishEndpoint.Publish(messageStore);
 
-                        var result = await _basketService.UpdateInventoryStore(basketItem.ProductId, basketItem.Quantity);
+                        var result =
+                            await _basketService.UpdateInventoryStore(basketItem.ProductId, basketItem.Quantity);
 
                         await RemoveItemFromBasket(basketId: basketItem.BasketId);
-
                     }
 
                     return new ResultDto
