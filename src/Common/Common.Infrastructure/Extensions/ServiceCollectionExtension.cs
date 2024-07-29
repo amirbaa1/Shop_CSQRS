@@ -60,7 +60,7 @@ public static class ServiceCollectionExtension
             PublicVariables.JwtIssuer = configuration["JWTOption:Issuer"];
         if (string.IsNullOrEmpty(PublicVariables.JwtAudience) &&
             !string.IsNullOrEmpty(configuration["JWTOption:Audience"]))
-            PublicVariables.JwtIssuer = configuration["JWTOption:Audience"];
+            PublicVariables.JwtAudience = configuration["JWTOption:Audience"];
     }
 
 

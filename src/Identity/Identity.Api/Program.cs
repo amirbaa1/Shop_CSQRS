@@ -1,8 +1,7 @@
 using System.Reflection;
-using Identity.Application;
-using Identity.Infrastructure;
-using Identity.Infrastructure.Data;
-using Identity.Infrastructure.Extensions;
+using Identity.Api.Extensions;
+using Common.Infrastructure.Extensions;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,15 +12,18 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddApplication();
 
-builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
+
+builder.Services.RegisterVariables(builder.Configuration);
+builder.Services.RegisterMassTransit(Assembly.GetExecutingAssembly());
+builder.Services.RegisterMediatR(Assembly.GetExecutingAssembly());
+builder.Services.RegisterAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.RegisterIdentityService(builder.Configuration);
+
 
 var app = builder.Build();
 
-app.MigrateDatabase<AuthDbContext>();
+//app.MigrateDatabase<AuthDbContext>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

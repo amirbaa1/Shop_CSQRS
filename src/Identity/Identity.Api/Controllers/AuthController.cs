@@ -1,8 +1,8 @@
-using Identity.Application.Features.Commands.AssignRole;
-using Identity.Application.Features.Commands.Login;
-using Identity.Application.Features.Commands.Register;
-using Identity.Application.Features.Commands.Update;
-using Identity.Application.Features.Queries.Profile;
+using Identity.Api.Features.Commands.AssignRole;
+using Identity.Api.Features.Commands.Login;
+using Identity.Api.Features.Commands.Register;
+using Identity.Api.Features.Commands.Update;
+using Identity.Api.Features.Queries.Profile;
 using Identity.Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

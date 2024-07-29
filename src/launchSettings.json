@@ -9,7 +9,11 @@
         "basket.api": "StartDebugging",
         "order.api": "StartDebugging",
         "identity.api": "StartDebugging",
-        "order.worker": "StartDebugging"
+        "order.worker": "StartDebugging",
+        "identity.worker": "StartDebugging",
+        "product.worker": "StartDebugging",
+        "store.worker": "StartDebugging",
+        "basket.worker": "StartDebugging"
       }
     }
   }
