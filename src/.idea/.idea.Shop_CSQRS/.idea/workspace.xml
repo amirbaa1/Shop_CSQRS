@@ -35,60 +35,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="757bd229-cf69-4952-ad51-a1e55abc9b8a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Service/OrderService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Product/Product.Worker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/material_theme_project_new.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Api/Extensions/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Api/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Api/Mapper/BasketMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Api/Mapper/BasketMap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Worker/Basket.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Worker/Basket.Worker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Worker/Consumer/MessageResultConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Worker/Consumer/MessageResultConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Worker/Consumer/UpdateProductConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Worker/Consumer/UpdateProductConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Worker/Extensions/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Worker/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Worker/Mapper/BasketMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Worker/Mapper/BasketMap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Common.Infrastructure/Extensions/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Contracts/Contracts/Contracts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Contracts/Contracts/Contracts.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EventBus.Messages/Event/Store/CheckStoreEvent.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EventBus.Messages/Event/Store/MessageCheckStoreEvent.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EventBus.Messages/EventBus.Messages.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/EventBus.Messages/EventBus.Messages.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Api/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Application/Consumer/BasketQueueEventConsumer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Application/Features/Order/Commands/Create/CreateOrderCommand.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Application/Features/Order/Commands/Create/CreateOrderHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Application/Features/Order/Queries/GetAll/GetAllOrderHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Application/Features/Order/Queries/GetAll/GetAllOrderQuery.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Application/Features/Order/Queries/GetOrderByUserId/GetOrderByUserIdHandler.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Application/Features/Order/Queries/GetOrderByUserId/GetOrderByUserIdQuery.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Application/Mapper/OrderMapper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Application/Order.Application.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Application/OrderApplication.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Infrastructure/Order.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Infrastructure/Order.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Worker/Consumer/BasketQueueEventConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Worker/Consumer/OrderBasketConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Worker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Worker/Extensions/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Worker/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Worker/Order.Worker.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Worker/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Worker/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Worker/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Consumers/UpdateProductStatusConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Consumers/UpdateProductStatusConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Extensions/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Mapping/ProductMapProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Mapping/ProductMapProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Product.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Product.Worker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shop_CSQRS.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Shop_CSQRS.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Mapper/StoreProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Mapper/StoreProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Domain/Model/Dto/UpdateProductNameDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Domain/Model/Dto/UpdateProductNameDto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Consumer/AddProductStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/AddProductStoreConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Consumer/BasketStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/BasketStoreConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Consumer/CheckStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/CheckStoreConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Consumer/ProductDeleteStore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/ProductDeleteStoreConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Consumer/UpdateProductStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/UpdateProductStoreConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Mapper/StoreProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Mapper/StoreProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Store.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Store.Worker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,6 +48,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
@@ -110,35 +58,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Basket.Api: https.executor": "Run",
-    ".NET Launch Settings Profile.Basket.Worker.executor": "Run",
-    ".NET Launch Settings Profile.Order.Api: https.executor": "Run",
-    ".NET Launch Settings Profile.Order.Worker.executor": "Run",
-    ".NET Launch Settings Profile.Product.Api: https.executor": "Run",
-    ".NET Launch Settings Profile.Product.Worker.executor": "Run",
-    ".NET Launch Settings Profile.Store.Api: https.executor": "Run",
-    ".NET Launch Settings Profile.Store.Worker.executor": "Run",
-    ".NET Project.Order.Worker.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "dev",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "MTFeaturesSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Basket.Api: https.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Basket.Worker.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Order.Api: https.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Order.Worker.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Product.Api: https.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Product.Worker.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Store.Api: https.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Launch Settings Profile.Store.Worker.executor&quot;: &quot;Run&quot;,
+    &quot;.NET Project.Order.Worker.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MTFeaturesSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
-      "/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
-      "/Users/amirba/Library/Application Support/Symbols/src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache&quot;,
+      &quot;/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache&quot;,
+      &quot;/Users/amirba/Library/Application Support/Symbols/src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Multi-Launch.Multi-Launch: Shop_CSQRS">
     <configuration name="Order.Worker" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
@@ -719,14 +667,38 @@
       <workItem from="1722256296552" duration="134000" />
       <workItem from="1722256493208" duration="753000" />
       <workItem from="1722257310941" duration="3020000" />
+      <workItem from="1722260704162" duration="311000" />
     </task>
+    <task id="LOCAL-00001" summary="update:&#10;order&#10;basket&#10;store">
+      <option name="closed" value="true" />
+      <created>1722260850074</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1722260850074</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="update:&#10;order&#10;basket&#10;store" />
+    <option name="LAST_COMMIT_MESSAGE" value="update:&#10;order&#10;basket&#10;store" />
   </component>
 </project>
