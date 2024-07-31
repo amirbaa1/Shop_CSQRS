@@ -1,7 +1,6 @@
 using Common.Infrastructure.Service;
 using Contracts.General;
 using Contracts.Product;
-using EventBus.Messages.Event.Product;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

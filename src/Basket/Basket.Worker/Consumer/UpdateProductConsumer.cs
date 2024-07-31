@@ -3,7 +3,6 @@ using Basket.Domain.Model.Dto;
 using Basket.Domain.Repository;
 using Contracts.General;
 using Contracts.Product;
-using EventBus.Messages.Event.Product;
 using MassTransit;
 
 namespace Basket.Worker.Consumer;

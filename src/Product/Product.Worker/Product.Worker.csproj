@@ -18,7 +18,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\EventBus.Messages\EventBus.Messages.csproj" />
 		<ProjectReference Include="..\..\Store\Store.Domain\Store.Domain.csproj" />
 		<ProjectReference Include="..\Product.Api\Product.Api.csproj" />
 		<ProjectReference Include="..\Product.Domain\Product.Domain.csproj" />

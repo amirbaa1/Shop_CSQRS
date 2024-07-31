@@ -1,4 +1,3 @@
-using EventBus.Messages.Event.Product;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

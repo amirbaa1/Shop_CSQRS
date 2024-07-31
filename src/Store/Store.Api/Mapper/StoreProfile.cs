@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Contracts.Product;
-using EventBus.Messages.Event.Basket;
-using EventBus.Messages.Event.Product;
 using Store.Api.Feature.Store.Commands.Create;
 using Store.Api.Feature.Store.Commands.Update.UpdateStoreNumber;
 using Store.Api.Feature.Store.Queries.Check;

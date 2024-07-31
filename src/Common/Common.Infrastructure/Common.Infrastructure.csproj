@@ -17,7 +17,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Contracts\Contracts\Contracts.csproj" />
-		<ProjectReference Include="..\..\EventBus.Messages\EventBus.Messages.csproj" />
 		<ProjectReference Include="..\Common.Api\Common.Api.csproj" />
 	</ItemGroup>
 

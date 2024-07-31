@@ -8,7 +8,6 @@ using System.Net;
 using Common.Infrastructure.Service;
 using Contracts.Product;
 using Newtonsoft.Json;
-using EventBus.Messages.Event.Product;
 using MassTransit;
 
 namespace Store.Infrastructure.Repository

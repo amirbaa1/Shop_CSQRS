@@ -2,7 +2,6 @@ using AutoMapper;
 using MediatR;
 using Product.Domain.Model.Dto;
 using Product.Domain.Repositories;
-using Product.Api.Mapping;
 
 namespace Product.Api.Features.Product.Queries.GetProductList;
 
@@ -21,7 +20,7 @@ public class GetProductListHandler : IRequestHandler<GetProductListQuery, List<P
     {
         var product = await _productRepository.GetProductList();
 
-        var responseList = ProductMapper.Mapper.Map<List<ProductDto>>(product);
+        var responseList = _mapper.Map<List<ProductDto>>(product);
 
         return responseList;
     }
