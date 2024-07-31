@@ -1,10 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Order.Domain.Repository;
+﻿using Order.Domain.Repository;
 using Order.Infrastructure.Data;
 using Order.Infrastructure.Repository;
-using Microsoft.EntityFrameworkCore;
 using Common.Infrastructure.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace Order.Api.Extensions
 {

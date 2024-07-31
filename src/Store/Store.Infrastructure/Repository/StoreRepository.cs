@@ -362,7 +362,7 @@ namespace Store.Infrastructure.Repository
                 };
             }
 
-            else
+            if (getProduct.Number == 0)
             {
                 // var message = new MessageCheckStoreEvent
                 // {
@@ -375,11 +375,18 @@ namespace Store.Infrastructure.Repository
 
                 return new ResultDto
                 {
-                    StatusCode = HttpStatusCode.BadGateway,
+                    StatusCode = HttpStatusCode.OK,
                     IsSuccessful = false,
                     Message = $"The product does not have in store."
                 };
             }
+
+            return new ResultDto
+            {
+                StatusCode = HttpStatusCode.BadGateway,
+                IsSuccessful = false,
+                Message = $"error !"
+            };
         }
 
         public async Task<ResultDto> UpdateInventoryAfterPurchase(UpdateNumberDto update)
