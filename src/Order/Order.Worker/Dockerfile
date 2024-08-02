@@ -9,7 +9,6 @@ WORKDIR /src
 COPY ["Order/Order.Worker/Order.Worker.csproj", "Order/Order.Worker/"]
 COPY ["Common/Common.Infrastructure/Common.Infrastructure.csproj", "Common/Common.Infrastructure/"]
 COPY ["Contracts/Contracts/Contracts.csproj", "Contracts/Contracts/"]
-COPY ["EventBus.Messages/EventBus.Messages.csproj", "EventBus.Messages/"]
 COPY ["Common/Common.Api/Common.Api.csproj", "Common/Common.Api/"]
 COPY ["Order/Order.Api/Order.Api.csproj", "Order/Order.Api/"]
 COPY ["Order/Order.Infrastructure/Order.Infrastructure.csproj", "Order/Order.Infrastructure/"]

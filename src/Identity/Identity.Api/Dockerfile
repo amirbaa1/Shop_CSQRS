@@ -9,9 +9,11 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Identity/Identity.Api/Identity.Api.csproj", "Identity/Identity.Api/"]
-COPY ["Identity/Identity.Application/Identity.Application.csproj", "Identity/Identity.Application/"]
-COPY ["Identity/Identity.Domain/Identity.Domain.csproj", "Identity/Identity.Domain/"]
+COPY ["Common/Common.Infrastructure/Common.Infrastructure.csproj", "Common/Common.Infrastructure/"]
+COPY ["Contracts/Contracts/Contracts.csproj", "Contracts/Contracts/"]
+COPY ["Common/Common.Api/Common.Api.csproj", "Common/Common.Api/"]
 COPY ["Identity/Identity.Infrastructure/Identity.Infrastructure.csproj", "Identity/Identity.Infrastructure/"]
+COPY ["Identity/Identity.Domain/Identity.Domain.csproj", "Identity/Identity.Domain/"]
 RUN dotnet restore "./Identity/Identity.Api/Identity.Api.csproj"
 COPY . .
 WORKDIR "/src/Identity/Identity.Api"

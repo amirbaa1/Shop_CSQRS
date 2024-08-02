@@ -25,8 +25,8 @@ services:
   orderdb:
     image: postgres
    
-  identitydb:
-    image: postgres
+  # identitydb:
+  #   image: postgres
 
   product.api:
     image: ${DOCKER_REGISTRY-}productapi
@@ -61,11 +61,13 @@ services:
       dockerfile: ApiGateway/ApiGateway.ocelot/Dockerfile
 
 
-  identity.api:
-    image: ${DOCKER_REGISTRY-}identityapi
-    build:
-      context: .
-      dockerfile: Identity/Identity.Api/Dockerfile
+  # identity.api:
+  #   image: ${DOCKER_REGISTRY-}identityapi
+  #   build:
+  #     context: .
+  #     dockerfile: Identity/Identity.Api/Dockerfile
+  #   env_file:
+  #     - .env
 
 
   order.worker:
@@ -74,11 +76,11 @@ services:
       context: .
       dockerfile: Order/Order.Worker/Dockerfile
 
-  identity.worker:
-    image: ${DOCKER_REGISTRY-}identityworker
-    build:
-      context: .
-      dockerfile: Identity/Identity.Worker/Dockerfile
+  # identity.worker:
+  #   image: ${DOCKER_REGISTRY-}identityworker
+  #   build:
+  #     context: .
+  #     dockerfile: Identity/Identity.Worker/Dockerfile
 
   product.worker:
     image: ${DOCKER_REGISTRY-}productworker
@@ -106,7 +108,7 @@ volumes:
   store_data:
   basket_data:
   order_data:
-  identity_data:
+  # identity_data:
 
 
 

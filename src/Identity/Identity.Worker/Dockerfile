@@ -9,7 +9,6 @@ WORKDIR /src
 COPY ["Identity/Identity.Worker/Identity.Worker.csproj", "Identity/Identity.Worker/"]
 COPY ["Common/Common.Infrastructure/Common.Infrastructure.csproj", "Common/Common.Infrastructure/"]
 COPY ["Contracts/Contracts/Contracts.csproj", "Contracts/Contracts/"]
-COPY ["EventBus.Messages/EventBus.Messages.csproj", "EventBus.Messages/"]
 COPY ["Common/Common.Api/Common.Api.csproj", "Common/Common.Api/"]
 COPY ["Identity/Identity.Api/Identity.Api.csproj", "Identity/Identity.Api/"]
 COPY ["Identity/Identity.Infrastructure/Identity.Infrastructure.csproj", "Identity/Identity.Infrastructure/"]

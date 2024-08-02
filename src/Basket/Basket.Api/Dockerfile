@@ -9,10 +9,11 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Basket/Basket.Api/Basket.Api.csproj", "Basket/Basket.Api/"]
-COPY ["Basket/Basket.Application/Basket.Application.csproj", "Basket/Basket.Application/"]
-COPY ["EventBus.Messages/EventBus.Messages.csproj", "EventBus.Messages/"]
-COPY ["Basket/Basket.Domain/Basket.Domain.csproj", "Basket/Basket.Domain/"]
 COPY ["Basket/Basket.Infrastructure/Basket.Infrastructure.csproj", "Basket/Basket.Infrastructure/"]
+COPY ["Common/Common.Infrastructure/Common.Infrastructure.csproj", "Common/Common.Infrastructure/"]
+COPY ["Contracts/Contracts/Contracts.csproj", "Contracts/Contracts/"]
+COPY ["Common/Common.Api/Common.Api.csproj", "Common/Common.Api/"]
+COPY ["Basket/Basket.Domain/Basket.Domain.csproj", "Basket/Basket.Domain/"]
 RUN dotnet restore "./Basket/Basket.Api/Basket.Api.csproj"
 COPY . .
 WORKDIR "/src/Basket/Basket.Api"
