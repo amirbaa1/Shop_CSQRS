@@ -15,6 +15,7 @@ namespace Store.Domain.Repository
         Task<ResultDto> UpdateStatusProduct(UpdateStatusProductDto updateStatusProductDto);
         Task<ResultDto> DeleteStore(Guid productId);
         Task<List<StoreDto>> GetStore();
+        Task<StoreDto> GetStoreByProductId(Guid productId);
         Task<ResultDto> CheckStore(CheckNumberDto checkNumberDto);
     }
 }

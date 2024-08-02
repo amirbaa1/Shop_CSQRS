@@ -1,4 +1,5 @@
 using System.Diagnostics.SymbolStore;
+using Contracts.General;
 using MediatR;
 
 namespace Product.Api.Features.Product.Commands.Delete;

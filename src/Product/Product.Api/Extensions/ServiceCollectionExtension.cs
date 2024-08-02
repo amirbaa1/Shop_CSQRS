@@ -1,5 +1,6 @@
 using System.Text;
 using Common.Infrastructure.Helpers;
+using Common.Infrastructure.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -53,5 +54,6 @@ public static class ServiceCollectionExtension
 
         service.AddScoped<IProductRepository, ProductRepository>();
         service.AddScoped<ICategoryRepository, CategoryRepository>();
+        service.AddScoped<ProductService>();
     }
 }

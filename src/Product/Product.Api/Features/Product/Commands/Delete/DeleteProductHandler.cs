@@ -1,3 +1,4 @@
+using Contracts.General;
 using MediatR;
 using Product.Domain.Repositories;
 

@@ -5,9 +5,9 @@ using Store.Domain.Model.Dto;
 using Store.Domain.Repository;
 using Store.Infrastructure.Data;
 using System.Net;
+using Common.Infrastructure.Service;
+using Contracts.Product;
 using Newtonsoft.Json;
-using EventBus.Messages.Event.Product;
-using EventBus.Messages.Event.Store;
 using MassTransit;
 
 namespace Store.Infrastructure.Repository
@@ -16,14 +16,14 @@ namespace Store.Infrastructure.Repository
     {
         private readonly StoreDbContext _context;
         private readonly ILogger<StoreRepository> _logger;
-        private readonly IPublishEndpoint _publishEndpoint;
+        private readonly StoreService _storeService;
 
         public StoreRepository(StoreDbContext context, ILogger<StoreRepository> logger,
-            IPublishEndpoint publishEndpoint)
+            StoreService storeService)
         {
             _context = context;
             _logger = logger;
-            _publishEndpoint = publishEndpoint;
+            _storeService = storeService;
         }
 
         public async Task<ResultDto> CreateStore(StoreDto storeDto)
@@ -72,7 +72,7 @@ namespace Store.Infrastructure.Repository
 
         public async Task<ResultDto> UpdateProductName(UpdateProductNameDto updateName)
         {
-            var getStore = await _context.storeModels.SingleOrDefaultAsync(x => x.ProductId == updateName.Id);
+            var getStore = await _context.storeModels.SingleOrDefaultAsync(x => x.ProductId == updateName.productId);
             if (getStore == null)
             {
                 return new ResultDto
@@ -83,8 +83,8 @@ namespace Store.Infrastructure.Repository
                 };
             }
 
-            getStore.ProductName = updateName.Name;
-            getStore.Price = updateName.Price;
+            getStore.ProductName = updateName.productName;
+            getStore.Price = updateName.productPrice;
             getStore.UpdateTimeProduct = DateTime.UtcNow;
 
             _context.storeModels.Update(getStore);
@@ -119,17 +119,31 @@ namespace Store.Infrastructure.Repository
                 getProduct.UpdateTimeStatus = DateTime.UtcNow;
 
                 _context.storeModels.Update(getProduct);
-                await _context.SaveChangesAsync();
 
-                var message = new UpdateProductStatusEvent
+
+                // var message = new UpdateProductStatusEvent
+                // {
+                //     ProductId = getProduct.ProductId,
+                //     Number = getProduct.Number,
+                //     ProductStatus = (ProductStatusEvent)getProduct.Status,
+                // };
+
+                var result =
+                    await _storeService.UpdateStoreStatus(getProduct.ProductId, (ProductStatusRequest)getProduct.Status,
+                        getProduct.Price, getProduct.Number);
+
+                if (result.IsSuccessful == false)
                 {
-                    ProductId = getProduct.ProductId,
-                    Number = getProduct.Number,
-                    ProductStatus = (ProductStatusEvent)getProduct.Status,
-                };
+                    return new ResultDto
+                    {
+                        StatusCode = HttpStatusCode.BadGateway,
+                        IsSuccessful = true,
+                        Message = $"Error : {result.Message}"
+                    };
+                }
 
                 await _context.SaveChangesAsync();
-                await _publishEndpoint.Publish(message);
+                // await _publishEndpoint.Publish(message);
 
                 return new ResultDto
                 {
@@ -148,23 +162,39 @@ namespace Store.Infrastructure.Repository
 
 
                     _context.storeModels.Update(getProduct);
-                    var message = new UpdateProductStatusEvent
+                    // var message = new UpdateProductStatusEvent
+                    // {
+                    //     ProductId = getProduct.ProductId,
+                    //     Number = getProduct.Number,
+                    //     ProductStatus = (ProductStatusEvent)getProduct.Status,
+                    // };
+
+                    var result =
+                        await _storeService.UpdateStoreStatus(getProduct.ProductId,
+                            (ProductStatusRequest)getProduct.Status,
+                            getProduct.Price, getProduct.Number);
+
+                    if (result.IsSuccessful == false)
                     {
-                        ProductId = getProduct.ProductId,
-                        Number = getProduct.Number,
-                        ProductStatus = (ProductStatusEvent)getProduct.Status,
-                    };
+                        return new ResultDto
+                        {
+                            StatusCode = HttpStatusCode.BadGateway,
+                            IsSuccessful = true,
+                            Message = $"Error : {result.Message}"
+                        };
+                    }
+
 
                     await _context.SaveChangesAsync();
-                    await _publishEndpoint.Publish(message);
+                    // await _publishEndpoint.Publish(message);
                     _logger.LogInformation($"{JsonConvert.SerializeObject(getProduct)}");
-                    _logger.LogInformation($"message---->{JsonConvert.SerializeObject(message)}");
+                    // _logger.LogInformation($"message---->{JsonConvert.SerializeObject(message)}");
 
                     return new ResultDto
                     {
                         StatusCode = HttpStatusCode.OK,
                         IsSuccessful = true,
-                        Message = $"change product status : {getProduct}"
+                        Message = $"change product status : {getProduct}\n message {result.Message}"
                     };
                 }
 
@@ -175,16 +205,31 @@ namespace Store.Infrastructure.Repository
 
                 _context.storeModels.Update(getProduct);
 
-                var updatedMessage = new UpdateProductStatusEvent
+                // var updatedMessage = new UpdateProductStatusEvent
+                // {
+                //     ProductId = getProduct.ProductId,
+                //     Number = getProduct.Number,
+                //     ProductStatus = (ProductStatusEvent)getProduct.Status,
+                // };
+
+                var result1 =
+                    await _storeService.UpdateStoreStatus(getProduct.ProductId, (ProductStatusRequest)getProduct.Status,
+                        getProduct.Price, getProduct.Number);
+
+                if (result1.IsSuccessful == false)
                 {
-                    ProductId = getProduct.ProductId,
-                    Number = getProduct.Number,
-                    ProductStatus = (ProductStatusEvent)getProduct.Status,
-                };
+                    return new ResultDto
+                    {
+                        StatusCode = HttpStatusCode.BadGateway,
+                        IsSuccessful = true,
+                        Message = $"Error : {result1.Message}"
+                    };
+                }
 
                 await _context.SaveChangesAsync();
 
-                await _publishEndpoint.Publish(updatedMessage);
+                // await _publishEndpoint.Publish(updatedMessage);
+
 
                 _logger.LogInformation($"{JsonConvert.SerializeObject(getProduct)}");
 
@@ -240,19 +285,35 @@ namespace Store.Infrastructure.Repository
             return store;
         }
 
+        public async Task<StoreDto> GetStoreByProductId(Guid productId)
+        {
+            var foundProduct = await _context.storeModels.FirstOrDefaultAsync(x => x.ProductId == productId);
+            if (foundProduct == null)
+            {
+                return null;
+            }
+
+            return new StoreDto
+            {
+                ProductId = foundProduct.ProductId,
+                ProductName = foundProduct.ProductName
+            };
+        }
+
         public async Task<ResultDto> CheckStore(CheckNumberDto checkNumberDto) //Not for control
         {
             var getProduct =
                 await _context.storeModels.FirstOrDefaultAsync(x => x.ProductId == checkNumberDto.ProductId);
             if (getProduct == null)
             {
-                var message = new MessageCheckStoreEvent
-                {
-                    StatusCode = HttpStatusCode.NotFound,
-                    IsSuccessful = false,
-                    Message = "Not found in store"
-                };
-                await _publishEndpoint.Publish(message);
+                // var result = await _storeService.
+                // var message = new MessageCheckStoreEvent
+                // {
+                //     StatusCode = HttpStatusCode.NotFound,
+                //     IsSuccessful = false,
+                //     Message = "Not found in store"
+                // };
+                // await _publishEndpoint.Publish(message);
 
                 return new ResultDto
                 {
@@ -264,14 +325,14 @@ namespace Store.Infrastructure.Repository
 
             if (getProduct.Number >= checkNumberDto.Number)
             {
-                var message = new MessageCheckStoreEvent
-                {
-                    ProductId = getProduct.ProductId,
-                    StatusCode = HttpStatusCode.Accepted,
-                    IsSuccessful = true,
-                    Message = "Ok"
-                };
-                await _publishEndpoint.Publish(message);
+                // var message = new MessageCheckStoreEvent
+                // {
+                //     ProductId = getProduct.ProductId,
+                //     StatusCode = HttpStatusCode.Accepted,
+                //     IsSuccessful = true,
+                //     Message = "Ok"
+                // };
+                // await _publishEndpoint.Publish(message);
 
                 return new ResultDto
                 {
@@ -283,14 +344,14 @@ namespace Store.Infrastructure.Repository
 
             if (getProduct.Number < checkNumberDto.Number && getProduct.Number != 0)
             {
-                var message = new MessageCheckStoreEvent
-                {
-                    ProductId = getProduct.ProductId,
-                    StatusCode = HttpStatusCode.BadGateway,
-                    IsSuccessful = false,
-                    Message = $"The product does not have more than {getProduct.Number}"
-                };
-                await _publishEndpoint.Publish(message);
+                // var message = new MessageCheckStoreEvent
+                // {
+                //     ProductId = getProduct.ProductId,
+                //     StatusCode = HttpStatusCode.BadGateway,
+                //     IsSuccessful = false,
+                //     Message = $"The product does not have more than {getProduct.Number}"
+                // };
+                // await _publishEndpoint.Publish(message);
 
                 return new ResultDto
                 {
@@ -300,24 +361,31 @@ namespace Store.Infrastructure.Repository
                 };
             }
 
-            else
+            if (getProduct.Number == 0)
             {
-                var message = new MessageCheckStoreEvent
-                {
-                    ProductId = getProduct.ProductId,
-                    StatusCode = HttpStatusCode.BadGateway,
-                    IsSuccessful = false,
-                    Message = $"The product does not have in store."
-                };
-                await _publishEndpoint.Publish(message);
+                // var message = new MessageCheckStoreEvent
+                // {
+                //     ProductId = getProduct.ProductId,
+                //     StatusCode = HttpStatusCode.BadGateway,
+                //     IsSuccessful = false,
+                //     Message = $"The product does not have in store."
+                // };
+                // await _publishEndpoint.Publish(message);
 
                 return new ResultDto
                 {
-                    StatusCode = HttpStatusCode.BadGateway,
+                    StatusCode = HttpStatusCode.OK,
                     IsSuccessful = false,
                     Message = $"The product does not have in store."
                 };
             }
+
+            return new ResultDto
+            {
+                StatusCode = HttpStatusCode.BadGateway,
+                IsSuccessful = false,
+                Message = $"error !"
+            };
         }
 
         public async Task<ResultDto> UpdateInventoryAfterPurchase(UpdateNumberDto update)
@@ -362,21 +430,34 @@ namespace Store.Infrastructure.Repository
 
             _context.storeModels.Update(getStore);
 
-            var message = new UpdateProductStatusEvent
+            // var message = new UpdateProductStatusEvent
+            // {
+            //     ProductId = getStore.ProductId,
+            //     Number = updateNumber,
+            //     ProductStatus = (ProductStatusEvent)getStore.Status,
+            // };
+            var result =
+                await _storeService.UpdateStoreStatus(getStore.ProductId, (ProductStatusRequest)getStore.Status,
+                    getStore.Price, getStore.Number);
+
+            if (result.IsSuccessful == false)
             {
-                ProductId = getStore.ProductId,
-                Number = updateNumber,
-                ProductStatus = (ProductStatusEvent)getStore.Status,
-            };
+                return new ResultDto
+                {
+                    StatusCode = HttpStatusCode.BadGateway,
+                    IsSuccessful = true,
+                    Message = $"Error : {result.Message}"
+                };
+            }
 
             await _context.SaveChangesAsync();
-            await _publishEndpoint.Publish(message);
+            // await _publishEndpoint.Publish(message);
 
             return new ResultDto
             {
                 StatusCode = HttpStatusCode.OK,
                 IsSuccessful = true,
-                Message = "Update store"
+                Message = $"Update store message {result.Message}"
             };
         }
     }

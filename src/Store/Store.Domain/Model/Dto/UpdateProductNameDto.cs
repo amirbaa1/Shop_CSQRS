@@ -2,7 +2,7 @@ namespace Store.Domain.Model.Dto;
 
 public class UpdateProductNameDto
 {
-    public Guid Id { get; set; }
-    public string Name { get; set; }
-    public int Price { get; set; }
+    public Guid productId { get; set; }
+    public string productName { get; set; }
+    public int productPrice { get; set; }
 }

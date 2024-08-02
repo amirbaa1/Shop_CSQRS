@@ -1,4 +1,6 @@
-using EventBus.Messages.Event.Product;
+using Common.Infrastructure.Service;
+using Contracts.General;
+using Contracts.Product;
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -14,13 +16,15 @@ public class ProductRepository : IProductRepository
     private readonly ProductDbContext _context;
     private readonly ILogger<ProductDbContext> _logger;
     private readonly IPublishEndpoint _publishEndpoint;
+    private readonly ProductService _productService;
 
     public ProductRepository(ProductDbContext context, ILogger<ProductDbContext> logger,
-        IPublishEndpoint publishEndpoint)
+        IPublishEndpoint publishEndpoint, ProductService productService)
     {
         _context = context;
         _logger = logger;
         _publishEndpoint = publishEndpoint;
+        _productService = productService;
     }
 
     public async Task<string> AddProduct(ProductDto addNewProduct)
@@ -51,20 +55,29 @@ public class ProductRepository : IProductRepository
 
         _context.Add(productCreate);
 
-        await _context.SaveChangesAsync();
+        var store = await _productService.PostProductStore(productCreate.Id, productCreate.Name, productCreate.Number,
+            productCreate.Price, (ProductStatusRequest)productCreate.ProductStatus);
 
-        var message = new ProductStoreEvent
+        if (store == true)
         {
-            ProductId = productCreate.Id,
-            ProductName = productCreate.Name,
-            Number = productCreate.Number,
-            Price = productCreate.Price,
-            ProductStatusEvent = (ProductStatusEvent)(int)productCreate.ProductStatus,
-        };
+            await _context.SaveChangesAsync();
 
-        await _publishEndpoint.Publish(message);
+            return "add in database";
+        }
 
-        return "add in database.";
+        // var message = new ProductStoreEvent
+        // {
+        //     ProductId = productCreate.Id,
+        //     ProductName = productCreate.Name,
+        //     Number = productCreate.Number,
+        //     Price = productCreate.Price,
+        //     ProductStatusEvent = (ProductStatusEvent)(int)productCreate.ProductStatus,
+        // };
+        // await _publishEndpoint.Publish(message);
+
+
+        return "error in store";
+        // return "add in database.";
     }
 
     public Task<List<ProductDto>> GetProductList()
@@ -144,26 +157,35 @@ public class ProductRepository : IProductRepository
         await _context.SaveChangesAsync();
 
 
-        var message = new ProductQueueEvent //update basket for updare product name or product price
+        // var message = new ProductQueueEvent //update basket for updare product name or product price
+        // {
+        //     ProductId = getProduct.Id,
+        //     Name = getProduct.Name,
+        //     Price = getProduct.Price
+        // };
+
+
+        // var messageUpdateStore = new ProductStoreUpdateEvent // update store for updare product name or product price
+        // {
+        //     ProductId = getProduct.Id,
+        //     ProductName = getProduct.Name,
+        //     ProductPrice = getProduct.Price
+        // };
+
+        var response = await _productService.ProductUpdate(getProduct.Id, getProduct.Name, getProduct.Price);
+
+
+        _logger.LogInformation($"--->{JsonConvert.SerializeObject(response)}");
+
+        // await _publishEndpoint.Publish(message);
+        // await _publishEndpoint.Publish(messageUpdateStore);
+
+        if (response.IsSuccessful == false)
         {
-            ProductId = getProduct.Id,
-            Name = getProduct.Name,
-            Price = getProduct.Price
-        };
+            return $"error : {response}";
+        }
 
-        var messageUpdateStore = new ProductStoreUpdateEvent // update store for updare product name or product price
-        {
-            ProductId = getProduct.Id,
-            ProductName = getProduct.Name,
-            ProductPrice = getProduct.Price
-        };
-
-        _logger.LogInformation($"--->{JsonConvert.SerializeObject(messageUpdateStore)}");
-
-        await _publishEndpoint.Publish(message);
-        await _publishEndpoint.Publish(messageUpdateStore);
-
-        return $"Update Product : {JsonConvert.SerializeObject(getProduct)}";
+        return $"response : {response} //Update Product : {JsonConvert.SerializeObject(getProduct)}";
     }
 
     public async Task<bool> DeleteProduct(Guid productId)
@@ -171,11 +193,29 @@ public class ProductRepository : IProductRepository
         var getProduct = await _context.Products.SingleOrDefaultAsync(x => x.Id == productId);
         if (getProduct == null)
         {
+            // return new ResponseResult
+            // {
+            //     Isuccess = false,
+            //     Message = "Not found Product"
+            // };
             return false;
         }
 
         _context.Products.Remove(getProduct);
+
+        var result = await _productService.DeleteProduct(productId);
+        if (result.IsSuccessful == false)
+        {
+            // return new ResponseResult
+            // {
+            //     Isuccess = false,
+            //     Message = result.Message
+            // };
+            return false;
+        }
+
         await _context.SaveChangesAsync();
+
         return true;
     }
 

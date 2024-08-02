@@ -11,7 +11,7 @@ namespace Store.Api.Controllers
 {
     [ApiController]
     [Route("api/[Controller]")]
-    [Authorize(Policy = "storeManagement")]
+    // [Authorize(Policy = "storeManagement")]
     public class StoreController : ControllerBase
     {
         private readonly IMediator _mediator;

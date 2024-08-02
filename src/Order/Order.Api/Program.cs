@@ -1,7 +1,7 @@
-using Order.Infrastructure;
-using Order.Application;
-using order.Infrastructure.Extensions;
-using Order.Infrastructure.Data;
+
+using Common.Infrastructure.Extensions;
+using System.Reflection;
+using Order.Api.Extensions;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,13 +13,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddApplication();
+builder.Services.RegisterVariables(builder.Configuration);
+builder.Services.RegisterMassTransit(Assembly.GetExecutingAssembly());
+builder.Services.RegisterAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.RegisterMediatR(Assembly.GetExecutingAssembly());
+builder.Services.RegisterOrderService(builder.Configuration);
 
-builder.Services.AddMediatR(cfg => { cfg.RegisterServicesFromAssemblies(typeof(Program).Assembly); });
 var app = builder.Build();
 
-app.MigrateDatabase<OrderdbContext>();
+//app.MigrateDatabase<OrderdbContext>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -1,13 +1,14 @@
+using AutoMapper;
 using MediatR;
 using Product.Domain.Model.Dto;
 using Product.Domain.Repositories;
-using Product.Api.Mapping;
 
 namespace Product.Api.Features.Product.Commands.CreateProduct;
 
 public class CreatProductHandler : IRequestHandler<CreateProductCommand, string>
 {
     private readonly IProductRepository _productRepository;
+    private readonly IMapper _mapper;
 
     public CreatProductHandler(IProductRepository productRepository)
     {
@@ -16,7 +17,7 @@ public class CreatProductHandler : IRequestHandler<CreateProductCommand, string>
 
     public async Task<string> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        var newProduct = ProductMapper.Mapper.Map<ProductDto>(request); 
+        var newProduct = _mapper.Map<ProductDto>(request); 
         
         var addToProduct = await _productRepository.AddProduct(newProduct);
 

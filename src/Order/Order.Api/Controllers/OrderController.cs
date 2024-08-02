@@ -2,14 +2,15 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Order.Application.Features.Order.Commands.Create;
-using Order.Application.Features.Order.Queries.GetOrderByUserId;
+using Order.Api.Features.Order.Commands.Create;
+using Order.Api.Features.Order.Queries.GetOrderByUserId;
+
 
 namespace Order.Api.Controllers;
 
 [ApiController]
 [Route("api/[Controller]")]
-[Authorize(Policy = "orderUser")]
+//[Authorize(Policy = "orderUser")]
 public class OrderController : ControllerBase
 {
     private readonly IMediator _mediator;

@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using EventBus.Messages.Event.Basket;
-using EventBus.Messages.Event.Product;
-using EventBus.Messages.Event.Store;
+using Contracts.Product;
 using Store.Api.Feature.Store.Commands.Create;
 using Store.Api.Feature.Store.Commands.Update.UpdateStoreNumber;
 using Store.Api.Feature.Store.Queries.Check;
@@ -16,11 +14,11 @@ namespace Store.Api.Mapper
         {
             CreateMap<UpdateNumberDto, UpdateStoreNumberCommand>().ReverseMap();
 
-            CreateMap<ProductStoreEvent, CreateStoreCommand>().ReverseMap();
+            CreateMap<ProductAddStoreRequest, CreateStoreCommand>().ReverseMap();
 
-            CreateMap<BasketStoreEvent, UpdateStoreNumberCommand>().ReverseMap();
+            // CreateMap<BasketStoreEvent, UpdateStoreNumberCommand>().ReverseMap();
 
-            CreateMap<CheckStoreEvent, CheckStoreQuery>().ReverseMap();
+            // CreateMap<CheckStoreEvent, CheckStoreQuery>().ReverseMap();
         }
     }
 }

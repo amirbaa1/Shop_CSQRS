@@ -1,13 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Order.Application.Features.Order.Queries.GetAll;
+using Order.Api.Features.Order.Queries.GetAll;
 
 namespace Order.Api.Controllers
 {
     [ApiController]
     [Route("api/[Controller]")]
-    [Authorize("orderManagement")]
+    //[Authorize("orderManagement")]
     public class OrderManagementController : ControllerBase
     {
         private readonly IMediator _mediator;

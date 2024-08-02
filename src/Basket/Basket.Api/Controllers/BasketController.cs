@@ -1,10 +1,10 @@
-﻿using Basket.Application.Features.Basket.Commands.CheckOut;
-using Basket.Application.Features.Basket.Commands.Create;
-using Basket.Application.Features.Basket.Commands.Delete;
-using Basket.Application.Features.Basket.Commands.Update;
-using Basket.Application.Features.Basket.Queries.BasketGet;
+﻿
+using Basket.Api.Features.Basket.Commands.CheckOut;
+using Basket.Api.Features.Basket.Commands.Create;
+using Basket.Api.Features.Basket.Commands.Delete;
+using Basket.Api.Features.Basket.Commands.Update;
+using Basket.Api.Features.Basket.Queries.BasketGet;
 using Basket.Domain.Model.Dto;
-using EventBus.Messages.Event;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
