@@ -2,6 +2,8 @@
 using Common.Infrastructure.Extensions;
 using System.Reflection;
 using Order.Api.Extensions;
+using order.Infrastructure.Extensions;
+using Order.Infrastructure.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,7 +23,7 @@ builder.Services.RegisterOrderService(builder.Configuration);
 
 var app = builder.Build();
 
-//app.MigrateDatabase<OrderdbContext>();
+app.MigrateDatabase<OrderdbContext>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
