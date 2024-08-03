@@ -5,7 +5,6 @@ using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Store.Api.Feature.Store.Queries.Check;
 using Store.Domain.Model.Dto;
 using Store.Domain.Repository;
 

@@ -7,11 +7,11 @@ using Product.Api.Features.Product.Commands.Update.UpdateProductStatus;
 using Product.Domain.Model.Dto;
 using Store.Domain.Model.Dto;
 
-namespace Product.Worker.Mapping;
+namespace Product.Api.Mapping;
 
-public class ProductMapProfile : Profile
+public class ProductProfile : Profile
 {
-    public ProductMapProfile()
+    public ProductProfile()
     {
         CreateMap<Domain.Model.Product, CreateProductCommand>().ReverseMap();
         CreateMap<ProductDto, CreateProductCommand>().ReverseMap();

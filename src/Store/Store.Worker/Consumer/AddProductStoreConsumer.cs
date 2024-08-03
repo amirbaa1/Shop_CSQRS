@@ -4,8 +4,6 @@ using Contracts.Product;
 using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Store.Api.Feature.Store.Commands.Create;
 using Store.Domain.Model.Dto;
 using Store.Domain.Repository;
 

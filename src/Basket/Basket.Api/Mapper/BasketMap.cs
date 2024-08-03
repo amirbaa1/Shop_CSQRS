@@ -24,12 +24,6 @@ namespace Basket.Api.Mapper
             CreateMap<Product, ProductDto>().ReverseMap();
             CreateMap<ProductDto, BasketModelDto>().ReverseMap();
             CreateMap<AddItemToBasketDto, ProductDto>().ReverseMap();
-
-            //CreateMap<CheckOutCommand, BasketQueueEvent>().ReverseMap();
-
-            //CreateMap<MessageResultCommand, MessageCheckStoreEvent>().ReverseMap();
-            CreateMap<CheckOutCommand, SendToOrderRequest>().ReverseMap();
-
         }
     }
 }

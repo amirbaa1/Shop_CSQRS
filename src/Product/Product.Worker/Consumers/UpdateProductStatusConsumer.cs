@@ -5,7 +5,7 @@ using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Product.Api.Features.Product.Commands.Update.UpdateProductStatus;
+using Product.Domain.Model;
 using Product.Domain.Model.Dto;
 using Product.Domain.Repositories;
 
@@ -32,34 +32,23 @@ namespace Product.Worker.Consumers
         public async Task Consume(ConsumeContext<UpdateStoreStatusRequest> context)
         {
             var message = context.Message;
-            //var updateMessage = new UpdateProductStatusCommand
-            //{
-            //    ProductId = message.ProductId,
-            //    ProductsStatus = MapProductStatusEventToProductStatus(message.ProductStatusEvent),
-            //    Number = message.Number,
-            //};
 
             _logger.LogInformation($"---> Consumer  : {JsonConvert.SerializeObject(message)} ");
 
 
-            var map = _mapper.Map<UpdateProductStatusDto>(message);
-            //
-            // _logger.LogInformation($"---> Consumer Update Statsu : {JsonConvert.SerializeObject(map)} ");
-            //
-            //
-            // 
-            // var productStatus = await _mediator.Send(new ProductStatusCommand
-            // {
-            //     ProductId = map.ProductId,
-            //     ProductStatus = map.ProductStatus,
-            //     Number = map.Number,
-            // });
+            var map = new UpdateProductStatusDto
+            {
+                ProductId = message.ProductId,
+                ProductStatus = (ProductStatus)message.ProductStatus,
+                Number = message.Number
+            };
+
 
             var response = await _productRepository.UpdateProductStatus(map);
 
 
             var result = new ResponseResult();
-            if (response == null)
+            if (string.IsNullOrEmpty(response))
             {
                 result.IsSuccessful = false;
                 result.Message = $"error :{response}";
@@ -69,7 +58,7 @@ namespace Product.Worker.Consumers
             result.IsSuccessful = true;
             result.Message = $"OK : {response}";
             result.StatusCode = result.StatusCode;
-            
+
             await context.RespondAsync(result);
         }
     }

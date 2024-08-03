@@ -1,5 +1,4 @@
 
-using Common.Api.Middlewares;
 using Common.Infrastructure.Helpers;
 using MassTransit;
 using MediatR;
@@ -94,7 +93,7 @@ public static class ServiceCollectionExtension
     public static void RegisterMediatR(this IServiceCollection service, Assembly assembly)
     {
         service.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assembly));
-        service.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        // service.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         //service.AddTransient<ExceptionHandlingMiddleware>();
     }
 

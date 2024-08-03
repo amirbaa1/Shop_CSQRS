@@ -17,10 +17,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Store\Store.Domain\Store.Domain.csproj" />
-	  <ProjectReference Include="..\Basket.Api\Basket.Api.csproj" />
 	  <ProjectReference Include="..\Basket.Domain\Basket.Domain.csproj" />
 	  <ProjectReference Include="..\Basket.Infrastructure\Basket.Infrastructure.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="..\..\.dockerignore">
+	    <Link>.dockerignore</Link>
+	  </Content>
 	</ItemGroup>
 
 </Project>

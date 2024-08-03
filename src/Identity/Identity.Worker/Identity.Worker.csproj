@@ -22,8 +22,13 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
-	  <ProjectReference Include="..\Identity.Api\Identity.Api.csproj" />
 	  <ProjectReference Include="..\Identity.Infrastructure\Identity.Infrastructure.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="..\..\.dockerignore">
+	    <Link>.dockerignore</Link>
+	  </Content>
 	</ItemGroup>
 
 

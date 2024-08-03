@@ -5,7 +5,6 @@ using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Store.Api.Feature.Store.Commands.Update.UpdateProductName;
 using Store.Domain.Model.Dto;
 using Store.Domain.Repository;
 

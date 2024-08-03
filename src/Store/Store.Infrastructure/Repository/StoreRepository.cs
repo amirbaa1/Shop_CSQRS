@@ -376,7 +376,7 @@ namespace Store.Infrastructure.Repository
                 {
                     StatusCode = HttpStatusCode.OK,
                     IsSuccessful = false,
-                    Message = $"The product does not have in store."
+                    Message = $"This product is out of stock."
                 };
             }
 

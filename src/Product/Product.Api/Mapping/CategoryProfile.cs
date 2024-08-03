@@ -4,11 +4,11 @@ using Product.Api.Features.Category.Queries.GetCategory;
 using Product.Domain.Model;
 using Product.Domain.Model.Dto;
 
-namespace Product.Worker.Mapping;
+namespace Product.Api.Mapping;
 
-public class CategoryMapProfile : Profile
+public class CategoryProfile : Profile
 {
-    public CategoryMapProfile()
+    public CategoryProfile()
     {
         CreateMap<Category, GetCategoryQuery>().ReverseMap();
         CreateMap<CategoryDto, GetCategoryQuery>().ReverseMap();
