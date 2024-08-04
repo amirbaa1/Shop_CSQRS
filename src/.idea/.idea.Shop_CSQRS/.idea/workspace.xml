@@ -39,43 +39,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="757bd229-cf69-4952-ad51-a1e55abc9b8a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Product/Product.Api/Mapping/CategoryProfile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Product/Product.Api/Mapping/ProductProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Basket/Basket.Api/Mapper/BasketMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Api/Mapper/BasketMap.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Worker/Basket.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Worker/Basket.Worker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Worker/Consumer/MessageResultConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Worker/Consumer/MessageResultConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Worker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Basket/Basket.Worker/Mapper/BasketMap.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Common.Infrastructure/Common.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Common.Infrastructure.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Common/Common.Infrastructure/Extensions/ServiceCollectionExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Extensions/ServiceCollectionExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity/Identity.Worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Identity/Identity.Worker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity/Identity.Worker/Identity.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Identity/Identity.Worker/Identity.Worker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Identity/Identity.Worker/Mapping/AuthMapper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Worker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Worker/Mapper/OrderMapper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Order/Order.Worker/Order.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Order/Order.Worker/Order.Worker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Product.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Product.Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Consumers/UpdateProductStatusConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Consumers/UpdateProductStatusConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Mapping/CategoryMapProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Mapping/ProductMapProfile.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Mapping/ProductMapper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Product.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Product.Worker.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Product/Product.Worker/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Worker/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Shop_CSQRS.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Shop_CSQRS.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Mapper/StoreProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Mapper/StoreProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Infrastructure/Repository/StoreRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Consumer/AddProductStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/AddProductStoreConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/MessageRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Common.Infrastructure/Service/BasketService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Service/BasketService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/CreateProduct/CreatProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/CreateProduct/CreatProductHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Extensions/HostExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Extensions/HostExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Store.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Store.Api.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Consumer/CheckStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/CheckStoreConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Consumer/UpdateProductStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/UpdateProductStoreConsumer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Consumer/InventoryStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/InventoryStoreConsumer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Mapper/StoreProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Mapper/StoreProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Store.Worker.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Store.Worker.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.override.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.override.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +65,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/amirba/Documents/Asp-net/mic2/Shop_CSQRS/src/Product/Product.Api/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d7b04cdab317d2212f328cfab214e9176e735e0ba3b48e5e5f2a1092219551/RabbitMqHostConfigurationExtensions.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="KubernetesApiPersistence">{}</component>
@@ -116,7 +93,7 @@
     ".NET Launch Settings Profile.Identity.Worker.executor": "Run",
     ".NET Launch Settings Profile.Order.Api: https.executor": "Run",
     ".NET Launch Settings Profile.Order.Worker.executor": "Run",
-    ".NET Launch Settings Profile.Product.Api: https.executor": "Run",
+    ".NET Launch Settings Profile.Product.Api: https.executor": "Debug",
     ".NET Launch Settings Profile.Product.Worker.executor": "Debug",
     ".NET Launch Settings Profile.Store.Api: https.executor": "Run",
     ".NET Launch Settings Profile.Store.Worker.executor": "Run",
@@ -140,7 +117,7 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Docker.Basket/Basket.Worker/Dockerfile base">
+  <component name="RunManager" selected=".NET Launch Settings Profile.Product.Api: https">
     <configuration name="Order.Worker" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -817,7 +794,8 @@
       <workItem from="1722257310941" duration="3020000" />
       <workItem from="1722260704162" duration="311000" />
       <workItem from="1722409778109" duration="10087000" />
-      <workItem from="1722670384803" duration="11958000" />
+      <workItem from="1722670384803" duration="12865000" />
+      <workItem from="1722757214670" duration="13265000" />
     </task>
     <task id="LOCAL-00001" summary="update:&#10;order&#10;basket&#10;store">
       <option name="closed" value="true" />
@@ -859,7 +837,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722427013405</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="FIX:update docker">
+      <option name="closed" value="true" />
+      <created>1722689672781</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722689672781</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -885,6 +871,26 @@
     <MESSAGE value="update &#10;order&#10;store" />
     <MESSAGE value="update product" />
     <MESSAGE value="update packages npgsql" />
-    <option name="LAST_COMMIT_MESSAGE" value="update packages npgsql" />
+    <MESSAGE value="FIX:update docker" />
+    <option name="LAST_COMMIT_MESSAGE" value="FIX:update docker" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/CreateProduct/CreatProductHandler.cs</url>
+          <line>19</line>
+          <properties documentPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/CreateProduct/CreatProductHandler.cs" containingFunctionPresentation="Method 'Handle'">
+            <startOffsets>
+              <option value="627" />
+            </startOffsets>
+            <endOffsets>
+              <option value="628" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -10,11 +10,10 @@ namespace Store.Worker.Mapper
     {
         public StoreProfile()
         {
-
             CreateMap<ProductAddStoreRequest, StoreDto>().ReverseMap();
 
             CreateMap<UpdateProductRequest, UpdateProductNameDto>().ReverseMap();
-            
+
             CreateMap<CheckOutStoreRequest, CheckNumberDto>().ReverseMap();
 
             CreateMap<CheckOutStoreRequest, UpdateNumberDto>().ReverseMap();

@@ -92,11 +92,11 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
       #      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
-      #      - "ConnectionStrings:ProductConnectionString=Host=productdb;Port=5432;Database=productdb;Username=Admin;Password=admin1234;"
+#      - "ConnectionStrings:ProductConnectionString=Host=productdb;Port=5432;Database=productdb;Username=Admin;Password=admin1234;"
       - RabbitmqHost=${RabbitmqHost}
       - RabbitmqUsername=${RabbitmqUsername}
       - RabbitmqPassword=${RabbitmqPassword}
-      - ProductConnectionString=${ProductConnectionString}
+      - ConnectionStrings:ProductConnectionString=${ProductConnectionString}
     depends_on:
       - rabbitmq
       - productdb
@@ -110,7 +110,7 @@ services:
       - RabbitmqHost=${RabbitmqHost}
       - RabbitmqUsername=${RabbitmqUsername}
       - RabbitmqPassword=${RabbitmqPassword}
-      - ProductConnectionString=${ProductConnectionString}
+      - ConnectionStrings:ProductConnectionString=${ProductConnectionString}
   
   
   
@@ -124,7 +124,7 @@ services:
       - RabbitmqHost=${RabbitmqHost}
       - RabbitmqUsername=${RabbitmqUsername}
       - RabbitmqPassword=${RabbitmqPassword}
-      - StoreConnectionString=${StoreConnectionString}
+      - ConnectionStrings:StoreConnectionString=${StoreConnectionString}
     depends_on:
       - rabbitmq
       - storedb
@@ -138,7 +138,7 @@ services:
       - RabbitmqHost=${RabbitmqHost}
       - RabbitmqUsername=${RabbitmqUsername}
       - RabbitmqPassword=${RabbitmqPassword}
-      - StoreConnectionString=${StoreConnectionString}
+      - ConnectionStrings:StoreConnectionString=${StoreConnectionString}
   
   
   
@@ -153,7 +153,7 @@ services:
       - RabbitmqHost=${RabbitmqHost}
       - RabbitmqUsername=${RabbitmqUsername}
       - RabbitmqPassword=${RabbitmqPassword}
-      - BasketConnectionString=${BasketConnectionString}
+      - ConnectionStrings:BasketConnectionString=${BasketConnectionString}
     ports:
       - "6003:80"
     depends_on:
@@ -183,7 +183,7 @@ services:
       - RabbitmqHost=${RabbitmqHost}
       - RabbitmqUsername=${RabbitmqUsername}
       - RabbitmqPassword=${RabbitmqPassword}
-      - OrderConnectionString=${OrderConnectionString}
+      - ConnectionStrings:OrderConnectionString=${OrderConnectionString}
     ports:
       - "6004:80"
     depends_on:
@@ -198,8 +198,8 @@ services:
       - RabbitmqHost=${RabbitmqHost}
       - RabbitmqUsername=${RabbitmqUsername}
       - RabbitmqPassword=${RabbitmqPassword}
-      - OrderConnectionString=${OrderConnectionString}
-    env_file: .env
+      - ConnectionStrings:OrderConnectionString=${OrderConnectionString}
+
   
   
   
@@ -220,7 +220,7 @@ services:
   #     - ASPNETCORE_ENVIRONMENT=Development
   #     - ASPNETCORE_URLS=http://+:80
   #     - "ConnectionStrings:IdentityConnectionString=Host=identitydb;Port=5432;Database=identitydb;Username=Admin;Password=admin1234;"
-  #     - IdentityConnectionString=${IdentityConnectionString}
+  #     - ConnectionStrings:IdentityConnectionString=${IdentityConnectionString}
   #     - Secret=${Secret}
   #     - Issuer=${Issuer}
   #     - Audience=${Audience}
@@ -233,5 +233,5 @@ services:
   #   container_name: identity.worker
   #   environment:
   #     - ASPNETCORE_ENVIRONMENT=Development
-  #     - IdentityConnectionString=${IdentityConnectionString}
+  #     - ConnectionStrings:IdentityConnectionString=${IdentityConnectionString}
 
