@@ -1,5 +1,4 @@
 using AutoMapper;
-using Basket.Api.Features.Basket.Queries.Message;
 using Basket.Domain.Repository;
 using MassTransit;
 using MediatR;

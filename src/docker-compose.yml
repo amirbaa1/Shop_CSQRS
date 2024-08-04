@@ -25,8 +25,8 @@ services:
   orderdb:
     image: postgres
    
-  identitydb:
-    image: postgres
+  # identitydb:
+  #   image: postgres
 
   product.api:
     image: ${DOCKER_REGISTRY-}productapi
@@ -61,39 +61,34 @@ services:
       dockerfile: ApiGateway/ApiGateway.ocelot/Dockerfile
 
 
-  identity.api:
-    image: ${DOCKER_REGISTRY-}identityapi
-    build:
-      context: .
-      dockerfile: Identity/Identity.Api/Dockerfile
-
-
-  order.worker:
-    image: ${DOCKER_REGISTRY-}orderworker
-    build:
-      context: .
-      dockerfile: Order/Order.Worker/Dockerfile
-
-  identity.worker:
-    image: ${DOCKER_REGISTRY-}identityworker
-    build:
-      context: .
-      dockerfile: Identity/Identity.Worker/Dockerfile
-
+  # identity.api:
+  #   image: ${DOCKER_REGISTRY-}identityapi
+  #   build:
+  #     context: .
+  #     dockerfile: Identity/Identity.Api/Dockerfile
+  #   env_file:
+  #     - .env
+  
   product.worker:
-    image: ${DOCKER_REGISTRY-}productworker
+    image: product.worker
     build:
       context: .
       dockerfile: Product/Product.Worker/Dockerfile
-
+      
   store.worker:
-    image: ${DOCKER_REGISTRY-}storeworker
+    image: store.worker
     build:
       context: .
-      dockerfile: Store/Store.Worker/Dockerfile
-
+      dockerfile: Store/Store.Worker/Dockerfile 
+      
+  order.worker:
+    image: order.worker
+    build:
+      context: .
+      dockerfile: Order/Order.Worker/Dockerfile
+    
   basket.worker:
-    image: ${DOCKER_REGISTRY-}basketworker
+    image: basket.worker
     build:
       context: .
       dockerfile: Basket/Basket.Worker/Dockerfile
@@ -106,7 +101,13 @@ volumes:
   store_data:
   basket_data:
   order_data:
-  identity_data:
+  # identity_data:
+
+
+
+
+
+
 
 
 

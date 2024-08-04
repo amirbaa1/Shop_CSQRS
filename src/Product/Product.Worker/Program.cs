@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using Common.Infrastructure.Extensions;
-using Contracts.Product;
 using Microsoft.Extensions.Hosting;
 using Product.Worker.Extensions;
 

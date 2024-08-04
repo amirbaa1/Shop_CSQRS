@@ -4,9 +4,6 @@ using Basket.Domain.Model;
 using Basket.Domain.Model.Dto;
 using Contracts.Basket;
 
-//using EventBus.Messages.Event.Basket;
-//using EventBus.Messages.Event.Store;
-
 
 namespace Basket.Api.Mapper
 {
@@ -25,11 +22,7 @@ namespace Basket.Api.Mapper
             CreateMap<ProductDto, BasketModelDto>().ReverseMap();
             CreateMap<AddItemToBasketDto, ProductDto>().ReverseMap();
 
-            //CreateMap<CheckOutCommand, BasketQueueEvent>().ReverseMap();
-
-            //CreateMap<MessageResultCommand, MessageCheckStoreEvent>().ReverseMap();
             CreateMap<CheckOutCommand, SendToOrderRequest>().ReverseMap();
-
         }
     }
 }

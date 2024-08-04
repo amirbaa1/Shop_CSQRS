@@ -9,10 +9,11 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Store/Store.Api/Store.Api.csproj", "Store/Store.Api/"]
-COPY ["Store/Store.Application/Store.Application.csproj", "Store/Store.Application/"]
-COPY ["EventBus.Messages/EventBus.Messages.csproj", "EventBus.Messages/"]
-COPY ["Store/Store.Domain/Store.Domain.csproj", "Store/Store.Domain/"]
+COPY ["Common/Common.Infrastructure/Common.Infrastructure.csproj", "Common/Common.Infrastructure/"]
+COPY ["Contracts/Contracts/Contracts.csproj", "Contracts/Contracts/"]
+COPY ["Common/Common.Api/Common.Api.csproj", "Common/Common.Api/"]
 COPY ["Store/Store.Infrastructure/Store.Infrastructure.csproj", "Store/Store.Infrastructure/"]
+COPY ["Store/Store.Domain/Store.Domain.csproj", "Store/Store.Domain/"]
 RUN dotnet restore "./Store/Store.Api/Store.Api.csproj"
 COPY . .
 WORKDIR "/src/Store/Store.Api"

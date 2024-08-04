@@ -11,7 +11,8 @@ namespace Common.Infrastructure.Service
         private readonly IRequestClient<CheckOutStoreRequest> _checkStore;
         private readonly IRequestClient<SendToOrderRequest> _sendToOrder;
 
-        public BasketService(IRequestClient<CheckOutStoreRequest> checkStore, IRequestClient<SendToOrderRequest> sendToOrder)
+        public BasketService(IRequestClient<CheckOutStoreRequest> checkStore,
+            IRequestClient<SendToOrderRequest> sendToOrder)
         {
             _checkStore = checkStore;
             _sendToOrder = sendToOrder;
@@ -68,12 +69,17 @@ namespace Common.Infrastructure.Service
 
         public async Task<ResponseResult> UpdateInventoryStore(Guid productId, int number)
         {
-            var response = await _checkStore.GetResponse<ResponseResult>(new CheckOutStoreRequest
+            var response = await _checkStore.GetResponse<ResponseResult>(new SendToOrderRequest
             {
-                ProductId = productId,
-                Number = number
+                BasketItems = new List<BasketItemRequest>
+                {
+                    new BasketItemRequest
+                    {
+                        ProductId = productId,
+                        Quantity = number
+                    }
+                }
             });
-
             if (response.Message.IsSuccessful == false)
             {
                 return new ResponseResult

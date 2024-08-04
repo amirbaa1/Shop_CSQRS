@@ -10,9 +10,10 @@ public class CreatProductHandler : IRequestHandler<CreateProductCommand, string>
     private readonly IProductRepository _productRepository;
     private readonly IMapper _mapper;
 
-    public CreatProductHandler(IProductRepository productRepository)
+    public CreatProductHandler(IProductRepository productRepository, IMapper mapper)
     {
         _productRepository = productRepository;
+        _mapper = mapper;
     }
 
     public async Task<string> Handle(CreateProductCommand request, CancellationToken cancellationToken)

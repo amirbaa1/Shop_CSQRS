@@ -1,26 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<TargetFramework>net7.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-		<DockerfileContext>..\..</DockerfileContext>
-	</PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerfileContext>..\..</DockerfileContext>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="DotNetEnv" Version="3.0.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="DotNetEnv" Version="3.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1"/>
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1"/>
+    </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
-		<ProjectReference Include="..\..\Product\Product.Domain\Product.Domain.csproj" />
-		<ProjectReference Include="..\Store.Api\Store.Api.csproj" />
-		<ProjectReference Include="..\Store.Domain\Store.Domain.csproj" />
-		<ProjectReference Include="..\Store.Infrastructure\Store.Infrastructure.csproj" />
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Store.Domain\Store.Domain.csproj"/>
+        <ProjectReference Include="..\Store.Infrastructure\Store.Infrastructure.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
 
 </Project>

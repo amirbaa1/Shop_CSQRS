@@ -44,6 +44,22 @@ namespace Basket.Infrastructure.Repository
                 throw new Exception("Basket not found....!");
             }
 
+            var map = _mapper.Map<BasketItem>(basketItem);
+
+
+            var result = await _basketService.CheckStore(map.ProductId, map.Quantity);
+
+
+            // انتظار برای دریافت پاسخ از سرویس فروشگاه
+
+
+            if (result.IsSuccessful == false)
+            {
+                _logger.LogError($"---> {result.Message}");
+
+                return $"{result.Message}";
+            }
+
             var existingItem = basket.Items
                 .FirstOrDefault(x => x.ProductId == basketItem.ProductId);
 
@@ -54,40 +70,6 @@ namespace Basket.Infrastructure.Repository
 
                 return $"{update}";
             }
-
-            var map = _mapper.Map<BasketItem>(basketItem);
-
-            //send check store
-            //var check = new CheckStoreEvent
-            //{
-            //    ProductId = map.ProductId,
-            //    Number = map.Quantity
-            //};
-            //_logger.LogWarning("---> Send");
-            //await _publishEndpoint.Publish(check);
-
-            //await Task.Delay(4000);
-
-
-            var result = await _basketService.CheckStore(map.ProductId, map.Quantity);
-
-
-            // انتظار برای دریافت پاسخ از سرویس فروشگاه
-            //var m = await _messageRepository.GetMessageResult(map.ProductId.ToString());
-
-            //if (m.IsSuccessful == false)
-            //{
-            //    _logger.LogError($"---> {m.Message}");
-            //    return $"{m.Message}";
-            //}
-
-            if (result.IsSuccessful == false)
-            {
-                _logger.LogError($"---> {result.Message}");
-
-                return $"{result.Message}";
-            }
-
 
             _context.basketItems.Add(map);
 
@@ -177,14 +159,6 @@ namespace Basket.Infrastructure.Repository
             }
 
             //send check store
-            //var check = new CheckStoreEvent
-            //{
-            //    ProductId = item.ProductId,
-            //    Number = item.Quantity + quantity
-            //};
-            //await _publishEndpoint.Publish(check);
-
-            //await Task.Delay(4000);
 
             var result = await _basketService.CheckStore(item.ProductId, item.Quantity);
 
@@ -197,14 +171,6 @@ namespace Basket.Infrastructure.Repository
 
                 return $"{result.Message}";
             }
-
-            //var m = await _messageRepository.GetMessageResult(item.ProductId.ToString());
-
-            //if (m.IsSuccessful == false)
-            //{
-            //    _logger.LogError($"---> {m.Message}");
-            //    return $"{m.Message}";
-            //}
 
             item.SetQuantity(quantity);
 

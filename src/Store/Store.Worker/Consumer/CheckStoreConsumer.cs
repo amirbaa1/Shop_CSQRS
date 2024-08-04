@@ -5,7 +5,6 @@ using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Store.Api.Feature.Store.Queries.Check;
 using Store.Domain.Model.Dto;
 using Store.Domain.Repository;
 
@@ -29,9 +28,6 @@ public class CheckStoreConsumer : IConsumer<CheckOutStoreRequest>
 
     public async Task Consume(ConsumeContext<CheckOutStoreRequest> context)
     {
-        // var map = _mapper.Map<CheckStoreQuery>(context.Message);
-        // _logger.LogInformation($"---> {JsonConvert.SerializeObject(map)}");
-        // await _mediator.Send(map);
         var map = _mapper.Map<CheckNumberDto>(context.Message);
         var response = await _storeRepository.CheckStore(map);
 

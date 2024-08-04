@@ -28,7 +28,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
 	  <ProjectReference Include="..\Basket.Infrastructure\Basket.Infrastructure.csproj" />
 	</ItemGroup>
 

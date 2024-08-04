@@ -7,12 +7,15 @@
     <projectFile kind="Docker">Basket/Basket.Api/Basket.Api.csproj</projectFile>
     <projectFile profileName="http">Basket/Basket.Api/Basket.Api.csproj</projectFile>
     <projectFile profileName="https">Basket/Basket.Api/Basket.Api.csproj</projectFile>
+    <projectFile kind="Docker">Basket/Basket.Worker/Basket.Worker.csproj</projectFile>
     <projectFile profileName="Basket.Worker">Basket/Basket.Worker/Basket.Worker.csproj</projectFile>
     <projectFile profileName="http">Common/Common.Api/Common.Api.csproj</projectFile>
     <projectFile profileName="https">Common/Common.Api/Common.Api.csproj</projectFile>
     <projectFile kind="Docker">Identity/Identity.Api/Identity.Api.csproj</projectFile>
     <projectFile profileName="http">Identity/Identity.Api/Identity.Api.csproj</projectFile>
     <projectFile profileName="https">Identity/Identity.Api/Identity.Api.csproj</projectFile>
+    <projectFile kind="Docker">Identity/Identity.Worker/Identity.Worker.csproj</projectFile>
+    <projectFile profileName="Identity.Worker">Identity/Identity.Worker/Identity.Worker.csproj</projectFile>
     <projectFile profileName="http">Notification/Notification.Api/Notification.Api.csproj</projectFile>
     <projectFile profileName="https">Notification/Notification.Api/Notification.Api.csproj</projectFile>
     <projectFile kind="Docker">Order/Order.Api/Order.Api.csproj</projectFile>
@@ -28,6 +31,7 @@
     <projectFile kind="Docker">Store/Store.Api/Store.Api.csproj</projectFile>
     <projectFile profileName="http">Store/Store.Api/Store.Api.csproj</projectFile>
     <projectFile profileName="https">Store/Store.Api/Store.Api.csproj</projectFile>
+    <projectFile kind="Docker">Store/Store.Worker/Store.Worker.csproj</projectFile>
     <projectFile profileName="Store.Worker">Store/Store.Worker/Store.Worker.csproj</projectFile>
   </component>
   <component name="AutoImportSettings">
@@ -36,6 +40,18 @@
   <component name="ChangeListManager">
     <list default="true" id="757bd229-cf69-4952-ad51-a1e55abc9b8a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Shop_CSQRS/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Api/Mapper/BasketMap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Api/Mapper/BasketMap.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/BasketRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Basket/Basket.Infrastructure/Repository/MessageRepository.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Common/Common.Infrastructure/Service/BasketService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Common/Common.Infrastructure/Service/BasketService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/CreateProduct/CreatProductHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/CreateProduct/CreatProductHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Api/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product/Product.Infrastructure/Extensions/HostExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Product/Product.Infrastructure/Extensions/HostExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Api/Store.Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Api/Store.Api.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Consumer/CheckStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/CheckStoreConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Consumer/InventoryStoreConsumer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Consumer/InventoryStoreConsumer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Store/Store.Worker/Mapper/StoreProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store/Store.Worker/Mapper/StoreProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.override.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.override.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +64,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/amirba/Documents/Asp-net/mic2/Shop_CSQRS/src/Product/Product.Api/appsettings.Development.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d7b04cdab317d2212f328cfab214e9176e735e0ba3b48e5e5f2a1092219551/RabbitMqHostConfigurationExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
@@ -58,36 +85,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.Basket.Api: https.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Basket.Worker.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Order.Api: https.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Order.Worker.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Product.Api: https.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Product.Worker.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Store.Api: https.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Launch Settings Profile.Store.Worker.executor&quot;: &quot;Run&quot;,
-    &quot;.NET Project.Order.Worker.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MTFeaturesSettingsConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.Basket.Api: https.executor": "Run",
+    ".NET Launch Settings Profile.Basket.Worker.executor": "Run",
+    ".NET Launch Settings Profile.Identity.Api: https.executor": "Run",
+    ".NET Launch Settings Profile.Identity.Worker.executor": "Run",
+    ".NET Launch Settings Profile.Order.Api: https.executor": "Run",
+    ".NET Launch Settings Profile.Order.Worker.executor": "Run",
+    ".NET Launch Settings Profile.Product.Api: https.executor": "Debug",
+    ".NET Launch Settings Profile.Product.Worker.executor": "Debug",
+    ".NET Launch Settings Profile.Store.Api: https.executor": "Run",
+    ".NET Launch Settings Profile.Store.Worker.executor": "Run",
+    ".NET Project.Order.Worker.executor": "Run",
+    "Docker.Basket/Basket.Worker/Dockerfile base.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "MTFeaturesSettingsConfigurable",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache&quot;,
-      &quot;/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache&quot;,
-      &quot;/Users/amirba/Library/Application Support/Symbols/src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/DecompilerCache",
+      "/Users/amirba/Library/Application Support/JetBrains/Rider2024.1/resharper-host/SourcesCache",
+      "/Users/amirba/Library/Application Support/Symbols/src"
     ]
   }
-}</component>
-  <component name="RunManager" selected="Multi-Launch.Multi-Launch: Shop_CSQRS">
+}]]></component>
+  <component name="RunManager" selected=".NET Launch Settings Profile.Product.Api: https">
     <configuration name="Order.Worker" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -230,6 +260,21 @@
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Identity/Identity.Api/Identity.Api.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
       <option name="LAUNCH_PROFILE_NAME" value="https" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="GENERATE_APPLICATIONHOST_CONFIG" value="1" />
+      <option name="SHOW_IIS_EXPRESS_OUTPUT" value="0" />
+      <option name="SEND_DEBUG_REQUEST" value="1" />
+      <option name="ADDITIONAL_IIS_EXPRESS_ARGUMENTS" value="" />
+      <method v="2">
+        <option name="Build" />
+      </method>
+    </configuration>
+    <configuration name="Identity.Worker" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+      <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Identity/Identity.Worker/Identity.Worker.csproj" />
+      <option name="LAUNCH_PROFILE_TFM" value="net7.0" />
+      <option name="LAUNCH_PROFILE_NAME" value="Identity.Worker" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
       <option name="RUNTIME_ARGUMENTS" value="" />
@@ -479,6 +524,30 @@
           </option>
           <option name="executable">
             <ExecutableSnapshot>
+              <option name="id" value="runConfig:.NET Launch Settings Profile.Product.Api: https" />
+            </ExecutableSnapshot>
+          </option>
+        </ExecutableRowSnapshot>
+        <ExecutableRowSnapshot>
+          <option name="condition">
+            <ConditionSnapshot>
+              <option name="type" value="immediately" />
+            </ConditionSnapshot>
+          </option>
+          <option name="executable">
+            <ExecutableSnapshot>
+              <option name="id" value="runConfig:.NET Launch Settings Profile.Product.Worker" />
+            </ExecutableSnapshot>
+          </option>
+        </ExecutableRowSnapshot>
+        <ExecutableRowSnapshot>
+          <option name="condition">
+            <ConditionSnapshot>
+              <option name="type" value="immediately" />
+            </ConditionSnapshot>
+          </option>
+          <option name="executable">
+            <ExecutableSnapshot>
               <option name="id" value="runConfig:.NET Launch Settings Profile.Store.Api: https" />
             </ExecutableSnapshot>
           </option>
@@ -522,6 +591,30 @@
       <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="true" />
       <method v="2" />
     </configuration>
+    <configuration name="Basket/Basket.Worker/Dockerfile base" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="mcr.microsoft.comdotnetruntime7.0_base" />
+          <option name="buildCliOptions" value="--target base" />
+          <option name="buildOnly" value="true" />
+          <option name="contextFolderPath" value="$PROJECT_DIR$" />
+          <option name="sourceFilePath" value="Basket/Basket.Worker/Dockerfile" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Basket.Worker/Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="containerName" value="basket.worker" />
+          <option name="contextFolderPath" value="$PROJECT_DIR$" />
+          <option name="sourceFilePath" value="Basket/Basket.Worker/Dockerfile" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <method v="2" />
+    </configuration>
     <configuration name="Identity.Api/Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
@@ -532,6 +625,17 @@
         </settings>
       </deployment>
       <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="true" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Identity.Worker/Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="containerName" value="identity.worker" />
+          <option name="contextFolderPath" value="$PROJECT_DIR$" />
+          <option name="sourceFilePath" value="Identity/Identity.Worker/Dockerfile" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
       <method v="2" />
     </configuration>
     <configuration name="Order.Api/Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
@@ -593,6 +697,17 @@
       <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="true" />
       <method v="2" />
     </configuration>
+    <configuration name="Store.Worker/Dockerfile" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="containerName" value="store.worker" />
+          <option name="contextFolderPath" value="$PROJECT_DIR$" />
+          <option name="sourceFilePath" value="Store/Store.Worker/Dockerfile" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -622,6 +737,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue=".NET Launch Settings Profile.Identity.Worker" />
       <item itemvalue=".NET Launch Settings Profile.ApiGateway.ocelot: http" />
       <item itemvalue=".NET Launch Settings Profile.ApiGateway.ocelot: https" />
       <item itemvalue=".NET Launch Settings Profile.Basket.Api: http" />
@@ -644,6 +760,9 @@
       <item itemvalue=".NET Launch Settings Profile.Store.Api: https" />
       <item itemvalue=".NET Launch Settings Profile.Store.Worker" />
       <item itemvalue=".NET Project.Order.Worker" />
+      <item itemvalue="Docker.Basket.Worker/Dockerfile" />
+      <item itemvalue="Docker.Identity.Worker/Dockerfile" />
+      <item itemvalue="Docker.Store.Worker/Dockerfile" />
       <item itemvalue="Docker.ApiGateway.ocelot/Dockerfile" />
       <item itemvalue="Docker.Basket.Api/Dockerfile" />
       <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
@@ -653,8 +772,14 @@
       <item itemvalue="Docker.Product.Api/Dockerfile" />
       <item itemvalue="Docker.Product.Worker/Dockerfile" />
       <item itemvalue="Docker.Store.Api/Dockerfile" />
+      <item itemvalue="Docker.Basket/Basket.Worker/Dockerfile base" />
       <item itemvalue="Multi-Launch.Multi-Launch: Shop_CSQRS" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.Basket/Basket.Worker/Dockerfile base" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -668,6 +793,9 @@
       <workItem from="1722256493208" duration="753000" />
       <workItem from="1722257310941" duration="3020000" />
       <workItem from="1722260704162" duration="311000" />
+      <workItem from="1722409778109" duration="10087000" />
+      <workItem from="1722670384803" duration="12865000" />
+      <workItem from="1722757214670" duration="13265000" />
     </task>
     <task id="LOCAL-00001" summary="update:&#10;order&#10;basket&#10;store">
       <option name="closed" value="true" />
@@ -677,7 +805,47 @@
       <option name="project" value="LOCAL" />
       <updated>1722260850074</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix identity">
+      <option name="closed" value="true" />
+      <created>1722416504071</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1722416504071</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update &#10;order&#10;store">
+      <option name="closed" value="true" />
+      <created>1722426416789</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1722426416789</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update product">
+      <option name="closed" value="true" />
+      <created>1722426760498</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722426760499</updated>
+    </task>
+    <task id="LOCAL-00005" summary="update packages npgsql">
+      <option name="closed" value="true" />
+      <created>1722427013405</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722427013405</updated>
+    </task>
+    <task id="LOCAL-00006" summary="FIX:update docker">
+      <option name="closed" value="true" />
+      <created>1722689672781</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722689672781</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -699,6 +867,30 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="update:&#10;order&#10;basket&#10;store" />
-    <option name="LAST_COMMIT_MESSAGE" value="update:&#10;order&#10;basket&#10;store" />
+    <MESSAGE value="fix identity" />
+    <MESSAGE value="update &#10;order&#10;store" />
+    <MESSAGE value="update product" />
+    <MESSAGE value="update packages npgsql" />
+    <MESSAGE value="FIX:update docker" />
+    <option name="LAST_COMMIT_MESSAGE" value="FIX:update docker" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/CreateProduct/CreatProductHandler.cs</url>
+          <line>19</line>
+          <properties documentPath="$PROJECT_DIR$/Product/Product.Api/Features/Product/Commands/CreateProduct/CreatProductHandler.cs" containingFunctionPresentation="Method 'Handle'">
+            <startOffsets>
+              <option value="627" />
+            </startOffsets>
+            <endOffsets>
+              <option value="628" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

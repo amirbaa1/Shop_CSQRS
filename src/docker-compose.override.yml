@@ -20,7 +20,7 @@ services:
       - "5050:80"
     volumes:
       - pgadmin_data:/root/.pgadmin
-   
+      
       
       
       ###########################
@@ -73,17 +73,17 @@ services:
     volumes:
       - order_data:/var/lib/postgresql/data
     
-  identitydb:
-    container_name: identitydb
-    restart: always
-    environment:
-      - POSTGRES_USER=Admin
-      - POSTGRES_PASSWORD=admin1234
-      - POSTGRES_DB=identitydb
-    ports:
-      - "5435:5432"
-    volumes:
-      - identity_data:/var/lib/postgresql/data
+    # identitydb:
+    #   container_name: identitydb
+    #   restart: always
+    #   environment:
+    #     - POSTGRES_USER=Admin
+    #     - POSTGRES_PASSWORD=admin1234
+    #     - POSTGRES_DB=identitydb
+    #   ports:
+    #     - "5435:5432"
+    #   volumes:
+    #     - identity_data:/var/lib/postgresql/data
     
     ###########################
   product.api:
@@ -91,13 +91,27 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
-      - "ConnectionStrings:ProductConnectionString=Host=productdb;Port=5432;Database=productdb;Username=Admin;Password=admin1234;"
+      #      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+#      - "ConnectionStrings:ProductConnectionString=Host=productdb;Port=5432;Database=productdb;Username=Admin;Password=admin1234;"
+      - RabbitmqHost=${RabbitmqHost}
+      - RabbitmqUsername=${RabbitmqUsername}
+      - RabbitmqPassword=${RabbitmqPassword}
+      - ConnectionStrings:ProductConnectionString=${ProductConnectionString}
     depends_on:
       - rabbitmq
       - productdb
     ports:
       - "6001:80"
+
+  product.worker:
+    container_name: product.worker
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitmqHost=${RabbitmqHost}
+      - RabbitmqUsername=${RabbitmqUsername}
+      - RabbitmqPassword=${RabbitmqPassword}
+      - ConnectionStrings:ProductConnectionString=${ProductConnectionString}
+  
   
   
   store.api:
@@ -105,30 +119,58 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
-      - "ConnectionStrings:StoreConnectionString=Host=storedb;Port=5432;Database=storedb;Username=Admin;Password=admin1234;"
+      #      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+      #      - "ConnectionStrings:StoreConnectionString=Host=storedb;Port=5432;Database=storedb;Username=Admin;Password=admin1234;"
+      - RabbitmqHost=${RabbitmqHost}
+      - RabbitmqUsername=${RabbitmqUsername}
+      - RabbitmqPassword=${RabbitmqPassword}
+      - ConnectionStrings:StoreConnectionString=${StoreConnectionString}
     depends_on:
       - rabbitmq
       - storedb
-      - identity.api 
     ports:
       - "6002:80"
+
+  store.worker:
+    container_name: store.worker
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitmqHost=${RabbitmqHost}
+      - RabbitmqUsername=${RabbitmqUsername}
+      - RabbitmqPassword=${RabbitmqPassword}
+      - ConnectionStrings:StoreConnectionString=${StoreConnectionString}
+  
   
   
   basket.api:
     container_name: basket.api
     environment:
+      #      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+      #      - "ConnectionStrings:BasketConnectionString=Host=basketdb;Port=5432;Database=basketdb;Username=Admin;Password=admin1234;"
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
-      - "ConnectionStrings:BasketConnectionString=Host=basketdb;Port=5432;Database=basketdb;Username=Admin;Password=admin1234;"
-      - "CacheSettings:ConnectionString=basketRedis:6379" 
+      - "CacheSettings:ConnectionString=basketRedis:6379"
+      - RabbitmqHost=${RabbitmqHost}
+      - RabbitmqUsername=${RabbitmqUsername}
+      - RabbitmqPassword=${RabbitmqPassword}
+      - ConnectionStrings:BasketConnectionString=${BasketConnectionString}
     ports:
       - "6003:80"
     depends_on:
       - rabbitmq
       - basketdb
-      - basketRedis 
+      - basketRedis
+  
+  basket.worker:
+    container_name: basket.worker
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "CacheSettings:ConnectionString=basketRedis:6379"
+      - RabbitmqHost=${RabbitmqHost}
+      - RabbitmqUsername=${RabbitmqUsername}
+      - RabbitmqPassword=${RabbitmqPassword}
+      - BasketConnectionString=${BasketConnectionString}
+  
   
   
   order.api:
@@ -136,13 +178,30 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:80
-      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
-      - "ConnectionStrings:OrderConnectionString=Host=orderdb;Port=5432;Database=orderdb;Username=Admin;Password=admin1234;"
+        #      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+      #       - "ConnectionStrings:OrderConnectionString=Host=orderdb;Port=5432;Database=orderdb;Username=Admin;Password=admin1234;"
+      - RabbitmqHost=${RabbitmqHost}
+      - RabbitmqUsername=${RabbitmqUsername}
+      - RabbitmqPassword=${RabbitmqPassword}
+      - ConnectionStrings:OrderConnectionString=${OrderConnectionString}
     ports:
       - "6004:80"
     depends_on:
       - rabbitmq
       - orderdb
+
+  order.worker:
+    container_name: order.worker
+    environment:
+      - InDocker=true
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RabbitmqHost=${RabbitmqHost}
+      - RabbitmqUsername=${RabbitmqUsername}
+      - RabbitmqPassword=${RabbitmqPassword}
+      - ConnectionStrings:OrderConnectionString=${OrderConnectionString}
+
+  
+  
   
   
   apigateway.ocelot:
@@ -152,18 +211,27 @@ services:
       - ASPNETCORE_URLS=http://+:80
     ports:
       - "6060:80"
-    depends_on:
-      - identity.api
 
 
-  identity.api:
-    container_name: identity.api
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
-      - "ConnectionStrings:IdentityConnectionString=Host=identitydb;Port=5432;Database=identitydb;Username=Admin;Password=admin1234;"
-    ports:
-      - "6015:80"
-    depends_on:
-      - identitydb
+
+  # identity.api:
+  #   container_name: identity.api
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_URLS=http://+:80
+  #     - "ConnectionStrings:IdentityConnectionString=Host=identitydb;Port=5432;Database=identitydb;Username=Admin;Password=admin1234;"
+  #     - ConnectionStrings:IdentityConnectionString=${IdentityConnectionString}
+  #     - Secret=${Secret}
+  #     - Issuer=${Issuer}
+  #     - Audience=${Audience}
+  #   ports:
+  #     - "6015:80"
+  #   depends_on:
+  #     - identitydb
+
+  # identity.worker:
+  #   container_name: identity.worker
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ConnectionStrings:IdentityConnectionString=${IdentityConnectionString}
 
