@@ -25,12 +25,6 @@
 	  <ProjectReference Include="..\Identity.Infrastructure\Identity.Infrastructure.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Content Include="..\..\.dockerignore">
-	    <Link>.dockerignore</Link>
-	  </Content>
-	</ItemGroup>
-
 
 
 </Project>
